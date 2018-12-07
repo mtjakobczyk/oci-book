@@ -1,0 +1,34 @@
+#cloud-config
+packages:
+ - git
+write_files:
+-   content: |
+      [Unit]
+      Description = Launching Vistula API
+      After = network.target
+      [Service]
+      Environment=VISTULA_PORT=8080
+      ExecStart = /home/opc/projects/bin/vistula
+      User = opc
+      [Install]
+      WantedBy = multi-user.target
+    path: /etc/systemd/system/vistula.service
+runcmd:
+-   wget "https://dl.google.com/go/go1.10.3.linux-amd64.tar.gz" -O /home/opc/go.tar.gz
+-   tar -C /usr/local -xzf /home/opc/go.tar.gz
+-   ln -s /usr/local/go/bin/go /usr/local/bin/go
+-   mkdir /home/opc/projects
+-   chown "opc:opc" /home/opc/projects
+-   export GOPATH=/home/opc/projects
+-   go get -u github.com/gorilla/mux
+-   go get -u github.com/google/uuid
+-   mkdir $GOPATH/src/github.com/mtjakobczyk
+-   cd $GOPATH/src/github.com/mtjakobczyk
+-   git clone "https://github.com/mtjakobczyk/oci-book.git"
+-   go install github.com/mtjakobczyk/oci-book/chapter02/vistula
+-   ln -s /etc/systemd/system/vistula.service /etc/systemd/system/multi-user.target.wants/vistula.service
+-   firewall-offline-cmd --add-port=8080/tcp
+-   systemctl restart firewalld
+-   systemctl enable vistula.service
+-   systemctl start vistula.service
+final_message: "Vistula API node is running, after $UPTIME seconds"
