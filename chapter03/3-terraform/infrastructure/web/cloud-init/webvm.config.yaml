@@ -1,0 +1,13 @@
+#cloud-config
+packages:
+  - httpd
+write_files:
+ -  content: |
+      Greetings from the Cloud
+    path: /var/www/html/index.html
+runcmd:
+ -  firewall-offline-cmd --add-port=80/tcp
+ -  systemctl restart firewalld
+ -  systemctl enable httpd
+ -  systemctl start httpd
+final_message: "$HOSTNAME initialization has been completed"
