@@ -1,0 +1,34 @@
+#!/usr/bin/env python3
+import datetime
+import uuid
+import os
+import sys
+import oci
+
+def prepare_report_entries(storage_namespace, bucket_name, object_prefix, client):
+    report_entries = []
+    objects = client.list_objects(storage_namespace, bucket_name, fields="name,size", prefix=object_prefix).data.objects
+    for obj in objects:
+        entry = str(obj.name)+' ('+str(obj.size/1024)+'K)'
+        report_entries.append(entry)
+    return report_entries
+
+def upload_report(report_entry_list, storage_namespace, bucket_name, object_name, client):
+    tmp_report_filename = 'bucket_report.'+str(uuid.uuid4())+'.txt'
+    with open(tmp_report_filename, 'w') as stream:
+        for entry in report_entry_list:
+            stream.write(entry+'\n')
+        stream.write('### Report generated '+str(datetime.datetime.now())+'\n')
+    with open(tmp_report_filename, 'r') as stream:
+        client.put_object(storage_namespace, bucket_name, object_name, stream)
+    os.remove(tmp_report_filename)
+
+if __name__ == '__main__':
+    bucket_name = str(sys.argv[1])
+    summary_object_name = str(sys.argv[2])
+    object_prefix = str(sys.argv[3])
+    config = oci.config.from_file('/Users/mjk/.oci/config', 'SANDBOX-USER')
+    client = oci.object_storage.ObjectStorageClient(config)
+    storage_namespace = client.get_namespace().data
+    report_entry_list = prepare_report_entries(storage_namespace, bucket_name, object_prefix, client)
+    upload_report(report_entry_list, storage_namespace, bucket_name, summary_object_name, client)
