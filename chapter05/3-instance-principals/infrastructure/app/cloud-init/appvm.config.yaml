@@ -1,0 +1,32 @@
+#cloud-config
+write_files:
+-   content: |
+      [Unit]
+      Description = Issue Report Job
+      After = network.target
+      [Service]
+      Environment=APP_BUCKET_NAME=blueprints
+      Environment=APP_OBJECT_NAME=waw/bemowo/summary.txt
+      Environment=APP_OBJECT_PREFIX=waw/bemowo
+      Environment=APP_POLLING_INTERVAL_SECONDS=30
+      Environment=PYTHONUNBUFFERED=1
+      ExecStart = /home/opc/reportissuer.py
+      User = opc
+      [Install]
+      WantedBy = multi-user.target
+    path: /etc/systemd/system/reportissuer.service
+runcmd:
+ -  [ yum, -y, install, "https://centos7.iuscommunity.org/ius-release.rpm" ]
+ -  [ yum, -y, install, python36u ]
+ -  [ yum, -y, install, python36u-pip ]
+ -  [ pip3.6, install, --upgrade, pip ]
+ -  [ pip3.6, install, oci ]
+ -  [ chown, -R, "opc:opc", "/home/opc/app" ]
+ -  [ wget, "https://raw.githubusercontent.com/mtjakobczyk/oci-book/master/chapter05/3-instance-principals/applications/reportissuer.py" ]
+ -  [ mv, reportissuer.py, "/home/opc/" ]
+ -  [ chown, "opc:opc", "/home/opc/reportissuer.py" ]
+ -  [ chmod, "u+x", "/home/opc/reportissuer.py" ]
+ -  [ ln, -s, "/etc/systemd/system/reportissuer.service", "/etc/systemd/system/multi-user.target.wants/reportissuer.service" ]
+ -  [ systemctl, enable, reportissuer.service ]
+ -  [ systemctl, start, reportissuer.service ]
+final_message: "$HOSTNAME initialization has been completed"
