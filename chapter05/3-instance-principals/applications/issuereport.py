@@ -24,11 +24,11 @@ def upload_report(report_entry_list, storage_namespace, bucket_name, object_name
     os.remove(tmp_report_filename)
 
 if __name__ == '__main__':
-    bucket_name = str(sys.argv[1])
-    summary_object_name = str(sys.argv[2])
-    object_prefix = str(sys.argv[3])
-    config = oci.config.from_file('/Users/mjk/.oci/config', 'SANDBOX-USER')
-    client = oci.object_storage.ObjectStorageClient(config)
+    bucket_name = os.environ['APP_BUCKET_NAME']
+    summary_object_name = os.environ['APP_OBJECT_NAME']
+    object_prefix = os.environ['APP_OBJECT_PREFIX']
+    signer = oci.auth.signers.InstancePrincipalsSecurityTokenSigner()
+    client = oci.object_storage.ObjectStorageClient(config={}, signer=signer)
     storage_namespace = client.get_namespace().data
     report_entry_list = prepare_report_entries(storage_namespace, bucket_name, object_prefix, client)
     upload_report(report_entry_list, storage_namespace, bucket_name, summary_object_name, client)
