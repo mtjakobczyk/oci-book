@@ -18,7 +18,9 @@ def upload_report(report_entry_list, storage_namespace, bucket_name, object_name
     with open(tmp_report_filename, 'w') as stream:
         for entry in report_entry_list:
             stream.write(entry+'\n')
-        stream.write('### Report generated '+str(datetime.datetime.now())+'\n')
+        report_timestamp_str = '### Report generated '+str(datetime.datetime.now())+'\n'
+        stream.write(report_timestamp_str)
+        print(report_timestamp_str)
     with open(tmp_report_filename, 'r') as stream:
         client.put_object(storage_namespace, bucket_name, object_name, stream)
     os.remove(tmp_report_filename)
@@ -27,8 +29,12 @@ if __name__ == '__main__':
     bucket_name = os.environ['APP_BUCKET_NAME']
     summary_object_name = os.environ['APP_OBJECT_NAME']
     object_prefix = os.environ['APP_OBJECT_PREFIX']
-    signer = oci.auth.signers.InstancePrincipalsSecurityTokenSigner()
-    client = oci.object_storage.ObjectStorageClient(config={}, signer=signer)
-    storage_namespace = client.get_namespace().data
-    report_entry_list = prepare_report_entries(storage_namespace, bucket_name, object_prefix, client)
-    upload_report(report_entry_list, storage_namespace, bucket_name, summary_object_name, client)
+    polling_interval_seconds = os.environ['APP_POLLING_INTERVAL_SECONDS']
+    while True:
+        print('Creating a report')
+        signer = oci.auth.signers.InstancePrincipalsSecurityTokenSigner()
+        client = oci.object_storage.ObjectStorageClient(config={}, signer=signer)
+        storage_namespace = client.get_namespace().data
+        report_entry_list = prepare_report_entries(storage_namespace, bucket_name, object_prefix, client)
+        upload_report(report_entry_list, storage_namespace, bucket_name, summary_object_name, client)
+        time.sleep(polling_interval_seconds)
