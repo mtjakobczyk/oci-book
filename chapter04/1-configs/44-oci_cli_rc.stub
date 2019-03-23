@@ -1,0 +1,6 @@
+[DEFAULT]
+compartment-id = ocid1.compartment.oc1..aa………gzwhsa
+[SANDBOX-ADMIN]
+compartment-id = ocid1.compartment.oc1..aa………gzwhsa
+[SANDBOX-USER]
+compartment-id = ocid1.compartment.oc1..aa………gzwhsa
