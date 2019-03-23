@@ -1,3 +1,6 @@
+# PRACTICAL ORACLE CLOUD Infrastructure
+# CHAPTER 05 - Code Snippets
+
 # SECTION: Buckets and objects
 
 ## Get object storage namespace name
