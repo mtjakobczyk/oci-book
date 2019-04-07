@@ -1,0 +1,8 @@
+#cloud-config
+runcmd:
+ -  [ parted, -s, "/dev/sdb", mklabel, gpt, mkpart, primary, "'0%'", "'100%'" ]
+ -  [ mkfs, -t, ext3, -L, WebVolume, "/dev/sdb1" ]
+ -  [ mkdir, "/mnt/webdata" ]
+ -  [ mount, -t, ext3, "/dev/sdb1", "/mnt/webdata" ]
+ -  [ chown, "opc:opc", "/mnt/webdata" ]
+ -  'echo "LABEL=WebVolume   /mnt/webdata   ext3   defaults,noatime,_netdev   0   2" | sudo tee -a "/etc/fstab"'
