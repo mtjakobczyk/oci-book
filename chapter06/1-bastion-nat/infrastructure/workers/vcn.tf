@@ -25,7 +25,7 @@ resource "oci_core_subnet" "workers_net" {
   compartment_id = "${var.compartment_ocid}"
   vcn_id = "${var.vcn_ocid}"
   display_name = "workers-net"
-  availability_domain = "${var.ads[0]}"
+#  availability_domain = "${var.ads[0]}" # Uncomment to use AD-specific subnet
   cidr_block = "${var.vcn_subnet_cidr}"
   route_table_id = "${oci_core_route_table.workers_rt.id}"
   security_list_ids = [ "${oci_core_security_list.workers_sl.id}" ]
