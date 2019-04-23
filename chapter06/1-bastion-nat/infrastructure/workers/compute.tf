@@ -16,3 +16,4 @@ resource "oci_core_instance" "worker_vm" {
     ssh_authorized_keys = "${file("~/.ssh/oci_id_rsa.pub")}"
   }
 }
+output "worker_private_ip" { value = "${oci_core_instance.worker_vm.private_ip}" }
