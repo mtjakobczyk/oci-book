@@ -7,7 +7,7 @@ resource "oci_core_instance" "worker_vm" {
     source_id = "${var.image_ocid}"
     source_type = "image"
   }
-  shape = "VM.Standard2.1"
+  shape = "VM.Standard2.2"
   create_vnic_details {
     subnet_id = "${oci_core_subnet.workers_net.id}"
     assign_public_ip = false
