@@ -16,12 +16,4 @@ resource "oci_core_instance" "bastion_vm" {
     ssh_authorized_keys = "${file("~/.ssh/oci_id_rsa.pub")}"
   }
 }
-#
-data "oci_core_vnic_attachments" "bastion_vnic_attachment" {
-  compartment_id = "${var.compartment_ocid}"
-  instance_id = "${oci_core_instance.bastion_vm.id}"
-}
-data "oci_core_vnic" "bastion_vnic" {
-  vnic_id = "${data.oci_core_vnic_attachments.bastion_vnic_attachment.vnic_attachments.0.vnic_id}"
-}
-output "bastion_public_ip" { value = "${data.oci_core_vnic.bastion_vnic.public_ip_address}" }
+output "bastion_public_ip" { value = "${oci_core_instance.bastion_vm.public_ip}" }
