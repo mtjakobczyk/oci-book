@@ -10,4 +10,4 @@ variable "region" {}
 variable "compartment_ocid" {}
 
 # root module variables
-variable "vcn_cidr" { type = "string" default = "10.0.1.0/24" }
+variable "vcn_cidr" { type = "string" default = "10.1.0.0/16" }

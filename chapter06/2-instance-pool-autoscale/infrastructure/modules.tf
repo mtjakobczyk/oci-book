@@ -6,7 +6,7 @@ module "bastion" {
   vcn_ocid = "${oci_core_virtual_network.vcn.id}"
   vcn_igw_ocid = "${oci_core_internet_gateway.igw.id}"
   vcn_cidr = "${oci_core_virtual_network.vcn.cidr_block}"
-  vcn_subnet_cidr = "10.0.1.0/27"
+  vcn_subnet_cidr = "10.1.1.0/24"
   ads = "${local.ads}"
   image_ocid = "${local.image_ocid}"
 }
@@ -17,10 +17,10 @@ module "workers" {
   vcn_ocid = "${oci_core_virtual_network.vcn.id}"
   vcn_nat_ocid = "${oci_core_nat_gateway.natgw.id}"
   vcn_cidr = "${oci_core_virtual_network.vcn.cidr_block}"
-  vcn_subnet_cidrs = [ "10.0.1.128/27", "10.0.1.160/27", "10.0.1.192/27" ]
+  vcn_subnet_cidr = "10.1.2.0/24"
   ads = "${local.ads}"
   image_ocid = "${local.image_ocid}"
-  pool_target_size = 2
+  pool_target_size = 1
 }
 
 ### ADs and Compute Image evaluation

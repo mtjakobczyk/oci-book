@@ -10,8 +10,9 @@ resource "oci_core_instance_configuration" "worker_config" {
       }
       metadata {
         ssh_authorized_keys = "${file("~/.ssh/oci_id_rsa.pub")}"
+        user_data = "${base64encode(file("workers/cloud-init/worker.config.yaml"))}"
       }
-      shape = "VM.Standard2.1"
+      shape = "VM.Standard2.2"
       source_details {
         source_type = "image"
         image_id = "${var.image_ocid}"
@@ -26,11 +27,15 @@ resource "oci_core_instance_pool" "worker_pool" {
   placement_configurations = [
     {
       availability_domain = "${var.ads[0]}"
-      primary_subnet_id = "${oci_core_subnet.workers_ad1_net.id}"
+      primary_subnet_id = "${oci_core_subnet.workers_net.id}"
     },
     {
       availability_domain = "${var.ads[1]}"
-      primary_subnet_id = "${oci_core_subnet.workers_ad2_net.id}"
+      primary_subnet_id = "${oci_core_subnet.workers_net.id}"
+    },
+    {
+      availability_domain = "${var.ads[2]}"
+      primary_subnet_id = "${oci_core_subnet.workers_net.id}"
     }
   ]
   size = "${var.pool_target_size}"
@@ -45,8 +50,8 @@ resource "oci_autoscaling_auto_scaling_configuration" "workers_pool_autoscale" {
   cool_down_in_seconds = 300
   policies {
     capacity {
-      initial = 2
-      max = 4
+      initial = "${var.pool_target_size}"
+      max = 3
       min = 1
     }
     policy_type = "threshold"
