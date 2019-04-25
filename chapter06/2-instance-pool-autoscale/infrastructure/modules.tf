@@ -41,5 +41,5 @@ data "oci_core_images" "compute_image" {
   operating_system_version = 7
 }
 
-output "Image name " { value = "${data.oci_core_images.compute_image.images.0.display_name}" }
-output "Bastion public IP" { value = "${module.bastion.bastion_public_ip}" }
+output "1 - Bastion public IP" { value = "${module.bastion.bastion_public_ip}" }
+output "2 - Image name " { value = "${data.oci_core_images.compute_image.images.0.display_name}" }
