@@ -15,4 +15,11 @@ resource "oci_core_instance" "vm" {
     ssh_authorized_keys = "${file("~/.ssh/oci_id_rsa.pub")}"
     user_data = "${base64encode(file("cloud-init/vm.config.yaml"))}"
   }
+#  # 1. Stop the instance
+#   state = "STOPPED"
+#   preserve_boot_volume = true
 }
+#
+# output "3 - VM bootvolume OCID" {
+#   value = "${oci_core_instance.vm.boot_volume_id}"
+# }

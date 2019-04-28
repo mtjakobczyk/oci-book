@@ -10,5 +10,5 @@ data "oci_core_images" "compute_image" {
   operating_system = "CentOS"
   operating_system_version = 7
 }
-output "1 - Bastion public IP" { value = "${oci_core_instance.vm.public_ip}" }
-output "2 - Image name " { value = "${data.oci_core_images.compute_image.images.0.display_name}" }
+output "1 - VM public IP" { value = "${oci_core_instance.vm.public_ip}" }
+output "2 - VM image" { value = "${data.oci_core_images.compute_image.images.0.display_name}" }
