@@ -1,3 +1,4 @@
+
 resource "oci_core_instance" "vm" {
   compartment_id = "${var.compartment_ocid}"
   display_name = "vm-1-OCPU"
@@ -15,11 +16,15 @@ resource "oci_core_instance" "vm" {
     ssh_authorized_keys = "${file("~/.ssh/oci_id_rsa.pub")}"
     user_data = "${base64encode(file("cloud-init/vm.config.yaml"))}"
   }
-#  # 1. Stop the instance
-#   state = "STOPPED"
-#   preserve_boot_volume = true
+/*
+   # 1. Stop the old instance
+   state = "STOPPED"
+   preserve_boot_volume = true
+*/
 }
-#
-# output "3 - VM bootvolume OCID" {
-#   value = "${oci_core_instance.vm.boot_volume_id}"
-# }
+/*
+ output "3 - VM bootvolume OCID" {
+   value = "${oci_core_instance.vm.boot_volume_id}"
+ }
+*/
+ output "1 - VM public IP" { value = "${oci_core_instance.vm.public_ip}" }

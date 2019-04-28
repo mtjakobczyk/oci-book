@@ -1,13 +1,13 @@
-
-variable "bootvolume_ocid" { }
+/* # 2. Scale up and boot the new instance
+variable "vm_2_ocpu_bootvolume_ocid" { }
 
  # 2. Add the new instance
-resource "oci_core_instance" "vm-v2" {
+resource "oci_core_instance" "vm_2_ocpu" {
   compartment_id = "${var.compartment_ocid}"
   display_name = "vm-2-OCPU"
   availability_domain = "${local.ad}"
   source_details {
-    source_id = "${var.bootvolume_ocid}"
+    source_id = "${var.vm_2_ocpu_bootvolume_ocid}"
     source_type = "bootVolume"
   }
   shape = "VM.Standard2.2"
@@ -17,6 +17,7 @@ resource "oci_core_instance" "vm-v2" {
   }
   metadata {
     ssh_authorized_keys = "${file("~/.ssh/oci_id_rsa.pub")}"
-    user_data = "${base64encode(file("cloud-init/vm.config.yaml"))}"
   }
 }
+ output "1 - (New) VM public IP" { value = "${oci_core_instance.vm_2_ocpu.public_ip}" }
+*/
