@@ -1,0 +1,41 @@
+#cloud-config
+yum_repos:
+    ol7_developer_EPEL:
+        name: Oracle Linux $releasever Developement Packages ($basearch)
+        baseurl: http://yum.oracle.com/repo/OracleLinux/OL7/developer_EPEL/$basearch/
+        enabled: true
+        gpgcheck: true
+        gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+package_upgrade: true
+packages:
+ - tree
+ - wget
+ - python36
+ - python36-pip
+write_files:
+-   content: |
+      [Unit]
+      Description = Launching UUID Service API
+      After = network.target
+      [Service]
+      Environment=FLASK_APP=/home/opc/uuidservice/app.py
+      Environment=LC_ALL=en_US.utf8
+      Environment=LANG=en_US.utf8
+      ExecStart = /home/opc/uuidservice/venv/bin/flask run --host=0.0.0.0
+      User = opc
+      [Install]
+      WantedBy = multi-user.target
+    path: /etc/systemd/system/uuidservice.service
+runcmd:
+  - [ "mkdir", "-p", "/home/opc/uuidservice/venv" ]
+  - [ "chown", "opc:opc", "/home/opc/uuidservice" ]
+  - [ "python3", "-m", "venv", "/home/opc/uuidservice/venv" ]
+  - [ "/home/opc/uuidservice/venv/bin/pip3", "install", "--upgrade", "pip" ]
+  - [ "/home/opc/uuidservice/venv/bin/pip3", "install", "flask" ]
+  - [ "wget", "-qO", "/home/opc/uuidservice/app.py", "https://raw.githubusercontent.com/mtjakobczyk/oci-book/master/chapter02/uuid-service/app.py?token=ABRSVT67AYWMMSX52KTHZXC47TOXQ" ]
+  - [ "firewall-offline-cmd", "--add-port=5000/tcp" ]
+  - [ "systemctl", "restart", "firewalld" ]
+  - [ "ln", "-s", "/etc/systemd/system/uuidservice.service", "/etc/systemd/system/multi-user.target.wants/uuidservice.service" ]
+  - [ "systemctl", "enable", "uuidservice.service" ]
+  - [ "systemctl", "start", "uuidservice.service" ]
+final_message: "UUID Service API node is running, after $UPTIME seconds"
