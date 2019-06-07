@@ -1,0 +1,17 @@
+#cloud-config
+yum_repos:
+    docker-ce-stable:
+        name: Docker CE Stable - $basearch
+        baseurl: https://download.docker.com/linux/centos/7/$basearch/stable
+        enabled: true
+        gpgcheck: true
+        gpgkey: https://download.docker.com/linux/centos/gpg
+packages:
+ - docker-ce
+ - docker-ce-cli
+ - containerd.io
+runcmd:
+ -  [ systemctl, enable, docker ]
+ -  [ systemctl, start, docker ]
+ -  [ usermod, -aG, docker, opc ]
+final_message: "DEV machine is running, after $UPTIME seconds"
