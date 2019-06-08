@@ -6,12 +6,21 @@ yum_repos:
         enabled: true
         gpgcheck: true
         gpgkey: https://download.docker.com/linux/centos/gpg
+    kubernetes:
+        name: Kubernetes
+        baseurl: https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
+        enabled: true
+        gpgcheck: true
+        gpgkey: https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
 packages:
+ - git
  - docker-ce
  - docker-ce-cli
  - containerd.io
+ - kubectl
 runcmd:
  -  [ systemctl, enable, docker ]
  -  [ systemctl, start, docker ]
  -  [ usermod, -aG, docker, opc ]
+ -  [ mkdir, "/home/opc/.kube" ]
 final_message: "DEV machine is running, after $UPTIME seconds"
