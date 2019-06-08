@@ -1,0 +1,4 @@
+[
+  "allow group sandbox-users to manage repos in tenancy where target.repo.name = /sandbox*/",
+  "allow group sandbox-users to use clusters in compartment Sandbox"
+]
