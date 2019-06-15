@@ -18,18 +18,20 @@ cat oci_api_pem.pub
 
 ## Create a virtual environment (Python 3)
 ### bash
+cd ~
 python3 --version
 python3 -m venv ocidev
 ls -1 ocidev/bin/
 
 ## Activate a virtual environment and install SDK
 ### bash
-source ocidev/bin/activate
-pip install –-upgrade pip
-pip –version
+source ~/ocidev/bin/activate
+pip install --upgrade pip
+pip --version
 pip freeze
 pip install oci
 pip freeze
+deactivate
 
 ## Activate a virtual environment and install SDK
 ### bash
@@ -38,15 +40,19 @@ touch ~/.oci/config
 chmod go-rwx ~/.oci/config
 ls ~/.oci
 
+### Prepare SDK configuration in .oci directory based on 1-sdk/config file
+
 ## Test SDK configuration import
 ### bash
-source ocidev/bin/activate
+source ~/ocidev/bin/activate
 python3
 ### python
 import oci
-config = oci.config.from_file(“~/.oci/config”,“DEFAULT”)
+config = oci.config.from_file("~/.oci/config","DEFAULT")
 compute = oci.core.ComputeClient(config)
-
+quit()
+### bash
+deactivate
 
 ## List availability domains in home region using SDK
 ### bash
