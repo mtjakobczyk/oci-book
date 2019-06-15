@@ -14,6 +14,7 @@ openssl rsa -pubout -in oci_api_pem -out oci_api_pem.pub
 ls -l | grep pem | awk '{ print $1" "$9 }'
 cat oci_api_pem.pub
 
+
 # SECTION: SDK
 
 ## Create a virtual environment (Python 3)
@@ -148,7 +149,6 @@ oci network internet-gateway delete --ig-id $igw_ocid --wait-for-state TERMINATE
 oci network vcn delete --vcn-id $vcn_ocid
 
 
-
 # SECTION: Terraform
 
 ## Install Terraform
@@ -177,6 +177,42 @@ source ~/tfvars.env.sh
 cd ~/myfirsttf
 terraform init
 
-## Inspect the size of provider plugin
+## Inspect the size of provider plugin and perform project cleanup
 ### bash
 du -sh ~/myfirsttf/.terraform/
+cd ~
+rm -rf ~/myfirsttf
+
+## Inspect the presence of Terraform-related environment variables
+### bash
+env | grep TF_VAR_
+
+## Clone source code used in the course of the book
+### bash
+mkdir ~/git
+cd ~/git
+git clone https://github.com/mtjakobczyk/oci-book.git
+
+## Prepare chapter03/3-terraform/2-simple-infrastructure project
+### bash
+source ~/tfvars.env.sh
+cd ~/git/oci-book/chapter03/3-terraform/2-simple-infrastructure
+terraform init
+
+## Add default compartment variable to the configuration for Terraform
+### bash
+echo "export TF_VAR_compartment_ocid={put-here-your-value}" >> ~/tfvars.env.sh
+source ~/tfvars.env.sh
+env | grep TF_VAR_compartment_ocid
+
+## Generate SSH Keypair for compute instance
+### bash
+ssh-keygen -t rsa -b 2048 -C you@example.com -f ~/.ssh/oci_id_rsa
+
+## Provision chapter03/3-terraform/2-simple-infrastructure
+### bash (in ~/git/oci-book/chapter03/3-terraform/2-simple-infrastructure)
+terraform apply
+
+## Terminate chapter03/3-terraform/2-simple-infrastructure
+### bash (in ~/git/oci-book/chapter03/3-terraform/2-simple-infrastructure)
+terraform destroy --auto-approve
