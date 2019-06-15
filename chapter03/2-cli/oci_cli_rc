@@ -1,0 +1,4 @@
+[DEFAULT]
+compartment-id = put-here-compartment-ocid
+[OCI_CLI_CANNED_QUERIES]
+list_ubuntu_1804 = data[?"operating-system-version"=='18.04'].{Image:"display-name"}

@@ -1,0 +1,7 @@
+[DEFAULT]
+tenancy=put-here-tenancy-ocid
+region=put-here-region-name
+user=put-here-user-ocid
+fingerprint=put-here-key-fingerprint
+key_file=put-here-path-to-private-key
+pass_phrase=put-here-private-key-password
