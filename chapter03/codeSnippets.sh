@@ -145,4 +145,38 @@ oci compute instance terminate --instance-id $vm_ocid --wait-for-state TERMINATE
 oci network subnet delete --subnet-id $subnet_ocid --wait-for-state TERMINATED
 oci network route-table delete --rt-id $rt_ocid --wait-for-state TERMINATED
 oci network internet-gateway delete --ig-id $igw_ocid --wait-for-state TERMINATED
-oci network vcn delete --vcn-id $vcn_ocid 
+oci network vcn delete --vcn-id $vcn_ocid
+
+
+
+# SECTION: Terraform
+
+## Install Terraform
+### bash
+wget https://releases.hashicorp.com/terraform/0.12.2/terraform_0.12.2_linux_amd64.zip
+sudo unzip terraform_0.12.2_linux_amd64.zip -d /usr/local/bin
+terraform -v
+
+## Prepare project directory
+### bash
+mkdir myfirsttf
+touch myfirsttf/provider.tf
+##### Edit provider.tf configuration file based on 3-terraform/1-provider-only/provider.tf
+touch myfirsttf/vars.tf
+##### Edit vars.tf configuration file based on 3-terraform/1-provider-only/vars.tf
+
+## Prepare configuration for Terraform
+### bash
+touch ~/tfvars.env.sh
+##### Edit tfvars.env.sh configuration file based on 3-terraform/tfvars.env.sh
+echo "source ~/tfvars.env.sh" | tee -a .profile
+
+## Initialize Terraform infrastructure project
+### bash
+source ~/tfvars.env.sh
+cd ~/myfirsttf
+terraform init
+
+## Inspect the size of provider plugin
+### bash
+du -sh ~/myfirsttf/.terraform/
