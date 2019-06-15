@@ -6,8 +6,8 @@ write_files:
       Greetings from the Cloud
     path: /var/www/html/index.html
 runcmd:
- -  firewall-offline-cmd --add-port=80/tcp
- -  systemctl restart firewalld
- -  systemctl enable httpd
- -  systemctl start httpd
+ -  [ "firewall-offline-cmd", "--add-port=80/tcp" ]
+ -  [ "systemctl", "restart", "firewalld" ]
+ -  [ "systemctl", "enable", "httpd" ]
+ -  [ "systemctl", "start", "httpd" ]
 final_message: "$HOSTNAME initialization has been completed"
