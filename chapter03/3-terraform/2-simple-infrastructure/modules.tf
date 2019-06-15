@@ -8,7 +8,7 @@ data "oci_core_images" "centos_image" {
   operating_system_version = 7
 }
 module "web" {
-  source = "web"
+  source = "./web"
   compartment_ocid = var.compartment_ocid
   vcn_ocid = oci_core_virtual_network.web_vcn.id
   vcn_igw_ocid = oci_core_internet_gateway.web_igw.id
@@ -22,4 +22,4 @@ module "web" {
   ]*/
   compute_image_ocid = data.oci_core_images.centos_image.images[0].id
 }
-output "Web server " { value = module.web.web_public_ip }
+output "web_instance_public_ip" { value = module.web.web_public_ip }
