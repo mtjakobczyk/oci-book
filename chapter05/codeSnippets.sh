@@ -20,7 +20,7 @@ oci os bucket list --query 'data[*].{Bucket:name}' --output table --profile SAND
 
 ## Create policy based on statements from sandbox-users.policies.storage.json
 ### bash / OCI CLI
-cd oci-book/chapter05/1-policies
+cd ~/git/oci-book/chapter05/1-policies
 oci iam policy create --name sandbox-users-storage-policy --statements file://sandbox-users.policies.storage.json --description "Storage-related policy for regular Sandbox users" --profile SANDBOX-ADMIN
 
 ## Generate random binary file
@@ -160,7 +160,7 @@ pip freeze | grep oci
 
 ## Test multi-part file upload using SDK
 ### bash / custom Python script
-cd oci-book/chapter05/2-multipart-upload
+cd ~/git/oci-book/chapter05/2-multipart-upload
 chmod u+x multipart.py
 FILE="$HOME/data/warsaw/bemowo/visualizations.pdf"
 CONFIG="$HOME/.oci/config"
@@ -206,7 +206,7 @@ oci iam dynamic-group create --name realestate-instances --description "Instance
 
 ## Updating existing policy
 ### bash / OCI CLI
-cd ~/oci-book/chapter05/1-policies
+cd ~/git/oci-book/chapter05/1-policies
 oci iam policy list --all --query "data[?name=='sandbox-users-storage-policy'].{OCID:id}" --profile SANDBOX-ADMIN
 POLICY_ID=ocid1.policy.oc1..aa………tiueya
 oci iam policy update --policy-id $POLICY_ID --statements file://sandbox-users.policies.storage.2.json --version-date "" --profile SANDBOX-ADMIN
@@ -216,7 +216,7 @@ oci iam policy update --policy-id $POLICY_ID --statements file://sandbox-users.p
 
 ## Provisioning infrastructure
 ### bash / Terraform
-cd oci-book/chapter05/3-instance-principals/infrastructure
+cd ~/git/oci-book/chapter05/3-instance-principals/infrastructure
 find . \( -name "*.tf" -o -name "*.yaml" \)
 env | grep TF_VAR_
 terraform init
