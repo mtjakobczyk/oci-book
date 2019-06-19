@@ -22,7 +22,7 @@ runcmd:
  -  [ pip3.6, install, --upgrade, pip ]
  -  [ pip3.6, install, oci ]
  -  [ chown, -R, "opc:opc", "/home/opc/app" ]
- -  [ wget, "https://raw.githubusercontent.com/mtjakobczyk/oci-book/master/chapter05/3-instance-principals/applications/reportissuer.py" ]
+ -  [ wget, "https://gist.githubusercontent.com/mtjakobczyk/cd1c9352344204e506f332342402e10b/raw/81501af1ebb955299f67efa29886ba4df2f2ac52/reportissuer.py" ]
  -  [ mv, reportissuer.py, "/home/opc/" ]
  -  [ chown, "opc:opc", "/home/opc/reportissuer.py" ]
  -  [ chmod, "u+x", "/home/opc/reportissuer.py" ]
