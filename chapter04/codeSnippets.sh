@@ -39,8 +39,8 @@ oci iam user ui-password create-or-reset --user-id $USER_OCID --query "data.pass
 
 ## Generate API Signing keys for both users
 ### bash
-mkdir ~/apikeys
-cd ~/apikeys
+mkdir ~/.apikeys
+cd ~/.apikeys
 openssl genrsa -out api.sandbox-user.pem -aes128 2048
 chmod go-r api.sandbox-user.pem
 openssl rsa -pubout -in api.sandbox-user.pem -out api.sandbox-user.pem.pub
@@ -57,7 +57,7 @@ oci iam user list -c $TENANCY_OCID --query "data[?name=='sandbox-admin'].{OCID:i
 ## Upload API Signing key for a user
 ### bash / OCI CLI
 USER_OCID=ocid1.user.oc1..aa………7d5dca
-oci iam user api-key upload --user-id $USER_OCID --key-file ~/apikeys/api.sandbox-admin.pem.pub --query "data.fingerprint"
+oci iam user api-key upload --user-id $USER_OCID --key-file ~/.apikeys/api.sandbox-admin.pem.pub --query "data.fingerprint"
 
 ## Testing insufficient credentials for sandbox-admins (through the SANDBOX-ADMIN profile)
 ### bash / OCI CLI
