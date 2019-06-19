@@ -1,3 +1,4 @@
+# root module - vars.tf
 ## Provider-specific Variables
 variable "tenancy_ocid" {}
 variable "user_ocid" {}
