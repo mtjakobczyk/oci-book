@@ -1,5 +1,0 @@
-[
-"allow group sandbox-users to read buckets in compartment Sandbox where target.bucket.name='blueprints'",
-"allow group sandbox-users to manage objects in compartment Sandbox where target.bucket.name='blueprints'",
-"allow dynamic-group realestate-instances to manage objects in compartment Sandbox where target.bucket.name='blueprints'"
-]

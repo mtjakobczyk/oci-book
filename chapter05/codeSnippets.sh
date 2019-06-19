@@ -18,13 +18,14 @@ oci os bucket create --name blueprints --profile SANDBOX-ADMIN
 ### bash / OCI CLI
 oci os bucket list --query 'data[*].{Bucket:name}' --output table --profile SANDBOX-ADMIN
 
-## Create policy based on statements from sandbox-users.policies.json
+## Create policy based on statements from sandbox-users.policies.storage.json
 ### bash / OCI CLI
-COMPARTMENT_ID=ocid1.compartment.oc1..aaaaa………gzwhsa
-oci iam policy create --name sandbox-users-storage-policy --statements file://sandbox-users.policies.json --description "Storage-related policy for regular Sandbox users" -c $COMPARTMENT_ID --profile SANDBOX-ADMIN
+cd oci-book/chapter05/1-polices
+oci iam policy create --name sandbox-users-storage-policy --statements file://sandbox-users.policies.storage.json --description "Storage-related policy for regular Sandbox users" --profile SANDBOX-ADMIN
 
 ## Generate random binary file
 ### bash
+mkdir ~/data & cd ~/data
 SIZE=$((4096+(10+RANDOM % 20)*1024))
 head -c $SIZE /dev/urandom > 101.pdf
 ls -l 101.pdf | awk '{ print $9 " (" $5 ")" }'
