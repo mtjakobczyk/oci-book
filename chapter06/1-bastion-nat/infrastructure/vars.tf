@@ -1,12 +1,13 @@
-# root / variables
-## Global Variables
+# root module - vars.tf
+## Provider-specific Variables
 variable "tenancy_ocid" {}
 variable "user_ocid" {}
+variable "region" {}
 variable "fingerprint" {}
 variable "private_key_path" {}
 variable "private_key_password" {}
-variable "region" {}
-## Compartment
+
+## Project-specific input variables
 variable "compartment_ocid" {}
 
 # root module variables
