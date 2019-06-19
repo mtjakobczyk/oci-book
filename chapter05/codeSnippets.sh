@@ -20,12 +20,13 @@ oci os bucket list --query 'data[*].{Bucket:name}' --output table --profile SAND
 
 ## Create policy based on statements from sandbox-users.policies.storage.json
 ### bash / OCI CLI
-cd oci-book/chapter05/1-polices
+cd oci-book/chapter05/1-policies
 oci iam policy create --name sandbox-users-storage-policy --statements file://sandbox-users.policies.storage.json --description "Storage-related policy for regular Sandbox users" --profile SANDBOX-ADMIN
 
 ## Generate random binary file
 ### bash
-mkdir ~/data & cd ~/data
+mkdir ~/data
+cd ~/data
 SIZE=$((4096+(10+RANDOM % 20)*1024))
 head -c $SIZE /dev/urandom > 101.pdf
 ls -l 101.pdf | awk '{ print $9 " (" $5 ")" }'
