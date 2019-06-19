@@ -151,6 +151,7 @@ ls -lh warsaw/bemowo/visualizations.pdf | awk '{ print $9 " (" $5 ")" }'
 
 ## Prepare a new virtual environment and install OCI SDK
 ### bash / OCI CLI
+cd
 python3 -m venv oci-multipart
 source oci-multipart/bin/activate
 pip install --upgrade pip
@@ -159,8 +160,7 @@ pip freeze | grep oci
 
 ## Test multi-part file upload using SDK
 ### bash / custom Python script
-source ocidev/bin/activate
-curl https://raw.githubusercontent.com/mtjakobczyk/oci-book/master/chapter05/2-multipart-upload/multipart.py -o multipart.py
+cd oci-book/chapter05/2-multipart-upload
 chmod u+x multipart.py
 FILE="$HOME/data/warsaw/bemowo/visualizations.pdf"
 CONFIG="$HOME/.oci/config"
@@ -199,16 +199,17 @@ oci iam tag list --tag-namespace-id ocid1.tagnamespace.oc1..aa………6qu2eq --
 
 ## Creating a dynamic group
 ### bash / OCI CLI
+cat ~/.oci/config | grep tenancy
 TENANCY_OCID=ocid1.tenancy.oc1..aa………3yymfa
 MATCHING_RULE="tag.test-projects.realestate.value"
 oci iam dynamic-group create --name realestate-instances --description "Instances related to the real-estate project" --matching-rule $MATCHING_RULE -c $TENANCY_OCID
 
 ## Updating existing policy
 ### bash / OCI CLI
-COMPARTMENT_ID=ocid1.compartment.oc1..aaaaa………gzwhsa
-oci iam policy list --all -c $COMPARTMENT_ID --query "data[?name=='sandbox-users-storage-policy'].{OCID:id}" --profile SANDBOX-ADMIN
+cd ~/oci-book/chapter05/1-policies
+oci iam policy list --all --query "data[?name=='sandbox-users-storage-policy'].{OCID:id}" --profile SANDBOX-ADMIN
 POLICY_ID=ocid1.policy.oc1..aa………tiueya
-oci iam policy update --policy-id $POLICY_ID --statements file://1-policies/sandbox-users.policies.2.json -c $COMPARTMENT_ID --profile SANDBOX-ADMIN
+oci iam policy update --policy-id $POLICY_ID --statements file://sandbox-users.policies.storage.2.json --version-date "" --profile SANDBOX-ADMIN
 
 
 # SECTION: Accessing storage from instances
