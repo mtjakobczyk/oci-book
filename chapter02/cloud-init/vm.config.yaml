@@ -32,7 +32,7 @@ runcmd:
   - [ "python3", "-m", "venv", "/home/opc/uuidservice/venv" ]
   - [ "/home/opc/uuidservice/venv/bin/pip3", "install", "--upgrade", "pip" ]
   - [ "/home/opc/uuidservice/venv/bin/pip3", "install", "flask" ]
-  - [ "wget", "-qO", "/home/opc/uuidservice/app.py", "https://raw.githubusercontent.com/mtjakobczyk/oci-book/master/chapter02/uuid-service/app.py?token=ABRSVT67AYWMMSX52KTHZXC47TOXQ" ]
+  - [ "wget", "-qO", "/home/opc/uuidservice/app.py", "https://raw.githubusercontent.com/mtjakobczyk/oci-book/master/chapter02/uuid-service/app.py" ]
   - [ "firewall-offline-cmd", "--add-port=5000/tcp" ]
   - [ "systemctl", "restart", "firewalld" ]
   - [ "ln", "-s", "/etc/systemd/system/uuidservice.service", "/etc/systemd/system/multi-user.target.wants/uuidservice.service" ]
