@@ -144,6 +144,7 @@ oci os object put -bn blueprints --name waw/bemowo/parking.pdf --file local.park
 
 ## Generate a large file with random binary contents
 ### bash / OCI CLI
+cd ~/data
 SIZE=$((25*1024*1024))
 head -c $SIZE /dev/urandom > warsaw/bemowo/visualizations.pdf
 ls -lh warsaw/bemowo/visualizations.pdf | awk '{ print $9 " (" $5 ")" }'
@@ -161,16 +162,17 @@ pip freeze | grep oci
 source ocidev/bin/activate
 curl https://raw.githubusercontent.com/mtjakobczyk/oci-book/master/chapter05/2-multipart-upload/multipart.py -o multipart.py
 chmod u+x multipart.py
-FILE="$HOME/warsaw/bemowo/visualizations.pdf"
+FILE="$HOME/data/warsaw/bemowo/visualizations.pdf"
 CONFIG="$HOME/.oci/config"
 ./multipart.py "$FILE" 10 "waw/bemowo/visualizations.pdf" "blueprints" "$CONFIG" SANDBOX-USER
 
 # List the parts
 ### bash
-ls -lh warsaw/bemowo/vi* | awk '{ print $9 " (" $5 ")" }'
+ls -lh ~/data/warsaw/bemowo/vi* | awk '{ print $9 " (" $5 ")" }'
 
 ## Verify the uploaded file is the same as the original file
 ### bash / OCI CLI
+cd ~/data
 oci os object get -bn blueprints --name "waw/bemowo/visualizations.pdf" --file visualizations.downloaded.pdf --profile SANDBOX-USER
 ls -lh visualizations.downloaded.pdf | awk '{ print $9 " (" $5 ")" }'
 diff visualizations.downloaded.pdf warsaw/bemowo/visualizations.pdf
