@@ -223,9 +223,10 @@ terraform init
 terraform apply -auto-approve
 
 ## Provisioning infrastructure
-### bash / Terraform
+### bash
 ssh -i ~/.ssh/oci_id_rsa opc@130.61.XX.XXX
 sudo systemctl status reportissuer
+exit
 
 ## Printing object content
 ### bash / OCI CLI
