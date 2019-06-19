@@ -17,7 +17,7 @@ resource "oci_core_instance" "app_vm" {
     user_data = base64encode(file("app/cloud-init/appvm.config.yaml"))
   }
   defined_tags = {
-    test-projects.realestate = "true"
+    "test-projects.realestate" = "true"
   }
 }
 data "oci_core_vnic_attachments" "app_vnic_attachment" {
