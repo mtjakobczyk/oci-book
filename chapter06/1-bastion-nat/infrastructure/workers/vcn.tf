@@ -13,17 +13,17 @@ resource "oci_core_security_list" "workers_sl" {
   compartment_id = var.compartment_ocid
   vcn_id = var.vcn_ocid
   egress_security_rules {
-    stateless="true"
+    stateless=true
     destination=var.vcn_cidr
     protocol="all"
   }
   egress_security_rules {
-    stateless="false"
+    stateless=false
     destination="0.0.0.0/0"
     protocol="all"
   }
   ingress_security_rules {
-    stateless="true"
+    stateless=true
     source=var.vcn_cidr
     protocol="all"
   }
@@ -37,6 +37,6 @@ resource "oci_core_subnet" "workers_net" {
   cidr_block = var.vcn_subnet_cidr
   route_table_id = oci_core_route_table.workers_rt.id
   security_list_ids = [ oci_core_security_list.workers_sl.id ]
-  prohibit_public_ip_on_vnic = "true"
+  prohibit_public_ip_on_vnic = true
   dns_label = "workers"
 }

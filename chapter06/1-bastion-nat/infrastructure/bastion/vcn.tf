@@ -13,22 +13,22 @@ resource "oci_core_security_list" "bastion_sl" {
   compartment_id = var.compartment_ocid
   vcn_id = var.vcn_ocid
   egress_security_rules {
-    stateless="true"
+    stateless=true
     destination=var.vcn_cidr
     protocol="all"
   }
   egress_security_rules {
-    stateless="false"
+    stateless=false
     destination="0.0.0.0/0"
     protocol="all"
   }
   ingress_security_rules {
-    stateless="true"
+    stateless=true
     source=var.vcn_cidr
     protocol="all"
   }
   ingress_security_rules {
-    stateless="false"
+    stateless=false
     source="0.0.0.0/0"
     protocol="6"
     tcp_options {
@@ -46,6 +46,6 @@ resource "oci_core_subnet" "bastion_net" {
   cidr_block = var.vcn_subnet_cidr
   route_table_id = oci_core_route_table.bastion_rt.id
   security_list_ids = [ oci_core_security_list.bastion_sl.id ]
-  prohibit_public_ip_on_vnic = "false"
+  prohibit_public_ip_on_vnic = false
   dns_label = "bastion"
 }

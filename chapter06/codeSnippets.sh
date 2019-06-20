@@ -25,12 +25,14 @@ oci network public-ip delete --public-ip-id $RESERVED_IP_OCID --force --profile 
 ## Provision bastion and worker instances
 ### bash
 cd ~/git
-$ cd oci-book/chapter06/1-bastion-nat/infrastructure/
-$ find . -name "*.tf"
+cd oci-book/chapter06/1-bastion-nat/infrastructure/
+find . -name "*.tf"
 terraform init
 terraform apply -auto-approve
 
 ## Connect to the worker over bastion and test the connectivity
+### bash (only on Windows Subsystem for Linux)
+eval `ssh-agent -s`
 ### bash
 ssh-add ~/.ssh/oci_id_rsa
 ssh -J opc@130.61.X.X opc@10.0.1.130
@@ -45,7 +47,6 @@ terraform apply -auto-approve
 
 ## Connect to the worker over bastion again and test the connectivity
 ### bash
-ssh-add ~/.ssh/oci_id_rsa
 ssh -J opc@130.61.X.X opc@10.0.1.130
 ### bash (on worker-vm)
 ping -c 3 8.8.8.8
