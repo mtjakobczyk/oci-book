@@ -93,7 +93,7 @@ terraform apply -auto-approve
 
 ## Access the instance and note down the time marker
 ### bash
-ssh -i .ssh/oci_id_rsa opc@130.61.X.X
+ssh -i ~/.ssh/oci_id_rsa opc@130.61.X.X
 # bash (on vm-1-ocpu)
 cat datemarker
 exit
@@ -126,7 +126,7 @@ terraform apply -auto-approve
 
 ## Access the instance and verify if the original time marker survived
 ### bash
-ssh -i .ssh/oci_id_rsa opc@130.61.X.X
+ssh -i ~/.ssh/oci_id_rsa opc@130.61.X.X
 # bash (on vm-2-ocpu)
 cat datemarker
 exit
