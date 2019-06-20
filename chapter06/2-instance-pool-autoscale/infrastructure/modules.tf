@@ -8,7 +8,7 @@ data "oci_core_images" "centos_image" {
   operating_system_version = 7
 }
 module "bastion" {
-  source = "bastion"
+  source = "./bastion"
   compartment_ocid = var.compartment_ocid
   vcn_ocid = oci_core_virtual_network.vcn.id
   vcn_igw_ocid = oci_core_internet_gateway.igw.id
@@ -19,7 +19,7 @@ module "bastion" {
 }
 
 module "workers" {
-  source = "workers"
+  source = "./workers"
   compartment_ocid = var.compartment_ocid
   vcn_ocid = oci_core_virtual_network.vcn.id
   vcn_nat_ocid = oci_core_nat_gateway.natgw.id
