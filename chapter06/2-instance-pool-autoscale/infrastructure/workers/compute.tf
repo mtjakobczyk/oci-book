@@ -24,20 +24,18 @@ resource "oci_core_instance_configuration" "worker_config" {
 resource "oci_core_instance_pool" "worker_pool" {
   compartment_id = var.compartment_ocid
   instance_configuration_id = oci_core_instance_configuration.worker_config.id
-  placement_configurations = [
-    {
+  placement_configurations {
       availability_domain = var.ads[0]
       primary_subnet_id = oci_core_subnet.workers_net.id
-    },
-    {
+  }
+  placement_configurations {
       availability_domain = var.ads[1]
       primary_subnet_id = oci_core_subnet.workers_net.id
-    },
-    {
+  }
+  placement_configurations {
       availability_domain = var.ads[2]
       primary_subnet_id = oci_core_subnet.workers_net.id
-    }
-  ]
+  }
   size = var.pool_target_size
   display_name = "workers-pool"
 }
@@ -55,8 +53,7 @@ resource "oci_autoscaling_auto_scaling_configuration" "workers_pool_autoscale" {
       min = 1
     }
     policy_type = "threshold"
-    rules = [
-      {
+    rules {
       action {
         type = "CHANGE_COUNT_BY"
         value = 1
@@ -69,8 +66,8 @@ resource "oci_autoscaling_auto_scaling_configuration" "workers_pool_autoscale" {
         }
       }
       display_name = "scale-out"
-    },
-    {
+    }
+    rules {
       action {
         type = "CHANGE_COUNT_BY"
         value = -1
@@ -84,7 +81,6 @@ resource "oci_autoscaling_auto_scaling_configuration" "workers_pool_autoscale" {
       }
       display_name = "scale-in"
     }
-    ]
     display_name = "workers-pool-autoscale-policy"
   }
   display_name = "workers-pool-autoscale"
