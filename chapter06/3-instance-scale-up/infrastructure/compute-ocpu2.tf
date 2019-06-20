@@ -15,7 +15,7 @@ resource "oci_core_instance" "vm_2_ocpu" {
     subnet_id = oci_core_subnet.net.id
     assign_public_ip = true
   }
-  metadata {
+  metadata = {
     ssh_authorized_keys = file("~/.ssh/oci_id_rsa.pub")
   }
 }
