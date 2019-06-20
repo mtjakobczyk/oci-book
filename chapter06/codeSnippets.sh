@@ -106,7 +106,7 @@ terraform apply -auto-approve
 
 ## Detach boot volume
 ### bash
-BOOTVOLUME_OCID=`terraform output "3 - VM bootvolume OCID"`
+BOOTVOLUME_OCID=`terraform output "vm_bootvolume_ocid"`
 echo $BOOTVOLUME_OCID
 BOOTVOLUME_AD=`oci bv boot-volume get --boot-volume-id $BOOTVOLUME_OCID --query 'data."availability-domain"' --profile SANDBOX-ADMIN | sed 's/["]//g'`
 echo $BOOTVOLUME_AD

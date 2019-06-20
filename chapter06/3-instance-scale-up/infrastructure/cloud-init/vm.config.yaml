@@ -13,6 +13,6 @@ write_files:
     path: /etc/systemd/system/stress.service
 runcmd:
  -  'echo $(date) | tee /home/opc/datemarker'
- -  ln -s /etc/systemd/system/stress.service /etc/systemd/system/multi-user.target.wants/stress.service
- -  systemctl enable stress.service
- -  systemctl start stress.service
+ -  [ "ln", "-s", "/etc/systemd/system/stress.service", "/etc/systemd/system/multi-user.target.wants/stress.service" ]
+ -  [ "systemctl", "enable", "stress.service" ]
+ -  [ "systemctl", "start", "stress.service" ]

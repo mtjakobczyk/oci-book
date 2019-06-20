@@ -1,13 +1,10 @@
-locals {
-  ad = "${lookup(data.oci_identity_availability_domains.ads.availability_domains[0], "name")}"
-  image_ocid = "${data.oci_core_images.compute_image.images.0.id}"
-}
+# root module - provider.tf
 data "oci_identity_availability_domains" "ads" {
-  compartment_id = "${var.tenancy_ocid}"
+  compartment_id = var.tenancy_ocid
 }
-data "oci_core_images" "compute_image" {
-  compartment_id = "${var.tenancy_ocid}"
+data "oci_core_images" "centos_image" {
+  compartment_id = var.tenancy_ocid
   operating_system = "CentOS"
   operating_system_version = 7
 }
-output "2 - VM image" { value = "${data.oci_core_images.compute_image.images.0.display_name}" }
+output "image_name" { value = data.oci_core_images.centos_image.images[0].display_name }
