@@ -27,6 +27,6 @@ module "workers" {
   ads = data.oci_identity_availability_domains.ads.availability_domains[*].name
   image_ocid = data.oci_core_images.centos_image.images[0].id
 }
-output "bastion_public_ip" { value = "${module.bastion.bastion_public_ip}" }
-output "worker_public_ip" { value = "${module.workers.worker_private_ip}" }
-output "image_name" { value = "${data.oci_core_images.compute_image.images[0].display_name}" }
+output "bastion_public_ip" { value = module.bastion.bastion_public_ip }
+output "worker_public_ip" { value = module.workers.worker_private_ip }
+output "image_name" { value = data.oci_core_images.centos_image.images[0].display_name }
