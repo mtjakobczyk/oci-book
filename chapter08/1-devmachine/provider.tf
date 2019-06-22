@@ -1,3 +1,4 @@
+# root module - provider.tf
 provider "oci" {
   tenancy_ocid         = var.tenancy_ocid
   user_ocid            = var.user_ocid
@@ -6,4 +7,3 @@ provider "oci" {
   private_key_password = var.private_key_password
   region               = var.region
 }
-

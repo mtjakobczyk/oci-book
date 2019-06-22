@@ -1,4 +1,4 @@
-# root / variables
+# root module - vars.tf
 ## Global Variables
 variable "tenancy_ocid" { }
 variable "user_ocid" { }

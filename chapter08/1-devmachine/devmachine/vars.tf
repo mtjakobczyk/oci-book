@@ -1,4 +1,4 @@
-# devmachine / variables
+# devmachine module - vars.tf
 ## Module Input Variables
 variable "compartment_ocid" {}
 variable "vcn_ocid" {}
