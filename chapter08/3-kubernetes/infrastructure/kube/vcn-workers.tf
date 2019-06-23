@@ -1,4 +1,4 @@
-# kube module / networking for workers
+# kube module - vcn-workers.tf / networking for workers
 
 resource "oci_core_route_table" "oke_workers_rt" {
   compartment_id = var.compartment_ocid
@@ -16,12 +16,12 @@ resource "oci_core_security_list" "oke_workers_sl" {
   display_name = "oke-workers-sl"
   # Allow all traffic within the VCN
   egress_security_rules {
-    stateless = "true"
+    stateless = true
     destination = var.oke_cluster["cidr"]
     protocol = "all"
   }
   ingress_security_rules {
-    stateless="true"
+    stateless=true
     source = var.oke_cluster["cidr"]
     protocol="all"
   }
@@ -41,7 +41,7 @@ resource "oci_core_subnet" "oke_workers_ad1_net" {
   route_table_id = oci_core_route_table.oke_workers_rt.id
   security_list_ids = [ oci_core_security_list.oke_workers_sl.id ]
 #  dhcp_options_id = var.vcn_dhcp_options_ocid
-  prohibit_public_ip_on_vnic = "true"
+  prohibit_public_ip_on_vnic = true
   dns_label = "work1"
 }
 
@@ -54,6 +54,6 @@ resource "oci_core_subnet" "oke_workers_ad2_net" {
   route_table_id = oci_core_route_table.oke_workers_rt.id
   security_list_ids = [ oci_core_security_list.oke_workers_sl.id ]
 #  dhcp_options_id = var.vcn_dhcp_options_ocid
-  prohibit_public_ip_on_vnic = "true"
+  prohibit_public_ip_on_vnic = true
   dns_label = "work2"
 }

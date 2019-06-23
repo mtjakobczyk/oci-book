@@ -1,4 +1,4 @@
-# kube module / networking for load balancer
+# kube module - vcn-lb.tf  / networking for load balancer
 
 resource "oci_core_route_table" "oke_lb_rt" {
   compartment_id = var.compartment_ocid
@@ -16,23 +16,23 @@ resource "oci_core_security_list" "oke_lb_sl" {
   display_name = "oke-lb-sl"
   # Allow all traffic within the VCN
   egress_security_rules {
-    stateless = "true"
+    stateless = true
     destination = var.oke_cluster["cidr"]
     protocol = "all"
   }
   ingress_security_rules {
-    stateless="true"
+    stateless=true
     source = var.oke_cluster["cidr"]
     protocol="all"
   }
   # Allow all inbound traffic on ports 30000-32767
   egress_security_rules {
-    stateless = "true"
+    stateless = true
     destination = "0.0.0.0/0"
     protocol = "all"
   }
   ingress_security_rules {
-    stateless="true"
+    stateless=true
     source = "0.0.0.0/0"
     protocol="6"
     tcp_options {

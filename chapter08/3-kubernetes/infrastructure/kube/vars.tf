@@ -1,4 +1,4 @@
-# kube module / variables
+# kube module - vars.tf
 variable "compartment_ocid" {}
 variable "vcn_ocid" {}
 variable "vcn_igw_ocid" {}

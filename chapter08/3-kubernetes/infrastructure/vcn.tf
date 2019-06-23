@@ -1,4 +1,4 @@
-# root module / networking
+# root module - vnc.tf
 resource "oci_core_virtual_network" "vcn" {
   compartment_id = var.compartment_ocid
   cidr_block     = var.vcn_cidr
