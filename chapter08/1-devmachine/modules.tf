@@ -21,5 +21,5 @@ output "dev_machine_public_ip" {
   value = module.devmachine.dev_public_ip
 }
 output "dev_machine_image_name" {
-  value = data.oci_core_images.compute_image.images[0].display_name
+  value = data.oci_core_images.centos_image.images[0].display_name
 }

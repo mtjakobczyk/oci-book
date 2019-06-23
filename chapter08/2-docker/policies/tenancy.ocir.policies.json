@@ -1,0 +1,5 @@
+[
+  "allow group sandbox-users to manage repos in tenancy where target.repo.name = /sandbox*/",
+  "allow group sandbox-admins to manage repos in tenancy where target.repo.name = /sandbox*/",
+  "allow group sandbox-admins to inspect repos in tenancy where request.operation='ListDockerRepositories'"
+]
