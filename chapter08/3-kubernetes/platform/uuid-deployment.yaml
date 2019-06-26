@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: uuid-deployment
+  namespace: dev-sandbox
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: uuid
+  template:
+    metadata:
+      labels:
+        app: uuid
+    spec:
+      imagePullSecrets:
+      - name: sandbox-user-secret
+      containers:
+      - name: uuid-container
+        image: fra.ocir.io/jakobczyk/sandbox/uuid:latest
+        ports:
+        - containerPort: 5000
+          protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: uuid-service
+  namespace: dev-sandbox
+spec:
+  type: LoadBalancer
+  selector:
+    app: uuid
+  ports:
+  - port: 80
+    targetPort: 5000

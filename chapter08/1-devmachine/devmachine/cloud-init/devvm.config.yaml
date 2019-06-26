@@ -23,6 +23,7 @@ runcmd:
  - [ systemctl, start, docker ]
  - [ usermod, -aG, docker, opc ]
  - [ mkdir, "/home/opc/.kube" ]
+ - [ chown, "opc:opc", "/home/opc/.kube" ]
  - [ firewall-offline-cmd, "--add-port=5010-5019/tcp" ]
  - [ systemctl, restart, firewalld ]
  - "echo "LANG=en_US.utf-8" >> /etc/environment"
