@@ -5,7 +5,7 @@ metadata:
   namespace: dev-sandbox
 spec:
   containers:
-  - image: fra.ocir.io/jakobczyk/sandbox/uuid:latest
+  - image: fra.ocir.io/jakobczyk/sandbox/uuid:1.0
     name: uuid-container
     ports:
     - containerPort: 5000
