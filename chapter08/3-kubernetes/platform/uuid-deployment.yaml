@@ -17,7 +17,7 @@ spec:
       - name: sandbox-user-secret
       containers:
       - name: uuid-container
-        image: fra.ocir.io/jakobczyk/sandbox/uuid:latest
+        image: fra.ocir.io/jakobczyk/sandbox/uuid:1.0
         ports:
         - containerPort: 5000
           protocol: TCP
