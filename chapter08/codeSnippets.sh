@@ -166,6 +166,7 @@ oci ce cluster create-kubeconfig --cluster-id $CLUSTER_OCID --file ~/.kube/sandb
 chmod 600 ~/.kube/sandbox-user-config
 ls -l ~/.kube | awk '{print $1, $9}'
 # Optionally upload kube config to Dev VM
+DEV_VM_PUBLIC_IP=130.61.X.X
 scp -i ~/.ssh/oci_id_rsa ~/.kube/sandbox-user-config opc@$DEV_VM_PUBLIC_IP:/home/opc/.kube
 ssh -i ~/.ssh/oci_id_rsa opc@$DEV_VM_PUBLIC_IP
 ### bash (on cloud-based devmachine or your local developer machine)
@@ -184,36 +185,49 @@ kubectl --kubeconfig ~/.kube/sandbox-user-config get all -n dev-sandbox # Succes
 # SECTION: Deployment, Service, Pods
 ##
 
+# Set .kube/config using environment variable
+# bash (on cloud-based devmachine or your local developer machine)
+export KUBECONFIG=~/.kube/sandbox-user-config
+
 # Create a secret within a namespace to access OCIR private repository
+# bash (on cloud-based devmachine or your local developer machine)
 OCI_TENANCY={put-here-your-tenancy-name}
 OCIR_REGION={put-here-your-ocir-region-code}
 OCI_USER=sandbox-user
 OCI_USER_TOKEN={put-here-sandbox-user-auth-token}
-kubectl --kubeconfig ~/.kube/sandbox-user-config create secret \
+kubectl create secret \
   docker-registry sandbox-user-secret --docker-server=$OCIR_REGION.ocir.io \
   --docker-username="$OCI_TENANCY/$OCI_USER" \
   --docker-password="$OCI_USER_TOKEN" -n dev-sandbox
 
-kubectl --kubeconfig ~/.kube/sandbox-user-config get secret sandbox-user-secret -n dev-sandbox -o yaml
-# visible: if echo "" | base64 -d => see decoded config
-
 # Create a Pod
+# bash (on cloud-based devmachine or your local developer machine)
 cd oci-book/chapter08/3-kubernetes/platform
-kc=~/.kube/sandbox-user-config
-kubectl --kubeconfig $kc create -f uuid-pod.yaml -n dev-sandbox
-kubectl --kubeconfig $kc get pods -n dev-sandbox
+kubectl create -f uuid-pod.yaml -n dev-sandbox
+kubectl get pods -n dev-sandbox
 
 # Delete the Pod
-kubectl --kubeconfig ~/.kube/sandbox-user-config delete pod uuid-pod -n dev-sandbox
+# bash (on cloud-based devmachine or your local developer machine)
+kubectl  delete pod uuid-pod -n dev-sandbox
 
 # Create a deployment
-kubectl --kubeconfig ~/.kube/sandbox-user-config create -f uuid-deployment.yaml -n dev-sandbox
-kubectl --kubeconfig ~/.kube/sandbox-user-config get pods -n dev-sandbox  -o wide
-kubectl --kubeconfig ~/.kube/sandbox-user-config get services -n dev-sandbox
+# bash (on cloud-based devmachine or your local developer machine)
+kubectl create -f uuid-deployment.yaml -n dev-sandbox
+kubectl get pods -n dev-sandbox  -o wide
+kubectl get replicasets -n dev-sandbox
+kubectl get services -n dev-sandbox
+exit
 
 # Test the API and observe the generator field
+# bash
 LB_PUBLIC_IP=132.145.X.X
 for i in {1..10}; do curl $LB_PUBLIC_IP:80/identifiers; done
 
 # Cleanup
-kubectl --kubeconfig ~/.kube/sandbox-user-config delete all --all -n dev-sandbox
+# bash
+DEV_VM_PUBLIC_IP=130.61.X.X
+ssh -i ~/.ssh/oci_id_rsa opc@$DEV_VM_PUBLIC_IP
+### bash (on cloud-based devmachine or your local developer machine)
+export KUBECONFIG=~/.kube/sandbox-user-config
+kubectl delete all --all -n dev-sandbox
+exit
