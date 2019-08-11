@@ -11,7 +11,7 @@ variable "ads" {
 variable "oke_cluster" {
   type = "map"
   default = {
-    cidr = "10.0.2.0/25"
+    cidr = "10.0.2.0/24"
     version = "v1.12.7"
     worker_image = "Oracle-Linux-7.6"
     worker_shape = "VM.Standard2.1"
