@@ -1,0 +1,25 @@
+﻿event_id,event_name,category_id,category_name,class_id,class_name
+I-SV-NS,no seatbelts,I-SV,safety violation,I,traffic incident
+I-SV-RO,road obstruction,I-SV,safety violation,I,traffic incident
+I-SV-MV,malfunctioning vehicle,I-SV,safety violation,I,traffic incident
+I-SV-NL,no lights,I-SV,safety violation,I,traffic incident
+I-LI-UD,unlicensed driving,I-LI,license issues,I,traffic incident
+I-LI-LP,no license plates,I-LI,license issues,I,traffic incident
+I-TR-RW,forcing the right of way,I-TR,traffic rules,I,traffic incident
+I-TR-LD,lane departure,I-TR,traffic rules,I,traffic incident
+I-TR-WW,wrong-way,I-TR,traffic rules,I,traffic incident
+I-TR-OT,overtaking,I-TR,traffic rules,I,traffic incident
+I-TR-SP,speeding,I-TR,traffic rules,I,traffic incident
+I-IN-DD,drunk driving,I-IN,intoxication,I,traffic incident
+I-IN-DR,driving on drugs,I-IN,intoxication,I,traffic incident
+A-CO-HO,head-on collision,A-CO,collision,A,traffic accident
+A-CO-RE,rear-end,A-CO,collision,A,traffic accident
+A-CO-SC,side collision,A-CO,collision,A,traffic accident
+A-CO-TR,side-road-tree hit,A-CO,collision,A,traffic accident
+A-OT-RO,rollover,A-OT,other accident,A,traffic accident
+A-OT-RR,run-off-road,A-OT,other accident,A,traffic accident
+A-CH-PH,pedestrian hit,A-CH,hit-by-car,A,traffic accident
+A-CH-CH,cyclist hit,A-CH,hit-by-car,A,traffic accident
+A-CH-AH,animal hit,A-CH,hit-by-car,A,traffic accident
+A-TD-LC,level crossing accident,A-TD,traffic disaster,A,traffic accident
+A-TD-MC,multi-car collision,A-TD,traffic disaster,A,traffic accident

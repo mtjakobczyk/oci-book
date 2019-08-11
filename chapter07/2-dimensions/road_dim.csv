@@ -1,0 +1,264 @@
+﻿segment_id,segment_name,segment_type,segment_voivodeship,segment_highway,segment_expressway,road_id,road_name,road_length
+R01S01,1/Pomeranian/A,A,Pomeranian,A1,,1,DK1,640
+R01S02,1/Kuyavian-Pomeranian/A,A,Kuyavian-Pomeranian,A1,,1,DK1,640
+R01S03,1/Lodz/A,A,Lodz,A1,,1,DK1,640
+R01S04,1/Lodz/GP,GP,Lodz,,,1,DK1,640
+R01S05,1/Silesian/GP,GP,Silesian,,,1,DK1,640
+R01S06,1/Silesian/S,S,Silesian,,S1,1,DK1,640
+R01S07,1/Silesian/A,A,Silesian,A1,,1,DK1,640
+R02S01,2/Lubusz/A,A,Lubusz,A2,,2,DK2,672
+R02S02,2/Greater Poland/A,A,Greater Poland,A2,,2,DK2,672
+R02S03,2/Lodz/A,A,Lodz,A2,,2,DK2,672
+R02S04,2/Masovian/A,A,Masovian,A2,,2,DK2,672
+R02S05,2/Masovian/S,S,Masovian,,S2,2,DK2,672
+R02S06,2/Masovian/GP,GP,Masovian,,,2,DK2,672
+R02S07,2/Lublin/GP,GP,Lublin,,,2,DK2,672
+R03S01,3/West Pomeranian/GP,GP,West Pomeranian,,,3,DK3,504
+R03S02,3/West Pomeranian/S,S,West Pomeranian,,S3,3,DK3,504
+R03S03,3/West Pomeranian/A,A,West Pomeranian,A6,,3,DK3,504
+R03S04,3/Lubusz/S,S,Lubusz,,S3,3,DK3,504
+R03S05,3/Lower Silesian/GP,GP,Lower Silesian,,,3,DK3,504
+R04S01,4/Lower Silesian/A,A,Lower Silesian,A4,,4,DK4,673
+R04S02,4/Opole/A,A,Opole,A4,,4,DK4,673
+R04S03,4/Silesian/A,A,Silesian,A4,,4,DK4,673
+R04S04,4/Lesser Poland/A,A,Lesser Poland,A4,,4,DK4,673
+R04S05,4/Subcarpathian/A,A,Subcarpathian,A4,,4,DK4,673
+R05S01,5/Kuyavian-Pomeranian/S,S,Kuyavian-Pomeranian,,S5,5,DK5,496
+R05S02,5/Kuyavian-Pomeranian/GP,GP,Kuyavian-Pomeranian,,,5,DK5,496
+R05S03,5/Greater Poland/S,S,Greater Poland,,S5,5,DK5,496
+R05S04,5/Greater Poland/GP,GP,Greater Poland,,,5,DK5,496
+R05S05,5/Lower Silesian/GP,GP,Lower Silesian,,,5,DK5,496
+R06S01,6/Pomeranian/GP,GP,Pomeranian,,,6,DK6,189
+R06S02,6/Pomeranian/S,S,Pomeranian,,S6,6,DK6,189
+R06S03,6/West Pomeranian/GP,GP,West Pomeranian,,,6,DK6,189
+R06S04,6/West Pomeranian/S,S,West Pomeranian,,S6,6,DK6,189
+R06S05,6/West Pomeranian/A,A,West Pomeranian,A6,,6,DK6,189
+R07S01,7/Pomeranian/GP,GP,Pomeranian,,,7,DK7,780
+R07S02,7/Pomeranian/S,S,Pomeranian,,S7,7,DK7,780
+R07S03,7/Warmian-Masurian/GP,GP,Warmian-Masurian,,,7,DK7,780
+R07S04,7/Warmian-Masurian/S,S,Warmian-Masurian,,S7,7,DK7,780
+R07S05,7/Masovian/GP,GP,Masovian,,,7,DK7,780
+R07S06,7/Masovian/S,S,Masovian,,S7,7,DK7,780
+R07S07,7/Swietokrzyskie/GP,GP,Swietokrzyskie,,,7,DK7,780
+R07S08,7/Swietokrzyskie/S,S,Swietokrzyskie,,S7,7,DK7,780
+R07S09,7/Lesser Poland/GP,GP,Lesser Poland,,,7,DK7,780
+R07S10,7/Lesser Poland/S,S,Lesser Poland,,S7,7,DK7,780
+R08S01,8/Podlaskie/GP,GP,Podlaskie,,,8,DK8,849
+R08S02,8/Podlaskie/S,S,Podlaskie,,S8,8,DK8,849
+R08S03,8/Masovian/GP,GP,Masovian,,,8,DK8,849
+R08S04,8/Masovian/S,S,Masovian,,S8,8,DK8,849
+R08S05,8/Lodz/S,S,Lodz,,S8,8,DK8,849
+R08S06,8/Greater Poland/S,S,Greater Poland,,S8,8,DK8,849
+R08S07,8/Lower Silesian/S,S,Lower Silesian,,S8,8,DK8,849
+R08S08,8/Lower Silesian/A,A,Lower Silesian,A8,,8,DK8,849
+R08S09,8/Lower Silesian/GP,GP,Lower Silesian,,,8,DK8,849
+R09S01,9/Masovian/GP,GP,Masovian,,,9,DK9,189
+R09S02,9/Swietokrzyskie/GP,GP,Swietokrzyskie,,,9,DK9,189
+R09S03,9/Subcarpathian/GP,GP,Subcarpathian,,,9,DK9,189
+R10S01,10/West Pomeranian/GP,GP,West Pomeranian,,,10,DK10,467
+R10S02,10/West Pomeranian/S,S,West Pomeranian,,S10,10,DK10,467
+R10S03,10/Greater Poland/GP,GP,Greater Poland,,,10,DK10,467
+R10S04,10/Kuyavian-Pomeranian/GP,GP,Kuyavian-Pomeranian,,,10,DK10,467
+R10S05,10/Kuyavian-Pomeranian/S,S,Kuyavian-Pomeranian,,S10,10,DK10,467
+R10S06,10/Masovian/GP,GP,Masovian,,,10,DK10,467
+R11S01,11/West Pomeranian/GP,GP,West Pomeranian,,,11,DK11,596
+R11S02,11/Greater Poland/S,S,Greater Poland,,S11,11,DK11,596
+R11S03,11/Greater Poland/GP,GP,Greater Poland,,,11,DK11,596
+R11S04,11/Opole/GP,GP,Opole,,,11,DK11,596
+R11S05,11/Silesian/GP,GP,Silesian,,,11,DK11,596
+R12S01,12/Lubusz/GP,GP,Lubusz,,,12,DK12,757
+R12S02,12/Greater Poland/GP,GP,Greater Poland,,,12,DK12,757
+R12S03,12/Lodz/GP,GP,Lodz,,,12,DK12,757
+R12S04,12/Masovian/GP,GP,Masovian,,,12,DK12,757
+R12S05,12/Lublin/S,S,Lublin,,S12,12,DK12,757
+R12S06,12/Lublin/GP,GP,Lublin,,,12,DK12,757
+R13S01,13/West Pomeranian/GP,GP,West Pomeranian,,,13,DK13,17
+R14S01,14/Lodz/GP,GP,Lodz,,,14,DK14,83
+R15S01,15/Warmian-Masurian/GP,GP,Warmian-Masurian,,,15,DK15,372
+R15S02,15/Kuyavian-Pomeranian/GP,GP,Kuyavian-Pomeranian,,,15,DK15,372
+R15S03,15/Greater Poland/GP,GP,Greater Poland,,,15,DK15,372
+R15S04,15/Lower Silesian/GP,GP,Lower Silesian,,,15,DK15,372
+R16S01,16/Podlaskie/GP,GP,Podlaskie,,,16,DK16,395
+R16S02,16/Warmian-Masurian/GP,GP,Warmian-Masurian,,,16,DK16,395
+R16S03,16/Kuyavian-Pomeranian/GP,GP,Kuyavian-Pomeranian,,,16,DK16,395
+R17S01,17/Masovian/S,S,Masovian,,S17,17,DK17,306
+R17S02,17/Masovian/GP,GP,Masovian,,,17,DK17,306
+R17S03,17/Lubusz/S,S,Lubusz,,S17,17,DK17,306
+R17S04,17/Lubusz/GP,GP,Lubusz,,,17,DK17,306
+R18S01,18/Lubusz/GP,GP,Lubusz,,,18,DK18,78
+R18S02,18/Lower Silesian/GP,GP,Lower Silesian,,,18,DK18,78
+R18S03,18/Lower Silesian/A,A,Lower Silesian,A18,,18,DK18,78
+R19S01,19/Podlaskie/GP,GP,Podlaskie,,,19,DK19,592
+R19S02,19/Masovian/GP,GP,Masovian,,,19,DK19,592
+R19S03,19/Lublin/GP,GP,Lublin,,,19,DK19,592
+R19S04,19/Lublin/S,S,Lublin,,S19,19,DK19,592
+R19S05,19/Subcarpathian/GP,GP,Subcarpathian,,,19,DK19,592
+R19S06,19/Subcarpathian/S,S,Subcarpathian,,S19,19,DK19,592
+R20S01,20/Pomeranian/GP,GP,Pomeranian,,,20,DK20,318
+R20S02,20/West Pomeranian/GP,GP,West Pomeranian,,,20,DK20,318
+R21S01,21/Pomeranian/GP,GP,Pomeranian,,,21,DK21,85
+R22S01,22/Warmian-Masurian/GP,GP,Warmian-Masurian,,,22,DK22,460
+R22S02,22/Warmian-Masurian/S,S,Warmian-Masurian,,S22,22,DK22,460
+R22S03,22/Pomeranian/GP,GP,Pomeranian,,,22,DK22,460
+R22S04,22/Greater Poland/GP,GP,Greater Poland,,,22,DK22,460
+R22S05,22/West Pomeranian/GP,GP,West Pomeranian,,,22,DK22,460
+R22S06,22/Lower Silesian/GP,GP,Lower Silesian,,,22,DK22,460
+R23S01,23/West Pomeranian/G,G,West Pomeranian,,,23,DK23,33
+R24S01,24/Lubusz/GP,GP,Lubusz,,,24,DK24,73
+R24S02,24/Greater Poland/GP,GP,Greater Poland,,,24,DK24,73
+R25S01,25/West Pomeranian/G,G,West Pomeranian,,,25,DK25,412
+R25S02,25/West Pomeranian/GP,GP,West Pomeranian,,,25,DK25,412
+R25S03,25/Pomeranian/GP,GP,Pomeranian,,,25,DK25,412
+R25S04,25/Kuyavian-Pomeranian/GP,GP,Kuyavian-Pomeranian,,,25,DK25,412
+R25S05,25/Greater Poland/GP,GP,Greater Poland,,,25,DK25,412
+R25S06,25/Lower Silesian/G,G,Lower Silesian,,,25,DK25,412
+R25S07,25/Lower Silesian/GP,GP,Lower Silesian,,,25,DK25,412
+R26S01,26/West Pomeranian/G,G,West Pomeranian,,,26,DK26,51
+R27S01,27/Lubusz/GP,GP,Lubusz,,,27,DK27,74
+R27S02,27/Lubusz/G,G,Lubusz,,,27,DK27,74
+R28S01,28/Lesser Poland/GP,GP,Lesser Poland,,,28,DK28,350
+R28S02,28/Subcarpathian/GP,GP,Subcarpathian,,,28,DK28,350
+R28S03,28/Subcarpathian/G,G,Subcarpathian,,,28,DK28,350
+R29S01,29/Lubusz/GP,GP,Lubusz,,,29,DK29,58
+R30S01,30/Lower Silesian/GP,GP,Lower Silesian,,,30,DK30,67
+R31S01,31/West Pomeranian/GP,GP,West Pomeranian,,,31,DK31,138
+R31S02,31/Lubusz/GP,GP,Lubusz,,,31,DK31,138
+R32S01,32/Lubusz/GP,GP,Lubusz,,,32,DK32,157
+R32S02,32/Greater Poland/GP,GP,Greater Poland,,,32,DK32,157
+R33S01,33/Lower Silesian/G,G,Lower Silesian,,,33,DK33,45
+R34S01,34/Lower Silesian/GP,GP,Lower Silesian,,,34,DK34,9
+R35S01,35/Lower Silesian/G,G,Lower Silesian,,,35,DK35,91
+R35S02,35/Lower Silesian/GP,GP,Lower Silesian,,,35,DK35,91
+R36S01,36/Greater Poland/G,G,Greater Poland,,,36,DK36,150
+R36S02,36/Greater Poland/GP,GP,Greater Poland,,,36,DK36,150
+R36S03,36/Lower Silesian/GP,GP,Lower Silesian,,,36,DK36,150
+R37S01,37/West Pomeranian/G,G,West Pomeranian,,,37,DK37,15
+R38S01,38/Opole/G,G,Opole,,,38,DK38,42
+R39S01,39/Lower Silesian/G,G,Lower Silesian,,,39,DK39,116
+R39S02,39/Greater Poland/G,G,Greater Poland,,,39,DK39,116
+R39S03,39/Opole/G,G,Opole,,,39,DK39,116
+R40S01,40/Opole/G,G,Opole,,,40,DK40,103
+R40S02,40/Silesian/G,G,Silesian,,,40,DK40,103
+R41S01,41/Opole/G,G,Opole,,,41,DK41,33
+R42S01,42/Silesian/GP,GP,Silesian,,,42,DK42,274
+R42S02,42/Opole/GP,GP,Opole,,,42,DK42,274
+R42S03,42/Opole/G,G,Opole,,,42,DK42,274
+R42S04,42/Lodz/GP,GP,Lodz,,,42,DK42,274
+R42S05,42/Lodz/G,G,Lodz,,,42,DK42,274
+R42S06,42/Swietokrzyskie/GP,GP,Swietokrzyskie,,,42,DK42,274
+R43S01,43/Silesian/G,G,Silesian,,,43,DK43,76
+R43S02,43/Opole/G,G,Opole,,,43,DK43,76
+R43S03,43/Lodz/G,G,Lodz,,,43,DK43,76
+R44S01,44/Silesian/GP,GP,Silesian,,,44,DK44,108
+R44S02,44/Silesian/G,G,Silesian,,,44,DK44,108
+R44S03,44/Lesser Poland/GP,GP,Lesser Poland,,,44,DK44,108
+R44S04,44/Lesser Poland/G,G,Lesser Poland,,,44,DK44,108
+R45S01,45/Opole/GP,GP,Opole,,,45,DK45,217
+R45S02,45/Opole/G,G,Opole,,,45,DK45,217
+R45S03,45/Lodz/GP,GP,Lodz,,,45,DK45,217
+R45S04,45/Lodz/G,G,Lodz,,,45,DK45,217
+R45S05,45/Silesian/GP,GP,Silesian,,,45,DK45,217
+R45S06,45/Silesian/G,G,Silesian,,,45,DK45,217
+R46S01,46/Lower Silesian/GP,GP,Lower Silesian,,,46,DK46,270
+R46S02,46/Opole/GP,GP,Opole,,,46,DK46,270
+R46S03,46/Silesian/GP,GP,Silesian,,,46,DK46,270
+R47S01,47/Lesser Poland/GP,GP,Lesser Poland,,,47,DK47,40
+R48S01,48/Lublin/GP,GP,Lublin,,,48,DK48,200
+R48S02,48/Lublin/G,G,Lublin,,,48,DK48,200
+R48S03,48/Masovian/G,G,Masovian,,,48,DK48,200
+R48S04,48/Lodz/G,G,Lodz,,,48,DK48,200
+R49S01,49/Lesser Poland/G,G,Lesser Poland,,,49,DK49,24
+R50S01,50/Masovian/GP,GP,Masovian,,,50,DK50,297
+R51S01,51/Warmian-Masurian/S,S,Warmian-Masurian,,S51,51,DK51,122
+R51S02,51/Warmian-Masurian/GP,GP,Warmian-Masurian,,,51,DK51,122
+R52S01,52/Lesser Poland/GP,GP,Lesser Poland,,,52,DK52,74
+R52S02,52/Silesian/GP,GP,Silesian,,,52,DK52,74
+R52S03,52/Silesian/S,S,Silesian,,S52,52,DK52,74
+R53S01,53/Warmian-Masurian/GP,GP,Warmian-Masurian,,,53,DK53,123
+R53S02,53/Masovian/G,G,Masovian,,,53,DK53,123
+R54S01,54/Warmian-Masurian/GP,GP,Warmian-Masurian,,,54,DK54,18
+R55S01,55/Pomeranian/G,G,Pomeranian,,,55,DK55,123
+R55S02,55/Kuyavian-Pomeranian/G,G,Kuyavian-Pomeranian,,,55,DK55,123
+R56S01,56/Kuyavian-Pomeranian/G,G,Kuyavian-Pomeranian,,,56,DK56,20
+R57S01,57/Masovian/G,G,Masovian,,,57,DK57,189
+R57S02,57/Warmian-Masurian/G,G,Warmian-Masurian,,,57,DK57,189
+R58S01,58/Warmian-Masurian/G,G,Warmian-Masurian,,,58,DK58,160
+R58S02,58/Podlaskie/G,G,Podlaskie,,,58,DK58,160
+R59S01,59/Warmian-Masurian/G,G,Warmian-Masurian,,,59,DK59,90
+R60S01,60/Masovian/G,G,Masovian,,,60,DK60,248
+R60S02,60/Lodz/G,G,Lodz,,,60,DK60,248
+R61S01,61/Podlaskie/G,G,Podlaskie,,,61,DK61,257
+R61S02,61/Masovian/G,G,Masovian,,,61,DK61,257
+R62S01,62/Kuyavian-Pomeranian/G,G,Kuyavian-Pomeranian,,,62,DK62,361
+R62S02,62/Masovian/G,G,Masovian,,,62,DK62,361
+R62S03,62/Podlaskie/G,G,Podlaskie,,,62,DK62,361
+R63S01,63/Warmian-Masurian/G,G,Warmian-Masurian,,,63,DK63,410
+R63S02,63/Podlaskie/G,G,Podlaskie,,,63,DK63,410
+R63S03,63/Masovian/G,G,Masovian,,,63,DK63,410
+R63S04,63/Lublin/G,G,Lublin,,,63,DK63,410
+R64S01,64/Podlaskie/G,G,Podlaskie,,,64,DK64,47
+R65S01,65/Podlaskie/G,G,Podlaskie,,,65,DK65,224
+R65S02,65/Warmian-Masurian/G,G,Warmian-Masurian,,,65,DK65,224
+R66S01,66/Podlaskie/G,G,Podlaskie,,,66,DK66,114
+R67S01,67/Kuyavian-Pomeranian/G,G,Kuyavian-Pomeranian,,,67,DK67,26
+R68S01,68/Lublin/GP,GP,Lublin,,,68,DK68,11
+R70S01,70/Masovian/G,G,Masovian,,,70,DK70,50
+R70S02,70/Lodz/G,G,Lodz,,,70,DK70,50
+R71S01,71/Lodz/G,G,Lodz,,,71,DK71,53
+R72S01,72/Greater Poland/GP,GP,Greater Poland,,,72,DK72,170
+R72S02,72/Lodz/GP,GP,Lodz,,,72,DK72,170
+R73S01,73/Swietokrzyskie/GP,GP,Swietokrzyskie,,,73,DK73,198
+R73S02,73/Lesser Poland/GP,GP,Lesser Poland,,,73,DK73,198
+R73S03,73/Subcarpathian/GP,GP,Subcarpathian,,,73,DK73,198
+R73S04,73/Subcarpathian/G,G,Subcarpathian,,,73,DK73,198
+R74S01,74/Lodz/GP,GP,Lodz,,,74,DK74,514
+R74S02,74/Swietokrzyskie/GP,GP,Swietokrzyskie,,,74,DK74,514
+R74S03,74/Lublin/GP,GP,Lublin,,,74,DK74,514
+R75S01,75/Lesser Poland/GP,GP,Lesser Poland,,,75,DK75,138
+R75S02,75/Lesser Poland/G,G,Lesser Poland,,,75,DK75,138
+R76S01,76/Masovian/G,G,Masovian,,,76,DK76,77
+R76S02,76/Lublin/G,G,Lublin,,,76,DK76,77
+R77S01,77/Swietokrzyskie/GP,GP,Swietokrzyskie,,,77,DK77,165
+R77S02,77/Subcarpathian/GP,GP,Subcarpathian,,,77,DK77,165
+R77S03,77/Subcarpathian/G,G,Subcarpathian,,,77,DK77,165
+R78S01,78/Swietokrzyskie/GP,GP,Swietokrzyskie,,,78,DK78,230
+R78S02,78/Silesian/GP,GP,Silesian,,,78,DK78,230
+R79S01,79/Masovian/GP,GP,Masovian,,,79,DK79,450
+R79S02,79/Masovian/G,G,Masovian,,,79,DK79,450
+R79S03,79/Swietokrzyskie/GP,GP,Swietokrzyskie,,,79,DK79,450
+R79S04,79/Swietokrzyskie/G,G,Swietokrzyskie,,,79,DK79,450
+R79S05,79/Lesser Poland/G,G,Lesser Poland,,,79,DK79,450
+R79S06,79/Lesser Poland/GP,GP,Lesser Poland,,,79,DK79,450
+R79S07,79/Silesian/GP,GP,Silesian,,,79,DK79,450
+R80S01,80/Kuyavian-Pomeranian/GP,GP,Kuyavian-Pomeranian,,,80,DK80,66
+R81S01,81/Silesian/GP,GP,Silesian,,,81,DK81,60
+R82S01,82/Lublin/GP,GP,Lublin,,,82,DK82,90
+R83S01,83/Greater Poland/GP,GP,Greater Poland,,,83,DK83,55
+R83S02,83/Lodz/GP,GP,Lodz,,,83,DK83,55
+R83S03,83/Lodz/G,G,Lodz,,,83,DK83,55
+R84S01,84/Subcarpathian/G,G,Subcarpathian,,,84,DK84,48
+R85S01,85/Masovian/G,G,Masovian,,,85,DK85,5
+R86S01,86/Silesian/GP,GP,Silesian,,,86,DK86,40
+R87S01,87/Lesser Poland/G,G,Lesser Poland,,,87,DK87,28
+R88S01,88/Opole/GP,GP,Opole,,,88,DK88,51
+R88S02,88/Silesian/GP,GP,Silesian,,,88,DK88,51
+R89S01,89/Pomeranian/GP,GP,Pomeranian,,,89,DK89,10
+R90S01,90/Pomeranian/G,G,Pomeranian,,,90,DK90,15
+R91S01,91/Pomeranian/GP,GP,Pomeranian,,,91,DK91,484
+R91S02,91/Kuyavian-Pomeranian/GP,GP,Kuyavian-Pomeranian,,,91,DK91,484
+R91S03,91/Lodz/GP,GP,Lodz,,,91,DK91,484
+R91S04,91/Silesian/GP,GP,Silesian,,,91,DK91,484
+R92S01,92/Lubusz/GP,GP,Lubusz,,,92,DK92,472
+R92S02,92/Greater Poland/GP,GP,Greater Poland,,,92,DK92,472
+R92S03,92/Lodz/GP,GP,Lodz,,,92,DK92,472
+R92S04,92/Masovian/GP,GP,Masovian,,,92,DK92,472
+R93S01,93/West Pomeranian/G,G,West Pomeranian,,,93,DK93,14
+R94S01,94/Lower Silesian/GP,GP,Lower Silesian,,,94,DK94,675
+R94S02,94/Opole/GP,GP,Opole,,,94,DK94,675
+R94S03,94/Silesian/GP,GP,Silesian,,,94,DK94,675
+R94S04,94/Lesser Poland/GP,GP,Lesser Poland,,,94,DK94,675
+R94S05,94/Subcarpathian/GP,GP,Subcarpathian,,,94,DK94,675
+R95S01,95/Kuyavian-Pomeranian/GP,GP,Kuyavian-Pomeranian,,,95,DK95,2
+R96S01,96/Kuyavian-Pomeranian/GP,GP,Kuyavian-Pomeranian,,,96,DK96,2
+R97S01,97/Subcarpathian/GP,GP,Subcarpathian,,,97,DK97,6
+R98S01,98/Lower Silesian/GP,GP,Lower Silesian,,,98,DK98,24

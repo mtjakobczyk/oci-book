@@ -1,0 +1,4 @@
+[
+"allow group sandbox-users to read buckets in compartment Sandbox where target.bucket.name='roadadw-load'",
+"allow group sandbox-users to manage objects in compartment Sandbox where target.bucket.name='roadadw-load'"
+]
