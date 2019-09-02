@@ -26,6 +26,4 @@ runcmd:
  - [ chown, "opc:opc", "/home/opc/.kube" ]
  - [ firewall-offline-cmd, "--add-port=5010-5019/tcp" ]
  - [ systemctl, restart, firewalld ]
- - "echo "LANG=en_US.utf-8" >> /etc/environment"
- - "echo "LC_ALL=en_US.utf-8" >> /etc/environment"
 final_message: "DEV machine is running, after $UPTIME seconds"
