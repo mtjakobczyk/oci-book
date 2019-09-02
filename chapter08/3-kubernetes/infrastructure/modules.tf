@@ -1,6 +1,6 @@
 # root module - modules.tf
 data "oci_identity_availability_domains" "ads" {
-  compartment_id = var.tenancy_ocid
+  compartment_id = var.compartment_ocid
 }
 module "kubernetes" {
   source           = "./kube"

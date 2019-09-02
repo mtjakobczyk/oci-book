@@ -1,9 +1,9 @@
 # root module - modules.tf
 data "oci_identity_availability_domains" "ads" {
-  compartment_id = var.tenancy_ocid
+  compartment_id = var.compartment_ocid
 }
 data "oci_core_images" "centos_image" {
-  compartment_id = var.tenancy_ocid
+  compartment_id = var.compartment_ocid
   operating_system = "CentOS"
   operating_system_version = 7
 }
