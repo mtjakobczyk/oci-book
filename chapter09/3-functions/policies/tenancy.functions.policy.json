@@ -1,0 +1,4 @@
+[
+  "allow service FaaS to use virtual-network-family in compartment Sandbox",
+  "allow service FaaS to read repos in tenancy"
+]

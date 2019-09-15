@@ -1,0 +1,5 @@
+[
+  "allow group sandbox-users to manage functions-family in compartment Sandbox",
+  "allow group sandbox-users to read metrics in compartment Sandbox",
+  "allow group sandbox-users to use virtual-network-family in compartment Sandbox"
+]
