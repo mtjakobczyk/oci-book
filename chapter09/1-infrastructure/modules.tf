@@ -19,6 +19,14 @@ module "devmachine" {
   ads = data.oci_identity_availability_domains.ads.availability_domains[*].name
   image_ocid = data.oci_core_images.centos_image.images[0].id
 }
+module "functions" {
+  source           = "./functions"
+  compartment_ocid = var.compartment_ocid
+  vcn_ocid         = oci_core_virtual_network.vcn.id
+  vcn_natgw_ocid     = oci_core_nat_gateway.natgw.id
+  vcn_cidr         = oci_core_virtual_network.vcn.cidr_block
+  vcn_subnet_cidr  = "10.0.9.128/25"
+}
 output "dev_machine_public_ip" {
   value = module.devmachine.dev_public_ip
 }
