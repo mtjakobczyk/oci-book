@@ -39,3 +39,4 @@ resource "oci_core_subnet" "fn_net" {
   prohibit_public_ip_on_vnic = true
   dns_label = "functions"
 }
+output "functions_subnet_ocid" { value = oci_core_subnet.fn_net.id }

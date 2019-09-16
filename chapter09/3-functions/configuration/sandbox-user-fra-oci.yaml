@@ -1,0 +1,5 @@
+api-url: https://functions.<REGION-CODE>.oraclecloud.com
+oracle.compartment-id: <COMPARTMENT-OCID>
+oracle.profile: SANDBOX-USER
+provider: oracle
+registry: <OCIR-REGION-CODE>.ocir.io/<TENANCY>/fn

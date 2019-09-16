@@ -33,3 +33,6 @@ output "dev_machine_public_ip" {
 output "dev_machine_image_name" {
   value = data.oci_core_images.centos_image.images[0].display_name
 }
+output "functions_subnet_ocid" {
+  value = module.functions.functions_subnet_ocid
+}
