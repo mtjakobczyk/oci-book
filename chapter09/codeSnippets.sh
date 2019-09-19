@@ -25,13 +25,14 @@ sudo cat /var/log/syslog | grep "DEV machine"
 ### bash (on cloud-based VM)
 curl -LSs https://raw.githubusercontent.com/fnproject/cli/master/install | sh
 fn version
-fn start &
+fn start -d
 
 ## Inspect local installation
 ### bash (on cloud-based VM)
 docker images
 docker ps
-tree -a ~/.fn
+docker logs fnserver
+
 
 ## Configure Fn Project for local development
 ### bash (on cloud-based VM)
@@ -134,7 +135,7 @@ fn list apps
 
 # SECTION: Serverless > Oracle Functions > Deploy function
 
-##
+## Create application in Oracle Functions
 ### bash (on cloud-based VM)
 FN_SUBNET_ID=`terraform output functions_subnet_ocid`
 fn create app uuidcloudapp --annotation oracle.com/oci/subnetIds="[\"$FN_SUBNET_ID\"]"
