@@ -1,0 +1,3 @@
+[
+"allow dynamic-group reporting-functions to manage objects in compartment Sandbox where target.bucket.name='reports'"
+]
