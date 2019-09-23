@@ -174,14 +174,21 @@ fn invoke uuidcloudapp uuidfn
 fn inspect function uuidcloudapp uuidfn | jq -r '.annotations."fnproject.io/fn/invokeEndpoint"'
 
 
-# SECTION: Serverless > Events > Events as function triggers
+# SECTION: Events > Functions and Object Storage > Preparing infrastructure
 
 # Create Object Storage bucket for reports
 ### bash
 oci os bucket create --name reports --profile SANDBOX-ADMIN
+
+## IAM Policy statement for object storage
+### bash
+cd ~/git/oci-book/chapter09/4-events/policies
+oci iam policy create --name sandbox-users-storage-reports-policy --statements file://sandbox-users.policies.storage-reports.json --description "Storage-related (reports) policy for regular Sandbox users" --profile SANDBOX-ADMIN
+
+## Put a test file to the bucket
+### bash
 cd ~/git/oci-book/chapter09/4-events/reports
-oci os object put -bn reports --file customer_attendance.20190922.csv --profile SANDBOX-USER
-oci os object put -bn reports --file customer_attendance.20190923.csv --profile SANDBOX-USER
+oci os object put -bn reports --file customer_attendance.20190922.raw.csv --profile SANDBOX-USER
 
 ## Create tag key inside the existing tag namespace
 ### bash
@@ -195,13 +202,13 @@ echo $TENANCY_OCID
 MATCHING_RULE="ALL {resource.type = 'fnfunc', tag.test-projects.reports.value}"
 oci iam dynamic-group create --name reporting-functions --description "Functions related to the reporting project" --matching-rule $MATCHING_RULE -c $TENANCY_OCID
 
-
 ## IAM Policy statement
 ### bash
 cd ~/git/oci-book/chapter09/4-events/policies
-oci iam policy create --name sandbox-users-storage-reports-policy --statements file://sandbox-users.policies.storage-reports.json --description "Storage-related (reports) policy for regular Sandbox users" --profile SANDBOX-ADMIN
 oci iam policy create --name functions-storage-reports-policy --statements file://functions.policies.storage-reports.json --description "Storage-related (reports) policy for tagged functions" --profile SANDBOX-ADMIN
 
+
+# SECTION: Events > Functions and Object Storage > Deploying function
 
 ## Create application in Oracle Functions
 ### bash (on cloud-based VM)
@@ -212,11 +219,6 @@ fn create app reportingapp --annotation oracle.com/oci/subnetIds="[\"$FN_SUBNET_
 cd reportingfn/
 fn -v deploy --app reportingapp --no-bump
 
-# Test failed (no tag on function)
-### bash (on cloud-based VM)
-echo -n '{ "object_name": "report1.txt", "object_content": "Some Text"  }' | fn invoke reportingapp reportingfn --content-type application/json
-# No object found
-
 ## Tag function with the defined tag key
 ### bash
 FN_APP_OCID=`oci fn application list --query "data[?\"display-name\" == 'reportingapp'] | [0].id" --raw-output`
@@ -225,10 +227,29 @@ FN_FUN_OCID=`oci fn function list --application-id $FN_APP_OCID --query "data[?\
 echo $FN_FUN_OCID
 oci fn function update --function-id $FN_FUN_OCID --defined-tags '{ "test-projects": {"reports": ""} }'
 
-# Test failed (no tag on function)
-### bash (on cloud-based VM)
-echo -n '{ "object_name": "report1.txt", "object_content": "Some Text"  }' | fn invoke reportingapp reportingfn --content-type application/json
-# No object found
+# SECTION: Events > Events as function triggers
 
-## Define Oracle Event
+# Trigger function using event mock
+### bash (on cloud-based VM)
+cat ~/event.mock.json | fn invoke reportingapp reportingfn --content-type application/json
+
+# SECTION: Events > Oracle Events
+
+## Let Oracle Events trigger Oracle Functions
 ### bash
+cd ~/git/oci-book/chapter09/4-events/policies
+oci iam policy create --name cloudevents-policy --statements file://cloudevents.policies.json --description "Functions-related policy for CloudEvents" --profile SANDBOX-ADMIN
+
+## Create Oracle Events rule
+### bash
+cd ~/git/oci-book/chapter09/4-events/events
+echo $FN_FUN_OCID
+cat oracleevents.actions.template.json | sed -e "s/PUT_HERE_FUNCTION_ID/$FN_FUN_OCID/g" > oracleevents.actions.json
+SERIALIZED_CONDITIONS=`cat oracleevents.conditions.json | sed 's/"/\\"/g' | sed 's/[[:space:]]//g' | tr -d '\n'`
+oci events rule create --display-name new-reports --is-enabled true --condition $SERIALIZED_CONDITIONS --actions file://oracleevents.actions.json
+
+## Put a two more test files to the bucket
+### bash
+cd ~/git/oci-book/chapter09/4-events/reports
+oci os object put -bn reports --file customer_attendance.20190923.raw.csv --profile SANDBOX-USER
+oci os object put -bn reports --file customer_attendance.20190924.raw.csv --profile SANDBOX-USER

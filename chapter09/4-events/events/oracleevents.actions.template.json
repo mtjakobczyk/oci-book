@@ -1,0 +1,10 @@
+{
+  "actions": [
+      {
+        "actionType": "FAAS",
+        "description": "string",
+        "functionId": "PUT_HERE_FUNCTION_ID",
+        "isEnabled": true
+      }
+  ]
+}
