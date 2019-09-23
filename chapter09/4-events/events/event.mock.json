@@ -1,0 +1,9 @@
+{
+  "eventType": "objectstorage.createobject",
+  "source": "ObjectStorage",
+  "eventTime": "2019-09-23T10:49:00.195Z",
+  "contentType": "application/json",
+  "data": {
+    "resourceName": "customer_attendance.20190923.csv",
+  }
+}

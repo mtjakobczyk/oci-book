@@ -1,4 +1,5 @@
 import io
+import os
 import json
 import uuid
 import oci
@@ -10,7 +11,7 @@ from io import StringIO
 def extract_object_name(data: io.BytesIO):
     data_bytes = data.getvalue()
     data_json = json.loads(data_bytes)
-    object_name = data_json.get("object_name")
+    object_name = data_json['data']['resourceName']
     return object_name
 
 
@@ -25,6 +26,7 @@ def load_object_content(client, storage_namespace, bucket_name, object_name):
 
 
 def process_city_attendance_data(object_content_str):
+    city_attendance_str = "city,attendance" + os.linesep
     city_attendance_dict = {}
     for line in object_content_str.splitlines():
         line_list = line.split(',')
@@ -33,11 +35,13 @@ def process_city_attendance_data(object_content_str):
             city_attendance_dict[city] = 0
         attendance = int(line_list[2])
         city_attendance_dict[city] += attendance
-    return city_attendance_dict
+    for city,attendance in city_attendance_dict.items():
+        city_attendance_str += city + ',' + str(attendance) + os.linesep
+    return city_attendance_str
 
 
-def put_city_attendance_object(client, storage_namespace, bucket_name, object_name, city_attendance_dict):
-    object_content_stream = StringIO(str(city_attendance_dict))
+def put_city_attendance_object(client, storage_namespace, bucket_name, object_name, city_attendance_str):
+    object_content_stream = StringIO(str(city_attendance_str))
     rsp = client.put_object(storage_namespace, bucket_name, object_name, object_content_stream)
     return rsp
 
@@ -60,6 +64,11 @@ def handler(ctx, data: io.BytesIO=None):
         # Process input
         bucket_name = "reports"
         object_name = extract_object_name(data)
+        # Process only .raw.csv
+        if not str(object_name).endswith('.raw.csv'):
+            res_dict["object_name"] = object_name
+            res_dict["result"] = "ignoring"
+            return prepare_function_response(ctx, res_dict, headers_dict)
 
         # Authenticate the function instance as an instance principal
         signer = oci.auth.signers.get_resource_principals_signer()
@@ -67,13 +76,13 @@ def handler(ctx, data: io.BytesIO=None):
         storage_namespace = client.get_namespace().data
 
         object_content_str = load_object_content(client, storage_namespace, bucket_name, object_name)
-        city_attendance_dict = process_city_attendance_data(object_content_str)
+        city_attendance_str = process_city_attendance_data(object_content_str)
 
-        processed_object_name = object_name.replace('.csv','.processed.csv')
-        put_response = put_city_attendance_object(client, storage_namespace, bucket_name, processed_object_name, city_attendance_dict)
+        processed_object_name = object_name.replace('.raw.csv','.processed.csv')
+        put_response = put_city_attendance_object(client, storage_namespace, bucket_name, processed_object_name, city_attendance_str)
 
-        res_dict["put_response"] = str(put_response)
-        res_dict["object_content"] = str(city_attendance_dict)
+        res_dict["object_name"] = object_name
+        res_dict["processed_object_name"] = processed_object_name
         res_dict["result"] = "success"
     except (Exception, ValueError) as ex:
         res_dict["result"] = "error"
