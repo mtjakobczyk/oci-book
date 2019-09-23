@@ -58,7 +58,7 @@ def handler(ctx, data: io.BytesIO=None):
 
     if data is None or not len(data.getvalue())>0:
         res_dict["message"] = "no data received"
-        return prepare_response(ctx, res_dict, headers_dict)
+        return prepare_function_response(ctx, res_dict, headers_dict)
 
     try:
         # Process input
