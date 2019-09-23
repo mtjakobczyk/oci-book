@@ -1,0 +1,9 @@
+{
+  "eventType": [ "com.oraclecloud.objectstorage.createobject" ],
+  "data": {
+    "compartmentName": ["Sandbox"],
+    "additionalDetails": {
+      "bucketName": ["reports"]
+    }
+  }
+}
