@@ -10,4 +10,5 @@ runcmd:
  - [ "mkdir", "/home/ubuntu/functions" ]
  - [ "wget", "-O", "/home/ubuntu/functions/blankfn.py", "https://raw.githubusercontent.com/mtjakobczyk/oci-book/master/chapter09/2-fn/blankfn.py?token=ABRSVT5N7B6JOL6ID5PHMKK5QYPNS" ]
  - [ "wget", "-O", "/home/ubuntu/functions/uuidfn.py", "https://raw.githubusercontent.com/mtjakobczyk/oci-book/master/chapter09/2-fn/uuidfn.py?token=ABRSVT2LAHFFX3H5WFCUEA25QZB3Q" ]
+ - [ "wget", "-O", "/home/ubuntu/functions/reportingfn.py", "https://raw.githubusercontent.com/mtjakobczyk/oci-book/master/chapter09/2-fn/reportingfn.py?token=ABRSVTZHYOLYV2JQ2HOZAE25SIGTQ" ]
 final_message: "DEV machine is running, after $UPTIME seconds"
