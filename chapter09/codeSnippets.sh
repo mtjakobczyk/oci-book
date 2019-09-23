@@ -38,7 +38,7 @@ docker logs fnserver
 ### bash (on cloud-based VM)
 fn list contexts
 fn use context default
-fn update context registry fndemouser
+fn update context registry localdev
 fn list contexts
 
 
@@ -64,12 +64,14 @@ fn --verbose deploy --app blankapp --local
 ### bash (on cloud-based VM)
 fn list functions blankapp
 docker images | grep blank
+docker ps --format '{{.Names}} [{{.Image}}] {{.Status}}'
 
 ## Test Fn function locally (Blank function)
 ### bash (on cloud-based VM)
 fn invoke blankapp blankfn
-watch docker ps
-
+docker ps --format '{{.Names}} [{{.Image}}] {{.Status}}'
+fn invoke blankapp blankfn &
+fn invoke blankapp blankfn &
 
 # SECTION: Serverless > Fn Project > UUID Generator function
 
@@ -82,7 +84,7 @@ cp ~/functions/uuidfn.py ~/uuidfn/func.py
 ## Create Fn application (UUID Generator)
 ### bash (on cloud-based VM)
 fn create app uuidapp
-fn list functions uuidapp
+fn list apps
 
 ## Build Fn function (UUID Generator)
 ### bash (on cloud-based VM)
@@ -103,8 +105,7 @@ curl -X "POST" -H "Content-Type: application/json" $FN_INVOKE_ENDPOINT
 ## Create FaaS and function developer policies
 ### bash
 cd ~/git/oci-book/chapter09/3-functions/policies
-cat ~/.oci/config | grep tenancy
-TENANCY_OCID={put-here-your-tenancy-ocid}
+TENANCY_OCID=`cat ~/.oci/config | grep tenancy | sed 's/tenancy=//'`
 oci iam policy create -c $TENANCY_OCID --name functions-policy --description "FaaS Policy" --statements "file://tenancy.functions.policy.json"
 oci iam policy create --name sandbox-users-functions-policy --description "Functions-related policy for regular Sandbox users" --statements "file://sandbox-users.functions.policy.json" --profile SANDBOX-ADMIN
 
@@ -113,9 +114,10 @@ oci iam policy create --name sandbox-users-functions-policy --description "Funct
 ## Create context, OCI config
 ### bash (on cloud-based VM)
 fn create context sandbox-user-fra-oci --provider oracle
+vi ~/.fn/contexts/sandbox-user-fra-oci.yaml
 # Edit the ~/.fn/contexts/sandbox-user-fra-oci.yaml file as described in the book
 mkdir ~/.oci
-touch ~/.oci/config
+vi ~/.oci/config
 # Edit the ~/.oci/config file as described in the book
 
 ## Upload SANDBOX-USER key, config and connect to the Dev Machine
@@ -200,7 +202,7 @@ oci iam tag create --tag-namespace-id $TAG_NAMESPACE_OCID --name reports --descr
 ### bash
 echo $TENANCY_OCID
 MATCHING_RULE="ALL {resource.type = 'fnfunc', tag.test-projects.reports.value}"
-oci iam dynamic-group create --name reporting-functions --description "Functions related to the reporting project" --matching-rule $MATCHING_RULE -c $TENANCY_OCID
+oci iam dynamic-group create --name reporting-functions --description "Functions related to the reporting project" --matching-rule "$MATCHING_RULE" -c $TENANCY_OCID
 
 ## IAM Policy statement
 ### bash
@@ -210,14 +212,26 @@ oci iam policy create --name functions-storage-reports-policy --statements file:
 
 # SECTION: Events > Functions and Object Storage > Deploying function
 
-## Create application in Oracle Functions
+## Initialize application in Oracle Functions
 ### bash (on cloud-based VM)
 cd ~
 fn init --runtime python reportingfn
 cp ~/functions/reportingfn.py ~/reportingfn/func.py
+echo -ne "\noci" >> ~/reportingfn/requirements.txt
+
+## Login to OCIR
+### bash (on cloud-based VM)
+OCI_TENANCY={put-here-your-tenancy-name}
+OCIR_REGION={put-here-your-ocir-region-code}
+OCI_USER=sandbox-user
+docker login -u $OCI_TENANCY/$OCI_USER $OCIR_REGION.ocir.io
+
+## Create application in Oracle Functions
+### bash (on cloud-based VM)
+FN_SUBNET_ID={put-here-subnet-ocid}
 fn create app reportingapp --annotation oracle.com/oci/subnetIds="[\"$FN_SUBNET_ID\"]"
 cd reportingfn/
-fn -v deploy --app reportingapp --no-bump
+fn -v deploy --app reportingapp
 
 ## Tag function with the defined tag key
 ### bash
