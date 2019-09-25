@@ -1,5 +1,7 @@
-### Practical Oracle Cloud Infrastructure © Michal Jakobczyk
-Code snippets to use with Chapter 2
+### Practical Oracle Cloud Infrastructure
+© Michal Jakobczyk  
+Code snippets to use with Chapter 2.  
+Replace `<placeholders>` with values matching your environment.  
 
 ---
 #### SECTION: Provisioning the Infrastructure
