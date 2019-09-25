@@ -4,7 +4,7 @@ Code snippets to use with Chapter 3.
 Replace `<placeholders>` with values matching your environment.  
 
 ---
-#### SECTION: Provisioning the Infrastructure
+#### SECTION: Cloud Management Plane ➙ API Signing Key
 
 :wrench: **Task:** Generate API Signing Key  
 :computer: **Execute on:** Your machine
