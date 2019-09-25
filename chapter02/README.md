@@ -19,7 +19,7 @@ Replace `<placeholders>` with values matching your environment.
     UUID1_INSTANCE=<uuid1_public_ip>
     ssh -i ~/id_rsa opc@$UUID1_INSTANCE
 
-**Task:** Verify cloud-init has completed  
+:wrench: **Task:** Verify cloud-init has completed  
 :computer: **Execute on:** Cloud Instance (UUID1_INSTANCE)
 
     sudo cat /var/log/cloud-init.log | grep "node is running"
