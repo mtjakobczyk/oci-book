@@ -16,7 +16,7 @@ Replace `<placeholders>` with values matching your environment.
 :wrench: **Task:** Connect to the compute instance (uuid-1)  
 :computer: **Execute on:** Your machine
 
-    UUID1_INSTANCE=130.61.228.125
+    UUID1_INSTANCE=<uuid1_public_ip>
     ssh -i ~/id_rsa opc@$UUID1_INSTANCE
 
 **Task:** Verify cloud-init has completed  
@@ -43,14 +43,14 @@ Replace `<placeholders>` with values matching your environment.
 :wrench: **Task:** Test the API on both instances  
 :computer: **Execute on:** Your machine
 
-    UUID2_INSTANCE=130.61.55.199
+    UUID2_INSTANCE=<uuid2_public_ip>
     curl $UUID1_INSTANCE:5000/identifiers
     curl $UUID2_INSTANCE:5000/identifiers
 
 :wrench: **Task:** Test the load balancer listener  
 :computer: **Execute on:** Your machine
 
-    LB_INSTANCE=132.145.240.101
+    LB_INSTANCE=<load_balancer_public_ip>
     curl $LB_INSTANCE:80/identifiers
     curl $LB_INSTANCE:80/identifiers
     curl $LB_INSTANCE:80/identifiers
