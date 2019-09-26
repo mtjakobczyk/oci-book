@@ -44,7 +44,7 @@ Replace `<placeholders>` with values matching your environment.
     
 :wrench: **Task:** Update the venv and install OCI SDK  
 :computer: **Execute on:** Your machine  
-:dart: **Context:** The venv is activated in your Shell
+:dart: **Context:** Shell with the activated venv
 
     pip install --upgrade pip
     pip --version
@@ -72,7 +72,7 @@ Replace `<placeholders>` with values matching your environment.
     
 :wrench: **Task:** Use OCI SDK for Python for the first time
 :computer: **Execute on:** Your machine  
-:dart: **Context:** Python interpreter run within active venv
+:dart: **Context:** Python interpreter run within the activated venv
 
     import oci
     config = oci.config.from_file("~/.oci/config","DEFAULT")
