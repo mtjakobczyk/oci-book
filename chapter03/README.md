@@ -209,3 +209,19 @@ Replace `<placeholders>` with values matching your environment.
     ROUTE_RULES="[{\"cidrBlock\":\"0.0.0.0/0\", \"networkEntityId\":\"$IGW_OCID\"}]"
     RT_OCID=`oci network route-table create --vcn-id $VCN_OCID --display-name cli-rt --route-rules "$ROUTE_RULES" --query "data.id" | tr -d '"'`
     echo $RT_OCID
+
+:wrench: **Task:** Use OCI CLI to create a new AD-specific subnet inside the VCN  
+:computer: **Execute on:** Your machine
+
+    AD1=`oci iam availability-domain list --query data[0].name | tr -d '"'`
+    echo $AD1
+    SUBNET_OCID=`oci network subnet create --vcn-id $VCN_OCID --display-name cli-vcn --cidr-block "192.168.3.0/30" --prohibit-public-ip-on-vnic false --availability-domain $AD1 --route-table-id $RT_OCID --query data.id | tr -d '"'`
+    echo $SUBNET_OCID
+    
+:wrench: **Task:** Use OCI CLI to provision a new compute instance    
+:computer: **Execute on:** Your machine
+
+    IMAGE_OCID=`oci compute image list --operating-system "CentOS" --operating-system-version 7 --sort-by TIMECREATED --query data[0].id | tr -d '"'`
+    echo $IMAGE_OCID
+    VM_OCID=`oci compute instance launch --display-name cli-vm --availability-domain "$AD1" --subnet-id "$SUBNET_OCID" --private-ip 192.168.3.2 --image-id "$IMAGE_OCID" --shape VM.Standard2.1 --ssh-authorized-keys-file ~/.ssh/oci_id_rsa.pub --wait-for-state RUNNING --query data.id | tr -d '"'`
+    echo $VM_OCID
