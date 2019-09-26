@@ -56,7 +56,7 @@ Replace `<placeholders>` with values matching your environment.
 ---
 #### SECTION: SDK ➙ Installation
 
-:wrench: **Task:** Prepare OCI SDK/CLI configuration file
+:wrench: **Task:** Prepare OCI SDK/CLI configuration file  
 :computer: **Execute on:** Your machine  
     
     mkdir ~/.oci
@@ -65,13 +65,13 @@ Replace `<placeholders>` with values matching your environment.
     ls ~/.oci
     vi ~/.oci/config
     
-:wrench: **Task:** Activate the venv and run Python interpreter
+:wrench: **Task:** Activate the venv and run Python interpreter  
 :computer: **Execute on:** Your machine
     
     source ~/ocidev/bin/activate
     python3
     
-:wrench: **Task:** Use OCI SDK for Python for the first time
+:wrench: **Task:** Use OCI SDK for Python for the first time  
 :computer: **Execute on:** Your machine  
 :dart: **Context:** Python interpreter run within the activated venv
 
