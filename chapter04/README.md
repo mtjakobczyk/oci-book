@@ -41,3 +41,20 @@ Replace `<placeholders>` with values matching your environment.
 
     USER_OCID=<put-here-sandbox-user-ocid>
     oci iam user ui-password create-or-reset --user-id "$USER_OCID" --query "data.password"
+
+:wrench: **Task:** Generate API Signing Keys for both sandbox-* users 
+:computer: **Execute on:** Your machine
+
+    cd ~/.apikeys
+    openssl genrsa -out api.sandbox-user.pem -aes128 2048
+    chmod go-r api.sandbox-user.pem
+    openssl rsa -pubout -in api.sandbox-user.pem -out api.sandbox-user.pem.pub
+    openssl genrsa -out api.sandbox-admin.pem -aes128 2048
+    chmod go-r api.sandbox-admin.pem
+    openssl rsa -pubout -in api.sandbox-admin.pem -out api.sandbox-admin.pem.pub
+    ls -l | awk '{print $1, $9}'
+    
+:wrench: **Task:** Query for user OCID by name
+:computer: **Execute on:** Your machine
+
+    oci iam user list -c $TENANCY_OCID --query "data[?name=='sandbox-admin'].{OCID:id,Name:name}" --all
