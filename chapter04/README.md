@@ -64,7 +64,7 @@ Replace `<placeholders>` with values matching your environment.
 
     oci iam user api-key upload --user-id $SANDBOX_ADMIN_OCID --key-file ~/.apikeys/api.sandbox-admin.pem.pub --query "data.fingerprint"
 
-:wrench: **Task:** Edit the config file and add a new profile for the sandbox-admin  
+:wrench: **Task:** Edit the config file and add the SANDBOX-ADMIN profile for the sandbox-admin  
 :computer: **Execute on:** Your machine
 
     vi ~/.oci/config # use vi or any other editor you prefer
@@ -74,5 +74,7 @@ Replace `<placeholders>` with values matching your environment.
 
     oci iam user list -c $TENANCY_OCID --query "data [?starts_with(name,'sandbox')].name" --all --profile SANDBOX-ADMIN
     
+:warning: **Warning:** Remember to upload the API Signing Key for the sandbox-user and add the SANDBOX-USER profile to the config
+
 ---
 #### SECTION: Groups and Policies  
