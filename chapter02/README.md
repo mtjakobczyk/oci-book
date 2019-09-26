@@ -9,7 +9,7 @@ Replace `<placeholders>` with values matching your environment.
 :wrench: **Task:** Generate keypair  
 :computer: **Execute on:** Your machine
 
-    ssh-keygen -t rsa -b 2048 -C michal@vm -f ~/id_rsa
+    ssh-keygen -t rsa -b 2048 -C michal@vm -f ~/.ssh/oci_id_rsa
 
 ---
 #### SECTION: Testing the Application
@@ -17,7 +17,7 @@ Replace `<placeholders>` with values matching your environment.
 :computer: **Execute on:** Your machine
 
     UUID1_INSTANCE=<uuid1_public_ip>
-    ssh -i ~/id_rsa opc@$UUID1_INSTANCE
+    ssh -i ~/.ssh/oci_id_rsa opc@$UUID1_INSTANCE
 
 :wrench: **Task:** Verify cloud-init has completed  
 :computer: **Execute on:** Cloud Instance (UUID1_INSTANCE)
