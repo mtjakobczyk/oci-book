@@ -142,18 +142,35 @@ Replace `<placeholders>` with values matching your environment.
     source ~/.bashrc
     oci --version
     
-:wrench: **Task:** Verify OCI installation  
+:wrench: **Task:** Verify OCI CLI installation  
 :computer: **Execute on:** Your machine
     
     head -n 1 `which oci`
     cd ~/lib/oracle-cli/
     source bin/activate
     
-:wrench: **Task:** Verify OCI installation (continued)  
+:wrench: **Task:** Verify OCI CLI installation (continued)  
 :computer: **Execute on:** Your machine   
 :dart: **Context:** Python interpreter run within the activated OCI CLI venv
     
     pip freeze | grep oci
     deactivate
     
- 
+---
+#### SECTION: CLI ➙ Configuration
+
+:wrench: **Task:** Install OCI CLI  
+:computer: **Execute on:** Your machine  
+:warning: **Warning:** SKIP THIS TASK IF YOU'VE ALREADY CONFIGURED THE ~/.oci/config FILE
+
+    oci setup config
+    
+:wrench: **Task:** Use OCI CLI to list available Ubuntu images  
+:computer: **Execute on:** Your machine
+
+    TENANCY_OCID=`cat ~/.oci/config | grep tenancy | sed 's/tenancy=//'`
+    oci compute image list --compartment-id "$TENANCY_OCID" --operating-system "Canonical Ubuntu" --output table --query "data [*].{Image:\"display-name\"}"
+    
+---
+#### SECTION: CLI ➙ Using the CLI
+
