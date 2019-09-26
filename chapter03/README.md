@@ -174,7 +174,7 @@ Replace `<placeholders>` with values matching your environment.
 :wrench: **Task:** Prepare the supplementary OCI CLI reusable configurtion file (oci_cli_rc)  
 :computer: **Execute on:** Your machine
 
-    touch ~/.oci/oci_cli_rc
+    cp ~/git/oci-book/chapter03/2-cli/oci_cli_rc.template ~/.oci/oci_cli_rc
     vi ~/.oci/oci_cli_rc # use vi or any other editor you prefer
     
 :wrench: **Task:** Use OCI CLI to list available Ubuntu images (using oci_cli_rc)  
