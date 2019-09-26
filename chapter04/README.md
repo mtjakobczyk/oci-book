@@ -64,6 +64,11 @@ Replace `<placeholders>` with values matching your environment.
 
     oci iam user api-key upload --user-id $SANDBOX_ADMIN_OCID --key-file ~/.apikeys/api.sandbox-admin.pem.pub --query "data.fingerprint"
 
+:wrench: **Task:** Edit the config file and add a new profile for the sandbox-admin  
+:computer: **Execute on:** Your machine
+
+    vi ~/.oci/config
+
 :wrench: **Task:** Test current sandbox-admin access  
 :computer: **Execute on:** Your machine
 
