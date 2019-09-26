@@ -157,3 +157,23 @@ Before you continue, remember to:
 ---
 #### SECTION: Audit and Search
 
+:wrench: **Task:** Run free-text search  
+:computer: **Execute on:** Your machine
+
+    oci search resource free-text-search --text sandbox --query 'data.items[*].{Type:"resource-type",Name:"display-name",OCID:"identifier",State:"lifecycle-state"}'
+    
+:wrench: **Task:** Run structured search to list RUNNING and TERMINATING instances in a particular compartment  
+:computer: **Execute on:** Your machine
+
+    COMPARTMENT_OCID=`oci iam compartment get --query "data.id" | tr -d '"'`
+    oci search resource structured-search --query-text "query instance resources where ( lifeCycleState = 'RUNNING' || lifeCycleState = 'TERMINATING' ) && compartmentId = '$COMPARTMENT_OCID'"
+    
+:wrench: **Task:** Run structured search to list users and groups matching given term  
+:computer: **Execute on:** Your machine
+
+    oci search resource structured-search --query-text "query user, group resources matching 'sandbox-'" --query 'data.items[*].{Type:"resource-type",Name:"display-name",OCID:"identifier"}'
+
+:wrench: **Task:** Searching with pagination  
+:computer: **Execute on:** Your machine
+
+    oci search resource free-text-search --text sandbox --query '{results:data.items[*].{Type:"resource-type",Name:"display-name",OCID:"identifier",State:"lifecycle-state"}, “opc-next-page”:"opc-next-page"}' --limit 3
