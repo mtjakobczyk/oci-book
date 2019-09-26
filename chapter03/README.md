@@ -185,7 +185,7 @@ Replace `<placeholders>` with values matching your environment.
 ---
 #### SECTION: CLI ➙ Using the CLI
 
-:wrench: **Task:** Use OCI CLI to display the name of the compartment set by the active profile in oci_cli_rc
+:wrench: **Task:** Use OCI CLI to display the name of the compartment set by the active profile in oci_cli_rc  
 :computer: **Execute on:** Your machine
 
     oci iam compartment get --output table --query "data.{CompartmentName:\"name\"}"
