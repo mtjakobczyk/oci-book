@@ -239,3 +239,32 @@ Replace `<placeholders>` with values matching your environment.
     oci network route-table delete --rt-id $RT_OCID --wait-for-state TERMINATED
     oci network internet-gateway delete --ig-id $IGW_OCID --wait-for-state TERMINATED
     oci network vcn delete --vcn-id $VCN_OCID
+
+---
+#### SECTION: Terraform ➙ Installation
+
+:wrench: **Task:** Install newest Terraform 0.12.x
+:computer: **Execute on:** Your machine
+
+    cd ~
+    wget https://releases.hashicorp.com/terraform/0.12.9/terraform_0.12.9_linux_amd64.zip
+    sudo unzip terraform_0.12.9_linux_amd64.zip -d /usr/local/bin
+    terraform -v
+
+---
+#### SECTION: Terraform ➙ Configuration
+
+:wrench: **Task:** Explore the simplest Terraform OCI project
+:computer: **Execute on:** Your machine
+
+    cd git/oci-book/chapter03/3-terraform/1-provider-only
+    find . -name "*.tf"
+    
+:wrench: **Task:** Prepare configuration for Terraform
+:computer: **Execute on:** Your machine
+
+    cp ~/git/oci-book/chapter03/3-terraform/tfvars.env.sh ~/tfvars.env.sh
+    vi ~/tfvars.env.sh # use vi or any other editor you prefer
+    
+---
+#### SECTION: Terraform ➙ Using Terraform
