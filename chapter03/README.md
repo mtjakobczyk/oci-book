@@ -25,25 +25,25 @@ Replace `<placeholders>` with values matching your environment.
 ---
 #### SECTION: SDK ➙ Installation
 
-:wrench: **Task:** Check the version of Python
+:wrench: **Task:** Check the version of Python  
 :computer: **Execute on:** Your machine
     
     python3 --version
     
-:wrench: **Task:** Create a virtual environment (venv)
+:wrench: **Task:** Create a virtual environment (venv)  
 :computer: **Execute on:** Your machine
     
     cd ~
     python3 -m venv ocidev
     ls -1 ocidev/bin/
     
-:wrench: **Task:** Activate the new virtual environment (venv)
+:wrench: **Task:** Activate the new virtual environment (venv)  
 :computer: **Execute on:** Your machine
     
     source ~/ocidev/bin/activate
     
-:wrench: **Task:** Update the venv and install OCI SDK
-:computer: **Execute on:** Your machine
+:wrench: **Task:** Update the venv and install OCI SDK  
+:computer: **Execute on:** Your machine  
 :computer: **Additionally:** Make sure the venv is activated in your Shell
 
     pip install --upgrade pip
