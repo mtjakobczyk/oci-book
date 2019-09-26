@@ -254,17 +254,36 @@ Replace `<placeholders>` with values matching your environment.
 ---
 #### SECTION: Terraform ➙ Configuration
 
-:wrench: **Task:** Explore the simplest Terraform OCI project
+:wrench: **Task:** Explore the simplest Terraform OCI project  
 :computer: **Execute on:** Your machine
 
     cd git/oci-book/chapter03/3-terraform/1-provider-only
     find . -name "*.tf"
     
-:wrench: **Task:** Prepare configuration for Terraform
+:wrench: **Task:** Prepare configuration for Terraform  
 :computer: **Execute on:** Your machine
 
-    cp ~/git/oci-book/chapter03/3-terraform/tfvars.env.sh ~/tfvars.env.sh
+    cp ~/git/oci-book/chapter03/3-terraform/tfvars.env.template.sh ~/tfvars.env.sh
     vi ~/tfvars.env.sh # use vi or any other editor you prefer
+    
+:wrench: **Task:**  Load new TF-specific environment variables  
+:computer: **Execute on:** Your machine
+
+    echo "source ~/tfvars.env.sh" | tee -a .profile
+    source ~/tfvars.env.sh
+    
+:wrench: **Task:**  Initialize 1-provider-only Terraform project  
+:computer: **Execute on:** Your machine
+:dart: **Context:** Shell with TF_VAR_* environment variables
+
+    cd git/oci-book/chapter03/3-terraform/1-provider-only
+    terraform init
+
+:wrench: **Task:**  Inspect the size of OCI provider for Terraform binary  
+:computer: **Execute on:** Your machine
+
+    du -sh git/oci-book/chapter03/3-terraform/1-provider-only/.terraform
     
 ---
 #### SECTION: Terraform ➙ Using Terraform
+
