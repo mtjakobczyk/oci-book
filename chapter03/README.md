@@ -79,3 +79,55 @@ Replace `<placeholders>` with values matching your environment.
     config = oci.config.from_file("~/.oci/config","DEFAULT")
     compute = oci.core.ComputeClient(config)
     quit()
+    
+:wrench: **Task:** Deactivate the venv  
+:computer: **Execute on:** Your machine
+:dart: **Context:** Shell with the activated venv (continued)
+    
+    deactivate
+
+---
+#### SECTION: SDK ➙ Using the SDK
+
+:wrench: **Task:** Activate the venv and run Python interpreter  
+:computer: **Execute on:** Your machine
+    
+    source ~/ocidev/bin/activate
+    python3
+    
+:wrench: **Task:** Use OCI SDK for Python to list all ADs in the current region  
+:computer: **Execute on:** Your machine  
+:dart: **Context:** Python interpreter run within the activated venv
+
+    import oci
+    config = oci.config.from_file("~/.oci/config","DEFAULT")
+    identity = oci.identity.IdentityClient(config)
+    ads_list = identity.list_availability_domains(config['tenancy']).data
+    for ad in ads_list:
+      print(ad.name)
+
+:wrench: **Task:** Use OCI SDK for Python to create a new VCN 
+:computer: **Execute on:** Your machine  
+:dart: **Context:** Python interpreter run within the activated venv (continued)
+
+    cid = "put-here-compartment-ocid"
+    kwargs = { "cidr_block": "10.5.0.0/16", "display_name": "sdk-vcn", "compartment_id": cid }
+    create_vcn_details = oci.core.models.CreateVcnDetails(**kwargs)
+    print(create_vcn_details)
+    vcn = oci.core.VirtualNetworkClient(config)
+    response = vcn.create_vcn(create_vcn_details)
+    response.data
+    
+:wrench: **Task:** Use OCI SDK for Python to delete the VCN 
+:computer: **Execute on:** Your machine  
+:dart: **Context:** Python interpreter run within the activated venv (continued)
+
+    response.data.id
+    vcn.delete_vcn(response.data.id)
+    quit()
+    
+:wrench: **Task:** Deactivate the venv  
+:computer: **Execute on:** Your machine
+:dart: **Context:** Shell with the activated venv (continued)
+    
+    deactivate
