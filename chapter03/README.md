@@ -265,8 +265,9 @@ Replace `<placeholders>` with values matching your environment.
 
     cp ~/git/oci-book/chapter03/3-terraform/tfvars.env.template.sh ~/tfvars.env.sh
     vi ~/tfvars.env.sh # use vi or any other editor you prefer
+    chmod go-rwx ~/tfvars.env.sh
     
-:wrench: **Task:**  Load new TF-specific environment variables  
+:wrench: **Task:**  Load new TF-specific environment variables for each session  
 :computer: **Execute on:** Your machine
 
     echo "source ~/tfvars.env.sh" | tee -a .profile
@@ -276,10 +277,11 @@ Replace `<placeholders>` with values matching your environment.
 :computer: **Execute on:** Your machine  
 :dart: **Context:** Shell with TF_VAR_* environment variables set as in ~/tfvars.env.sh
 
+    source ~/tfvars.env.sh
     cd git/oci-book/chapter03/3-terraform/1-provider-only
     terraform init
 
-:wrench: **Task:**  Inspect the size of OCI provider for Terraform binary  
+:wrench: **Task:**  Inspect the size of OCI provider for Terraform binary   
 :computer: **Execute on:** Your machine
 
     du -sh .terraform
