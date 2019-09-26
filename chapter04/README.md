@@ -42,7 +42,7 @@ Replace `<placeholders>` with values matching your environment.
     USER_OCID=<put-here-sandbox-user-ocid>
     oci iam user ui-password create-or-reset --user-id "$USER_OCID" --query "data.password"
 
-:wrench: **Task:** Generate API Signing Keys for both sandbox-* users 
+:wrench: **Task:** Generate API Signing Keys for both sandbox-* users  
 :computer: **Execute on:** Your machine
 
     cd ~/.apikeys
@@ -54,8 +54,12 @@ Replace `<placeholders>` with values matching your environment.
     openssl rsa -pubout -in api.sandbox-admin.pem -out api.sandbox-admin.pem.pub
     ls -l | awk '{print $1, $9}'
     
-:wrench: **Task:** Query for user OCID by name
+:wrench: **Task:** Query for user OCID by name  
 :computer: **Execute on:** Your machine
 
     SANDBOX_ADMIN_OCID=`oci iam user list -c $TENANCY_OCID --query "data[?name=='sandbox-admin'] | [0].id" --all --raw-output`
     
+:wrench: **Task:** Upload API Signing key (public part) for the sandbox-admin user  
+:computer: **Execute on:** Your machine
+
+    oci iam user api-key upload --user-id “$SANDBOX_ADMIN_OCID” --key-file ~/apikeys/api.sandbox-admin.pem.pub --query "data.fingerprint"
