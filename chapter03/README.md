@@ -106,7 +106,7 @@ Replace `<placeholders>` with values matching your environment.
     for ad in ads_list:
       print(ad.name)
 
-:wrench: **Task:** Use OCI SDK for Python to create a new VCN 
+:wrench: **Task:** Use OCI SDK for Python to create a new VCN  
 :computer: **Execute on:** Your machine  
 :dart: **Context:** Python interpreter run within the activated venv (continued)
 
@@ -118,7 +118,7 @@ Replace `<placeholders>` with values matching your environment.
     response = vcn.create_vcn(create_vcn_details)
     response.data
     
-:wrench: **Task:** Use OCI SDK for Python to delete the VCN 
+:wrench: **Task:** Use OCI SDK for Python to delete the VCN  
 :computer: **Execute on:** Your machine  
 :dart: **Context:** Python interpreter run within the activated venv (continued)
 
@@ -127,7 +127,7 @@ Replace `<placeholders>` with values matching your environment.
     quit()
     
 :wrench: **Task:** Deactivate the venv  
-:computer: **Execute on:** Your machine  
+:computer: **Execute on:** Your machine   
 :dart: **Context:** Shell with the activated venv (continued)
     
     deactivate
