@@ -63,3 +63,11 @@ Replace `<placeholders>` with values matching your environment.
 :computer: **Execute on:** Your machine
 
     oci iam user api-key upload --user-id $SANDBOX_ADMIN_OCID --key-file ~/.apikeys/api.sandbox-admin.pem.pub --query "data.fingerprint"
+
+:wrench: **Task:** Test current sandbox-admin access  
+:computer: **Execute on:** Your machine
+
+    oci iam user list -c $TENANCY_OCID --query "data [?starts_with(name,'sandbox')].name" --all --profile SANDBOX-ADMIN
+    
+---
+#### SECTION: Groups and Policies  
