@@ -67,7 +67,7 @@ Replace `<placeholders>` with values matching your environment.
 :wrench: **Task:** Edit the config file and add a new profile for the sandbox-admin  
 :computer: **Execute on:** Your machine
 
-    vi ~/.oci/config
+    vi ~/.oci/config # use vi or any other editor you prefer
 
 :wrench: **Task:** Test current sandbox-admin access  
 :computer: **Execute on:** Your machine
