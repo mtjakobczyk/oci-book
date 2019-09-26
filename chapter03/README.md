@@ -81,7 +81,7 @@ Replace `<placeholders>` with values matching your environment.
     quit()
     
 :wrench: **Task:** Deactivate the venv  
-:computer: **Execute on:** Your machine
+:computer: **Execute on:** Your machine  
 :dart: **Context:** Shell with the activated venv (continued)
     
     deactivate
@@ -131,3 +131,29 @@ Replace `<placeholders>` with values matching your environment.
 :dart: **Context:** Shell with the activated venv (continued)
     
     deactivate
+
+---
+#### SECTION: CLI ➙ Installation
+
+:wrench: **Task:** Install OCI CLI  
+:computer: **Execute on:** Your machine
+    
+    bash -c "$(curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh)"
+    source ~/.bashrc
+    oci --version
+    
+:wrench: **Task:** Verify OCI installation  
+:computer: **Execute on:** Your machine
+    
+    head -n 1 `which oci`
+    cd ~/lib/oracle-cli/
+    source bin/activate
+    
+:wrench: **Task:** Verify OCI installation (continued)  
+:computer: **Execute on:** Your machine   
+:dart: **Context:** Python interpreter run within the activated OCI CLI venv
+    
+    pip freeze | grep oci
+    deactivate
+    
+ 
