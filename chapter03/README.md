@@ -110,7 +110,7 @@ Replace `<placeholders>` with values matching your environment.
 :computer: **Execute on:** Your machine  
 :dart: **Context:** Python interpreter run within the activated venv (continued)
 
-    cid = "put-here-compartment-ocid"
+    cid = "<put-here-sandbox-compartment-ocid>"
     kwargs = { "cidr_block": "10.5.0.0/16", "display_name": "sdk-vcn", "compartment_id": cid }
     create_vcn_details = oci.core.models.CreateVcnDetails(**kwargs)
     print(create_vcn_details)
@@ -127,7 +127,7 @@ Replace `<placeholders>` with values matching your environment.
     quit()
     
 :wrench: **Task:** Deactivate the venv  
-:computer: **Execute on:** Your machine
+:computer: **Execute on:** Your machine  
 :dart: **Context:** Shell with the activated venv (continued)
     
     deactivate
