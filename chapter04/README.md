@@ -81,4 +81,34 @@ Before you continue, remember to:
 - add the SANDBOX-USER profile to the config
 
 ---
-#### SECTION: Groups and Policies  
+#### SECTION: Groups and Policies > Groups  
+
+:wrench: **Task:** Create sandbox-user group 
+:computer: **Execute on:** Your machine
+
+    oci iam group create --name sandbox-users --description "Group for the regular users of the Sandbox compartment" --query "data.id" -c $TENANCY_OCID
+   
+:wrench: **Task:** List sandbox* groups
+:computer: **Execute on:** Your machine
+    
+    oci iam group list -c $TENANCY_OCID --all --query "data[?starts_with(name,'sandbox')].{Name:name,OCID:id}" --output table
+    
+:wrench: **Task:** Add a user to a group  
+:computer: **Execute on:** Your machine
+    
+    USER_OCID=`oci iam user list -c $TENANCY_OCID --query "data[?name=='sandbox-admin'] | [0].id" --all --raw-output`
+    GROUP_OCID=`oci iam group list -c $TENANCY_OCID --query "data[?name=='sandbox-admins'] | [0].id" --all --raw-output`
+    oci iam group add-user --user-id $USER_OCID --group-id $GROUP_OCID
+    
+:wrench: **Task:** List group members  
+:computer: **Execute on:** Your machine
+    
+    oci iam group list-users --group-id $GROUP_OCID --query "data[*].name" -c $TENANCY_OCID --all
+    
+:warning: **Warning:**  
+Before you continue, remember to:
+- add the SANDBOX-USER profile to the `config`
+- add SANDBOX-USER and SANDBOX-ADMIN profiles to the `oci_cli_rc` file
+
+---
+#### SECTION: Groups and Policies > Policy Statements
