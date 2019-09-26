@@ -62,4 +62,4 @@ Replace `<placeholders>` with values matching your environment.
 :wrench: **Task:** Upload API Signing key (public part) for the sandbox-admin user  
 :computer: **Execute on:** Your machine
 
-    oci iam user api-key upload --user-id “$SANDBOX_ADMIN_OCID” --key-file ~/apikeys/api.sandbox-admin.pem.pub --query "data.fingerprint"
+    oci iam user api-key upload --user-id $SANDBOX_ADMIN_OCID --key-file ~/.apikeys/api.sandbox-admin.pem.pub --query "data.fingerprint"
