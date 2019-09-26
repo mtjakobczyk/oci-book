@@ -272,9 +272,9 @@ Replace `<placeholders>` with values matching your environment.
     echo "source ~/tfvars.env.sh" | tee -a .profile
     source ~/tfvars.env.sh
     
-:wrench: **Task:**  Initialize 1-provider-only Terraform project  
+:wrench: **Task:**  Initialize Terraform project (1-provider-only)  
 :computer: **Execute on:** Your machine  
-:dart: **Context:** Shell with TF_VAR_* environment variables
+:dart: **Context:** Shell with TF_VAR_* environment variables set as in ~/tfvars.env.sh
 
     cd git/oci-book/chapter03/3-terraform/1-provider-only
     terraform init
@@ -287,3 +287,23 @@ Replace `<placeholders>` with values matching your environment.
 ---
 #### SECTION: Terraform ➙ Using Terraform
 
+:wrench: **Task:**  Initialize Terraform project (2-simple-infrastructure)   
+:computer: **Execute on:** Your machine  
+:dart: **Context:** Shell with TF_VAR_* environment variables set as in ~/tfvars.env.sh
+
+    env | grep TF_VAR_
+    cd ~/git/oci-book/chapter03/3-terraform/2-simple-infrastructure
+    terraform init
+    terraform apply
+    
+:wrench: **Task:**  Test application running on VM build with Terraform project (2-simple-infrastructure)  
+:computer: **Execute on:** Your machine 
+    
+    VM_PUBLIC_IP=<set-public-ip>
+    curl $VM_PUBLIC_IP
+    
+:wrench: **Task:**  Terminate Terraform project (2-simple-infrastructure)  
+:computer: **Execute on:** Your machine  
+:dart: **Context:** Shell with TF_VAR_* environment variables set as in ~/tfvars.env.sh
+
+    terraform destroy --auto-approve
