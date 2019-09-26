@@ -74,7 +74,9 @@ Replace `<placeholders>` with values matching your environment.
 
     oci iam user list -c $TENANCY_OCID --query "data [?starts_with(name,'sandbox')].name" --all --profile SANDBOX-ADMIN
     
-:warning: **Warning:** Remember to upload the API Signing Key for the sandbox-user and add the SANDBOX-USER profile to the config
+:warning: **Warning:** Before you continue, remember to:
+- upload the API Signing Key for the sandbox-user 
+- add the SANDBOX-USER profile to the config
 
 ---
 #### SECTION: Groups and Policies  
