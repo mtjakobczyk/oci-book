@@ -44,7 +44,7 @@ Replace `<placeholders>` with values matching your environment.
     
 :wrench: **Task:** Update the venv and install OCI SDK  
 :computer: **Execute on:** Your machine  
-:computer: **Additionally:** Make sure the venv is activated in your Shell
+:dart: **Additionally:** Make sure the venv is activated in your Shell
 
     pip install --upgrade pip
     pip --version
