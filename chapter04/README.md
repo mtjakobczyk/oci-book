@@ -177,4 +177,5 @@ Before you continue, remember to:
 :computer: **Execute on:** Your machine
 
     oci search resource free-text-search --text sandbox --query "{results: data.items[*].{type: \"resource-type\", name: \"display-name\"}, nextpage: \"opc-next-page\"}" --limit 3
+    NEXTPAGE=<put-here-nextpage-value>
     oci search resource free-text-search --text sandbox --query "{results: data.items[*].{type: \"resource-type\", name: \"display-name\"}, nextpage: \"opc-next-page\"}" --limit 3 --page "$NEXTPAGE"
