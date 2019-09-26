@@ -189,3 +189,23 @@ Replace `<placeholders>` with values matching your environment.
 :computer: **Execute on:** Your machine
 
     oci iam compartment get --output table --query "data.{CompartmentName:\"name\"}"
+
+:wrench: **Task:** Use OCI CLI to create a new VCN  
+:computer: **Execute on:** Your machine
+
+    VCN_OCID=`oci network vcn create --cidr-block 192.168.3.0/24 --display-name cli-vcn --query "data.id" | tr -d '"'`
+    echo $VCN_OCID
+    
+:wrench: **Task:** Use OCI CLI to create a new Internet Gateway for the VCN  
+:computer: **Execute on:** Your machine
+
+    IGW_OCID=`oci network internet-gateway create --vcn-id $VCN_OCID --display-name cli-igw --is-enabled true --query "data.id" | tr -d '"'`
+    echo $IGW_OCID
+    
+    
+:wrench: **Task:** Use OCI CLI to create a new Route Table for the VCN  
+:computer: **Execute on:** Your machine
+
+    ROUTE_RULES="[{\"cidrBlock\":\"0.0.0.0/0\", \"networkEntityId\":\"$IGW_OCID\"}]"
+    RT_OCID=`oci network route-table create --vcn-id $VCN_OCID --display-name cli-rt --route-rules "$ROUTE_RULES" --query "data.id" | tr -d '"'`
+    echo $RT_OCID
