@@ -60,7 +60,7 @@ Replace `<placeholders>` with values matching your environment.
 :computer: **Execute on:** Your machine  
     
     mkdir ~/.oci
-    touch ~/.oci/config
+    cp ~/git/oci-book/chapter03/1-sdk/config.template ~/.oci/config
     chmod go-rwx ~/.oci/config
     ls ~/.oci
     vi ~/.oci/config # use vi or any other editor you prefer
