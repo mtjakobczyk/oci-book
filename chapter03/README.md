@@ -63,6 +63,7 @@ Replace `<placeholders>` with values matching your environment.
     touch ~/.oci/config
     chmod go-rwx ~/.oci/config
     ls ~/.oci
+    vi ~/.oci/config
     
 :wrench: **Task:** Activate the venv and run Python interpreter
 :computer: **Execute on:** Your machine
