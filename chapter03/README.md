@@ -12,5 +12,14 @@ Replace `<placeholders>` with values matching your environment.
     mkdir ~/.apikeys
     cd ~/.apikeys
     openssl genrsa -out oci_api_pem -aes128 2048
+    chmod go-rwx oci_api_pem
+    ls -l | grep pem | awk '{ print $1" "$9 }'
+    openssl rsa -pubout -in oci_api_pem -out oci_api_pem.pub
+    ls -l | grep pem | awk '{ print $1" "$9 }'
+ 
+:wrench: **Task:** Display the public key (API Signing Key)  
+:computer: **Execute on:** Your machine
+    
+    cat oci_api_pem.pub
 
 ---
