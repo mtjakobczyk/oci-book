@@ -57,4 +57,5 @@ Replace `<placeholders>` with values matching your environment.
 :wrench: **Task:** Query for user OCID by name
 :computer: **Execute on:** Your machine
 
-    oci iam user list -c $TENANCY_OCID --query "data[?name=='sandbox-admin'].{OCID:id,Name:name}" --all
+    SANDBOX_ADMIN_OCID=`oci iam user list -c $TENANCY_OCID --query "data[?name=='sandbox-admin'] | [0].id" --all --raw-output`
+    
