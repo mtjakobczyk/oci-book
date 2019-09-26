@@ -21,3 +21,19 @@ Replace `<placeholders>` with values matching your environment.
 :computer: **Execute on:** Your machine
 
     oci iam compartment delete -c "$EXP_COMPARTMENT_OCID"
+
+---
+#### SECTION: Users
+
+:wrench: **Task:** Create IAM user  
+:computer: **Execute on:** Your machine
+
+    TENANCY_OCID=`cat ~/.oci/config | grep tenancy | sed 's/tenancy=//'`
+    oci iam user create --name sandbox-user --description "Sandbox user" --query "data.id" -c $TENANCY_OCID
+    
+:wrench: **Task:** List sandbox- users  
+:computer: **Execute on:** Your machine
+
+    oci iam user list -c $TENANCY_OCID --query "data [?starts_with(name,'sandbox')].name" --all
+    
+    
