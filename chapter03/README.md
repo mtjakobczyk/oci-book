@@ -44,7 +44,7 @@ Replace `<placeholders>` with values matching your environment.
     
 :wrench: **Task:** Update the venv and install OCI SDK  
 :computer: **Execute on:** Your machine  
-:dart: **Additionally:** Make sure the venv is activated in your Shell
+:dart: **Context:** The venv is activated in your Shell
 
     pip install --upgrade pip
     pip --version
@@ -52,3 +52,29 @@ Replace `<placeholders>` with values matching your environment.
     pip install oci
     pip freeze
     deactivate
+
+---
+#### SECTION: SDK ➙ Installation
+
+:wrench: **Task:** Prepare OCI SDK/CLI configuration file
+:computer: **Execute on:** Your machine  
+    
+    mkdir ~/.oci
+    touch ~/.oci/config
+    chmod go-rwx ~/.oci/config
+    ls ~/.oci
+    
+:wrench: **Task:** Activate the venv and run Python interpreter
+:computer: **Execute on:** Your machine
+    
+    source ~/ocidev/bin/activate
+    python3
+    
+:wrench: **Task:** Use OCI SDK for Python for the first time
+:computer: **Execute on:** Your machine  
+:dart: **Context:** Python interpreter run within active venv
+
+    import oci
+    config = oci.config.from_file("~/.oci/config","DEFAULT")
+    compute = oci.core.ComputeClient(config)
+    quit()
