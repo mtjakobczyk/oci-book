@@ -299,7 +299,8 @@ Replace `<placeholders>` with values matching your environment.
 :wrench: **Task:**  Test application running on VM build with Terraform project (2-simple-infrastructure)  
 :computer: **Execute on:** Your machine 
     
-    VM_PUBLIC_IP=<set-public-ip>
+    VM_PUBLIC_IP=`terraform output web_instance_public_ip`
+    echo $VM_PUBLIC_IP
     curl $VM_PUBLIC_IP
     
 :wrench: **Task:**  Terminate Terraform project (2-simple-infrastructure)  
