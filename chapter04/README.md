@@ -81,7 +81,7 @@ Before you continue, remember to:
 - add the SANDBOX-USER profile to the config
 
 ---
-#### SECTION: Groups and Policies > Groups  
+#### SECTION: Groups and Policies ➙ Groups  
 
 :wrench: **Task:** Create sandbox-user group 
 :computer: **Execute on:** Your machine
@@ -111,4 +111,29 @@ Before you continue, remember to:
 - add SANDBOX-USER and SANDBOX-ADMIN profiles to the `oci_cli_rc` file
 
 ---
-#### SECTION: Groups and Policies > Policy Statements
+#### SECTION: Groups and Policies ➙ Policies
+
+:wrench: **Task:** List policies and the number of statements  
+:computer: **Execute on:** Your machine
+
+    oci iam policy list -c $TENANCY_OCID --all --query 'data[*].{Name:name,Statements:length(statements)}' --output table
+    
+:wrench: **Task:** List Tenant Admin Policy statements  
+:computer: **Execute on:** Your machine
+
+    oci iam policy list -c $TENANCY_OCID --all --query "data[?name=='Tenant Admin Policy'].statements[0]"
+    
+:wrench: **Task:** Create Policy for sandbox-admins    
+:computer: **Execute on:** Your machine
+    
+    oci iam policy create -c $TENANCY_OCID --name sandbox-admins-policy --description "Policy for the Sandbox compartment admins group"  --statements '["allow group sandbox-admins to manage all-resources in compartment Sandbox"]'
+
+:wrench: **Task:** Test sandbox-admin access (through the SANDBOX-ADMIN profile)    
+:computer: **Execute on:** Your machine
+
+    oci lb shape list --profile SANDBOX-ADMIN --query 'data[*].name'
+    
+:wrench: **Task:** Test sandbox-admin access (through the SANDBOX-USER profile)    
+:computer: **Execute on:** Your machine
+
+    oci lb shape list --profile SANDBOX-USER --query 'data[*].name'
