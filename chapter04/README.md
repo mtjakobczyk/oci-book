@@ -176,4 +176,5 @@ Before you continue, remember to:
 :wrench: **Task:** Searching with pagination  
 :computer: **Execute on:** Your machine
 
-    oci search resource free-text-search --text sandbox --query '{results:data.items[*].{Type:"resource-type",Name:"display-name",OCID:"identifier",State:"lifecycle-state"}, “opc-next-page”:"opc-next-page"}' --limit 3
+    oci search resource free-text-search --text sandbox --query "{results: data.items[*].{type: \"resource-type\", name: \"display-name\"}, nextpage: \"opc-next-page\"}" --limit 3
+    oci search resource free-text-search --text sandbox --query "{results: data.items[*].{type: \"resource-type\", name: \"display-name\"}, nextpage: \"opc-next-page\"}" --limit 3 --page "$NEXTPAGE"
