@@ -36,4 +36,8 @@ Replace `<placeholders>` with values matching your environment.
 
     oci iam user list -c $TENANCY_OCID --query "data [?starts_with(name,'sandbox')].name" --all
     
-    
+:wrench: **Task:** Generate one-time password for the sandbox-user  
+:computer: **Execute on:** Your machine
+
+    USER_OCID=<put-here-sandbox-user-ocid>
+    oci iam user ui-password create-or-reset --user-id "$USER_OCID" --query "data.password"
