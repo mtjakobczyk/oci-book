@@ -133,18 +133,18 @@ Before you continue, remember to:
 
     oci lb shape list --profile SANDBOX-ADMIN --query 'data[*].name'
     
-:wrench: **Task:** Test sandbox-admin access (through the SANDBOX-USER profile)    
+:wrench: **Task:** Test sandbox-users access (through the SANDBOX-USER profile)   
 :computer: **Execute on:** Your machine
 
     oci lb shape list --profile SANDBOX-USER --query 'data[*].name'
 
-:wrench: **Task:** Create new Policy   
+:wrench: **Task:** Create a new policy from file  
 :computer: **Execute on:** Your machine
 
     cd ~/git/oci-book/chapter04/2-policies/
     oci iam policy create --profile SANDBOX-ADMIN --name sandbox-users-policy --description "Policy for regular Sandbox compartment users"  --statements "file://sandbox-user-policy.json"
     
-:wrench: **Task:** Create new Policy   
+:wrench: **Task:** List policy statements   
 :computer: **Execute on:** Your machine
 
     oci iam policy list --profile SANDBOX-ADMIN --all --query "data[*].{Name:name,Statements:statements}"
