@@ -171,9 +171,6 @@ Replace `<placeholders>` with values matching your environment.
     TENANCY_OCID=`cat ~/.oci/config | grep tenancy | sed 's/tenancy=//'`
     oci compute image list --compartment-id "$TENANCY_OCID" --operating-system "Canonical Ubuntu" --output table --query "data [*].{Image:\"display-name\"}"
     
----
-#### SECTION: CLI ➙ Using the CLI
-
 :wrench: **Task:** Prepare the supplementary OCI CLI reusable configurtion file (oci_cli_rc)  
 :computer: **Execute on:** Your machine
 
@@ -184,3 +181,11 @@ Replace `<placeholders>` with values matching your environment.
 :computer: **Execute on:** Your machine
 
     oci compute image list --operating-system "Canonical Ubuntu" --output table --query query://list_ubuntu_1804
+
+---
+#### SECTION: CLI ➙ Using the CLI
+
+:wrench: **Task:** Use OCI CLI to display the name of the compartment set by the active profile in oci_cli_rc
+:computer: **Execute on:** Your machine
+
+    oci iam compartment get --output table --query "data.{CompartmentName:\"name\"}"
