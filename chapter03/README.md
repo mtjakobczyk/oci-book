@@ -273,7 +273,7 @@ Replace `<placeholders>` with values matching your environment.
     source ~/tfvars.env.sh
     
 :wrench: **Task:**  Initialize 1-provider-only Terraform project  
-:computer: **Execute on:** Your machine
+:computer: **Execute on:** Your machine  
 :dart: **Context:** Shell with TF_VAR_* environment variables
 
     cd git/oci-book/chapter03/3-terraform/1-provider-only
@@ -282,7 +282,7 @@ Replace `<placeholders>` with values matching your environment.
 :wrench: **Task:**  Inspect the size of OCI provider for Terraform binary  
 :computer: **Execute on:** Your machine
 
-    du -sh git/oci-book/chapter03/3-terraform/1-provider-only/.terraform
+    du -sh .terraform
     
 ---
 #### SECTION: Terraform ➙ Using Terraform
