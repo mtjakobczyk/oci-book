@@ -12,7 +12,7 @@ Replace `<placeholders>` with values matching your environment.
     oci os ns get
 
 ---
-#### SECTION: Working with objects
+#### SECTION: Working with objects > Basics
 
 :wrench: **Task:** Get object storage namespace name   
 :computer: **Execute on:** Your machine
@@ -37,9 +37,27 @@ Replace `<placeholders>` with values matching your environment.
     cd ~/data
     SIZE=$((4096+(10+RANDOM % 20)*1024))
     head -c $SIZE /dev/urandom > 101.pdf
-    ls -l 101.pdf | awk '{ print $9 " (" $5 ")" }'
+    ls -lh 101.pdf | awk '{ print $9 " (" $5 ")" }'
     
 :wrench: **Task:** Put a file to a bucket  
 :computer: **Execute on:** Your machine
 
     oci os object put -bn blueprints --file 101.pdf --profile SANDBOX-USER
+
+:wrench: **Task:** Put a file to a bucket with namespace name  
+:computer: **Execute on:** Your machine
+
+    oci os object put -ns <put-here-object-storage-namespace-name> -bn blueprints --file 101.pdf --profile SANDBOX-USER
+    
+:wrench: **Task:** Get an object  
+:computer: **Execute on:** Your machine
+
+    oci os object get -bn blueprints --name 101.pdf --file 101-copy.pdf --profile SANDBOX-USER
+    
+:wrench: **Task:** Delete an object  
+:computer: **Execute on:** Your machine
+
+    oci os object delete -bn blueprints --name 101.pdf --profile SANDBOX-USER
+    
+---
+#### SECTION: Working with objects > Object Name Prefixes
