@@ -171,3 +171,30 @@ Replace `<placeholders>` with values matching your environment.
 
 ---
 #### SECTION: Programming Object Storage ➙ Multi-part uploads
+
+:wrench: **Task:** Generate a large file with random binary contents  
+:computer: **Execute on:** Your machine
+
+    cd ~/data
+    SIZE=$((25*1024*1024))
+    head -c $SIZE /dev/urandom > warsaw/bemowo/visualizations.pdf
+    ls -lh warsaw/bemowo/visualizations.pdf | awk '{ print $9 " (" $5 ")" }'
+    
+:wrench: **Task:** Prepare a new virtual environment and install OCI SDK  
+:computer: **Execute on:** Your machine
+
+    cd
+    python3 -m venv oci-multipart
+    source oci-multipart/bin/activate
+    pip install --upgrade pip
+    pip install oci
+    pip freeze | grep oci
+    
+:wrench: **Task:** Test multi-part file upload using SDK  
+:computer: **Execute on:** Your machine
+
+    cd ~/git/oci-book/chapter05/2-multipart-upload
+    chmod u+x multipart.py
+    FILE="$HOME/data/warsaw/bemowo/visualizations.pdf"
+    CONFIG="$HOME/.oci/config"
+    ./multipart.py "$FILE" 10 "waw/bemowo/visualizations.pdf" "blueprints" "$CONFIG" SANDBOX-USER
