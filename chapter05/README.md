@@ -12,7 +12,7 @@ Replace `<placeholders>` with values matching your environment.
     oci os ns get
 
 ---
-#### SECTION: Working with objects > Basics
+#### SECTION: Working with objects ➙ Basics
 
 :wrench: **Task:** Get object storage namespace name   
 :computer: **Execute on:** Your machine
@@ -60,7 +60,7 @@ Replace `<placeholders>` with values matching your environment.
     oci os object delete -bn blueprints --name 101.pdf --profile SANDBOX-USER
     
 ---
-#### SECTION: Working with objects > Object Name Prefixes
+#### SECTION: Working with objects ➙ Object Name Prefixes
 
 :wrench: **Task:** Generate test files - group 1: warsaw/bemowo  
 :computer: **Execute on:** Your machine
@@ -118,7 +118,7 @@ Replace `<placeholders>` with values matching your environment.
     oci os object list -bn blueprints --prefix "waw/wola/b/12" --query 'data[*].name' --profile SANDBOX-USER
     
 ---
-#### SECTION: Working with objects > Listing objects in pages
+#### SECTION: Working with objects ➙ Listing objects in pages
 
 :wrench: **Task:** List objects in pages  
 :computer: **Execute on:** Your machine
@@ -128,4 +128,36 @@ Replace `<placeholders>` with values matching your environment.
     oci os object list -bn blueprints  --limit 5 --start "waw/wola/b/120.pdf" --query '{names:data[*].name, next:"next-start-with"}' --profile SANDBOX-USER
     
 ---
-#### SECTION: Working with objects > Object metadata
+#### SECTION: Working with objects ➙ Object metadata
+
+:wrench: **Task:** Put an object with custom metadata  
+:computer: **Execute on:** Your machine
+
+    head -c 4096 /dev/urandom > warsaw/wola/a/122.pdf
+    METADATA='{ "apartment-levels": "2" }'
+    oci os object put -bn blueprints --name "waw/wola/a/122.pdf" --file warsaw/wola/a/122.pdf --metadata "$METADATA" --profile SANDBOX-USER
+    
+:wrench: **Task:** Head an object  
+:computer: **Execute on:** Your machine
+
+    oci os object head -bn blueprints --name "waw/wola/a/122.pdf" --profile SANDBOX-USER
+    
+---
+#### SECTION: Working with objects ➙ Concurrent updates
+
+:wrench: **Task:** Observe changing ETags  
+:computer: **Execute on:** Your machine
+
+    head -c 8096 /dev/urandom > warsaw/bemowo/parking.pdf
+    oci os object put -bn blueprints --name waw/bemowo/parking.pdf --file warsaw/bemowo/parking.pdf --profile SANDBOX-USER
+    oci os object put -bn blueprints --name waw/bemowo/parking.pdf --file warsaw/bemowo/parking.pdf --profile SANDBOX-USER
+    
+:wrench: **Task:** Demonstrate ETag-based optimistic concurrency 1/2  
+:computer: **Execute on:** Your machine
+
+    ETAG=`oci os object head -bn blueprints --name waw/bemowo/parking.pdf --query 'etag' --profile SANDBOX-USER --raw-output`
+    oci os object get -bn blueprints --name waw/bemowo/parking.pdf --file local.parking.pdf --profile SANDBOX-USER
+    ls -l local.parking.pdf | awk '{ print $9 " (" $5 ")" }'
+    head -c 2048 /dev/urandom >> local.parking.pdf
+    ls -l local.parking.pdf | awk '{ print $9 " (" $5 ")" }'
+    oci os object put -bn blueprints --name waw/bemowo/parking.pdf --file local.parking.pdf --if-match "$ETAG" --profile SANDBOX-USER
