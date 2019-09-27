@@ -102,3 +102,30 @@ Replace `<placeholders>` with values matching your environment.
 
     oci os object bulk-upload -bn blueprints --src-dir warsaw/wola/b --object-prefix "waw/wola/b/" --profile SANDBOX-USER
     
+:wrench: **Task:** List objects prefixed with with waw/wo  
+:computer: **Execute on:** Your machine
+
+    oci os object list -bn blueprints --prefix "waw/wo" --query 'data[*].name' --profile SANDBOX-USER
+    
+:wrench: **Task:** List objects prefixed with with waw/wola/b  
+:computer: **Execute on:** Your machine
+
+    oci os object list -bn blueprints --prefix "waw/wola/b" --query 'data[*].name' --profile SANDBOX-USER
+    
+:wrench: **Task:** List objects prefixed with with waw/wola/b/12  
+:computer: **Execute on:** Your machine
+
+    oci os object list -bn blueprints --prefix "waw/wola/b/12" --query 'data[*].name' --profile SANDBOX-USER
+    
+---
+#### SECTION: Working with objects > Listing objects in pages
+
+:wrench: **Task:** List objects in pages  
+:computer: **Execute on:** Your machine
+
+    oci os object list -bn blueprints  --limit 5 --query '{names:data[*].name, next:"next-start-with"}' --profile SANDBOX-USER
+    oci os object list -bn blueprints  --limit 5 --start "waw/wola/a/115.pdf" --query '{names:data[*].name, next:"next-start-with"}' --profile SANDBOX-USER
+    oci os object list -bn blueprints  --limit 5 --start "waw/wola/b/120.pdf" --query '{names:data[*].name, next:"next-start-with"}' --profile SANDBOX-USER
+    
+---
+#### SECTION: Working with objects > Object metadata
