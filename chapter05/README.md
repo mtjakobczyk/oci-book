@@ -161,3 +161,13 @@ Replace `<placeholders>` with values matching your environment.
     head -c 2048 /dev/urandom >> local.parking.pdf
     ls -l local.parking.pdf | awk '{ print $9 " (" $5 ")" }'
     oci os object put -bn blueprints --name waw/bemowo/parking.pdf --file local.parking.pdf --if-match "$ETAG" --profile SANDBOX-USER
+
+:wrench: **Task:** Demonstrate ETag-based optimistic concurrency 2/2  
+:computer: **Execute on:** Your machine
+
+    head -c 1024 /dev/urandom >> local.parking.pdf
+    ls -l local.parking.pdf | awk '{ print $9 " (" $5 ")" }'
+    oci os object put -bn blueprints --name waw/bemowo/parking.pdf --file local.parking.pdf --if-match "$ETAG" --profile SANDBOX-USER
+
+---
+#### SECTION: Programming Object Storage ➙ Multi-part uploads
