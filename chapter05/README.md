@@ -191,10 +191,25 @@ Replace `<placeholders>` with values matching your environment.
     pip freeze | grep oci
     
 :wrench: **Task:** Test multi-part file upload using SDK  
-:computer: **Execute on:** Your machine
+:computer: **Execute on:** Your machine  
+:dart: **Context:** Shell with the activated venv (oci-multipart)
 
     cd ~/git/oci-book/chapter05/2-multipart-upload
     chmod u+x multipart.py
     FILE="$HOME/data/warsaw/bemowo/visualizations.pdf"
     CONFIG="$HOME/.oci/config"
     ./multipart.py "$FILE" 10 "waw/bemowo/visualizations.pdf" "blueprints" "$CONFIG" SANDBOX-USER
+    deactivate
+    
+:wrench: **Task:** List the parts  
+:computer: **Execute on:** Your machine
+
+    ls -lh ~/data/warsaw/bemowo/visual* | awk '{ print $9 " (" $5 ")" }'
+   
+:wrench: **Task:** Verify the uploaded file is the same as the original file  
+:computer: **Execute on:** Your machine
+
+    cd ~/data
+    oci os object get -bn blueprints --name "waw/bemowo/visualizations.pdf" --file visualizations.downloaded.pdf --profile SANDBOX-USER
+    ls -lh visualizations.downloaded.pdf | awk '{ print $9 " (" $5 ")" }'
+    diff visualizations.downloaded.pdf warsaw/bemowo/visualizations.pdf
