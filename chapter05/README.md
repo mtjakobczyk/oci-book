@@ -61,3 +61,44 @@ Replace `<placeholders>` with values matching your environment.
     
 ---
 #### SECTION: Working with objects > Object Name Prefixes
+
+:wrench: **Task:** Generate test files - group 1: warsaw/bemowo  
+:computer: **Execute on:** Your machine
+
+    cd ~/data
+    mkdir -p warsaw/bemowo
+    for i in 101 102 105 107 115; do SIZE=$((4096+(10+RANDOM % 20)*1024)); head -c $SIZE /dev/urandom > warsaw/bemowo/$i.pdf; done
+    
+:wrench: **Task:** Generate test files - group 2: warsaw/wola/a  
+:computer: **Execute on:** Your machine
+
+    mkdir -p warsaw/wola/a
+    for i in 115 120 124 130; do SIZE=$((4096+(10+RANDOM % 20)*1024)); head -c $SIZE /dev/urandom > warsaw/wola/a/$i.pdf; done
+    
+:wrench: **Task:** Generate test files - group 1: warsaw/wola/b  
+:computer: **Execute on:** Your machine
+
+    mkdir -p warsaw/wola/b
+    for i in 119 120 121; do SIZE=$((4096+(10+RANDOM % 20)*1024)); head -c $SIZE /dev/urandom > warsaw/wola/b/$i.pdf; done
+    
+    
+:wrench: **Task:** List test files  
+:computer: **Execute on:** Your machine
+
+    find warsaw -type f -exec ls -lh {} + | awk '{ print $9 " (" $5 ")"}'
+    
+:wrench: **Task:** Bulk upload test files (group 1: warsaw/bemowo) prefixed with waw/bemowo/  
+:computer: **Execute on:** Your machine
+
+    oci os object bulk-upload -bn blueprints --src-dir warsaw/bemowo/ --object-prefix "waw/bemowo/" --include "*.pdf" --profile SANDBOX-USER
+    
+:wrench: **Task:** Bulk upload test files (group 2: warsaw/wola/a) prefixed with waw/wola/a  
+:computer: **Execute on:** Your machine
+
+    oci os object bulk-upload -bn blueprints --src-dir warsaw/wola/a --object-prefix "waw/wola/a/" --profile SANDBOX-USER
+    
+:wrench: **Task:** Bulk upload test files (group 3: warsaw/wola/b) prefixed with waw/wola/b  
+:computer: **Execute on:** Your machine
+
+    oci os object bulk-upload -bn blueprints --src-dir warsaw/wola/b --object-prefix "waw/wola/b/" --profile SANDBOX-USER
+    
