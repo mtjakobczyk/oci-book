@@ -20,12 +20,12 @@ Replace `<placeholders>` with values matching your environment.
     ssh -i ~/.ssh/oci_id_rsa opc@$UUID1_INSTANCE
 
 :wrench: **Task:** Verify cloud-init has completed  
-:computer: **Execute on:** Cloud Instance (UUID1_INSTANCE)
+:cloud: **Execute on:** Cloud Instance (UUID1_INSTANCE)
 
     sudo cat /var/log/cloud-init.log | grep "node is running"
 
 :wrench: **Task:** Verify uuidservice service is running  
-:computer: **Execute on:** Cloud Instance (UUID1_INSTANCE)
+:cloud: **Execute on:** Cloud Instance (UUID1_INSTANCE)
 
     sudo systemctl status uuidservice.service
     ss -nltp
