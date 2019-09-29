@@ -254,12 +254,23 @@ Replace `<placeholders>` with values matching your environment.
 #### SECTION: Programming Object Storage ➙ Accessing storage from instances
 
 :wrench: **Task:** Provisioning infrastructure  
-:computer: **Execute on:** Your machine
+:computer: **Execute on:** Your machine  
 :dart: **Context:** Shell with TF_VAR_* environment variables set as in ~/tfvars.env.sh
 
+    source ~/tfvars.env.sh
     cd ~/git/oci-book/chapter05/3-instance-principals/infrastructure
     find . \( -name "*.tf" -o -name "*.yaml" \)
-    env | grep TF_VAR_
     terraform init
     terraform apply -auto-approve
+    APP_VM_PUBLIC_IP=`terraform output app_instance_public_ip`
     
+:wrench: **Task:** Connect to the instance  
+:computer: **Execute on:** Your machine
+
+    ssh -i ~/.ssh/oci_id_rsa opc@$APP_VM_PUBLIC_IP
+    
+:wrench: **Task:** Observe the status of thereportissuer  
+:computer: **Execute on:** Compute instance :cloud:
+ 
+    sudo systemctl status reportissuer
+    exit
