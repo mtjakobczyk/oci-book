@@ -235,3 +235,31 @@ Replace `<placeholders>` with values matching your environment.
     
 ---
 #### SECTION: Programming Object Storage ➙ Dynamic Groups
+
+:wrench: **Task:** Creating a dynamic group  
+:computer: **Execute on:** Your machine
+
+    TENANCY_OCID=`cat ~/.oci/config | grep tenancy | sed 's/tenancy=//'`
+    MATCHING_RULE="tag.test-projects.realestate.value"
+    oci iam dynamic-group create --name realestate-instances --description "Instances related to the real-estate project" --matching-rule $MATCHING_RULE -c $TENANCY_OCID
+
+:wrench: **Task:** Updating existing policy  
+:computer: **Execute on:** Your machine
+
+    cd ~/git/oci-book/chapter05/1-policies
+    POLICY_ID=`oci iam policy list --all --query "data[?name=='sandbox-users-storage-policy'] | [0].id" --raw-output --profile SANDBOX-ADMIN`
+    oci iam policy update --policy-id $POLICY_ID --statements file://sandbox-users.policies.storage.2.json --version-date "" --profile SANDBOX-ADMIN
+
+---
+#### SECTION: Programming Object Storage ➙ Accessing storage from instances
+
+:wrench: **Task:** Provisioning infrastructure  
+:computer: **Execute on:** Your machine
+:dart: **Context:** Shell with TF_VAR_* environment variables set as in ~/tfvars.env.sh
+
+    cd ~/git/oci-book/chapter05/3-instance-principals/infrastructure
+    find . \( -name "*.tf" -o -name "*.yaml" \)
+    env | grep TF_VAR_
+    terraform init
+    terraform apply -auto-approve
+    
