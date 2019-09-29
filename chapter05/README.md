@@ -213,3 +213,25 @@ Replace `<placeholders>` with values matching your environment.
     oci os object get -bn blueprints --name "waw/bemowo/visualizations.pdf" --file visualizations.downloaded.pdf --profile SANDBOX-USER
     ls -lh visualizations.downloaded.pdf | awk '{ print $9 " (" $5 ")" }'
     diff visualizations.downloaded.pdf warsaw/bemowo/visualizations.pdf
+
+---
+#### SECTION: Programming Object Storage ➙ Tagging resources
+
+:wrench: **Task:** Create a tag namespace  
+:computer: **Execute on:** Your machine
+
+    oci iam tag-namespace create --name "test-projects" --description "Test tag namespace: projects" --profile SANDBOX-ADMIN
+    
+:wrench: **Task:** Create a tag key  
+:computer: **Execute on:** Your machine
+
+    TAG_NAMESPACE_OCID=`oci iam tag-namespace list --query "data[?name=='test-projects'] | [0].id" --raw-output`
+    oci iam tag create --tag-namespace-id $TAG_NAMESPACE_OCID --name realestate --description "Real-estate project" --profile SANDBOX-ADMIN
+    
+:wrench: **Task:** List all tag keys within the namespace  
+:computer: **Execute on:** Your machine
+
+    oci iam tag list --tag-namespace-id $TAG_NAMESPACE_OCID --all --profile SANDBOX-ADMIN
+    
+---
+#### SECTION: Programming Object Storage ➙ Dynamic Groups
