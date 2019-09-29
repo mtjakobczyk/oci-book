@@ -307,5 +307,4 @@ Replace `<placeholders>` with values matching your environment.
     oci os preauth-request delete -bn blueprints --par-id $OS_PARID
     oci os object bulk-delete -bn blueprints
     oci os bucket delete -bn blueprints
-    Are you sure you want to delete this resource? [y/N]: y
-    
+  
