@@ -274,3 +274,23 @@ Replace `<placeholders>` with values matching your environment.
  
     sudo systemctl status reportissuer
     exit
+
+:wrench: **Task:** Printing object content  
+:computer: **Execute on:** Your machine  
+
+    oci os object get -bn blueprints --name "waw/bemowo/summary.txt" --file - --profile SANDBOX-USER
+    
+:wrench: **Task:** Infrastructure cleanup  
+:computer: **Execute on:** Your machine  
+:dart: **Context:** Shell with TF_VAR_* environment variables set as in ~/tfvars.env.sh
+
+    cd ~/git/oci-book/chapter05/3-instance-principals/infrastructure
+    terraform destroy -auto-approve
+    
+---
+#### SECTION: Public access
+
+:wrench: **Task:** Creating a pre-authenticated request  
+:computer: **Execute on:** Your machine  
+
+    oci os preauth-request create -bn blueprints --name waw-bemowo-105-par2356 --access-type ObjectRead --time-expires 2019-03-23T10:15:00.000Z -on waw/bemowo/105.pdf --profile SANDBOX-ADMIN
