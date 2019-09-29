@@ -270,7 +270,7 @@ Replace `<placeholders>` with values matching your environment.
     ssh -i ~/.ssh/oci_id_rsa opc@$APP_VM_PUBLIC_IP
     
 :wrench: **Task:** Observe the status of thereportissuer  
-:computer: **Execute on:** Compute instance :cloud:
+:cloud: **Execute on:** Compute instance with the app
  
     sudo systemctl status reportissuer
     exit
@@ -296,3 +296,16 @@ Replace `<placeholders>` with values matching your environment.
     ONE_WEEK_LATER=`date -d "+7 days" +"%Y-%m-%d"`
     MIDNIGHT="T00:00:00.000Z"
     oci os preauth-request create -bn blueprints --name waw-bemowo-105-par --access-type ObjectRead --time-expires "$ONE_WEEK_LATER$MIDNIGHT" -on waw/bemowo/105.pdf --profile SANDBOX-ADMIN
+
+---
+#### SECTION: Cleanup
+
+:wrench: **Task:** Delete the blueprints bucket and its contents  
+:computer: **Execute on:** Your machine 
+
+    OS_PARID=`oci os preauth-request list -bn blueprints --query "data[?name=='waw-bemowo-105-par'] | [0].id" --raw-output --profile SANDBOX-ADMIN`
+    oci os preauth-request delete -bn blueprints --par-id $OS_PARID
+    oci os object bulk-delete -bn blueprints
+    oci os bucket delete -bn blueprints
+    Are you sure you want to delete this resource? [y/N]: y
+    
