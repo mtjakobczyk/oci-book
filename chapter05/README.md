@@ -294,4 +294,5 @@ Replace `<placeholders>` with values matching your environment.
 :computer: **Execute on:** Your machine  
 
     ONE_WEEK_LATER=`date -d "+7 days" +"%Y-%m-%d"`
-    oci os preauth-request create -bn blueprints --name waw-bemowo-105-par --access-type ObjectRead --time-expires "$(ONE_WEEK_LATER)T00:00:00.000Z" -on waw/bemowo/105.pdf --profile SANDBOX-ADMIN
+    MIDNIGHT="T00:00:00.000Z"
+    oci os preauth-request create -bn blueprints --name waw-bemowo-105-par --access-type ObjectRead --time-expires "$ONE_WEEK_LATER$MIDNIGHT" -on waw/bemowo/105.pdf --profile SANDBOX-ADMIN
