@@ -83,12 +83,12 @@ Before you continue, remember to:
 ---
 #### SECTION: Groups and Policies ➙ Groups  
 
-:wrench: **Task:** Create sandbox-user group 
+:wrench: **Task:** Create sandbox-user group  
 :computer: **Execute on:** Your machine
 
     oci iam group create --name sandbox-users --description "Group for the regular users of the Sandbox compartment" --query "data.id" -c $TENANCY_OCID
    
-:wrench: **Task:** List sandbox* groups
+:wrench: **Task:** List sandbox* groups  
 :computer: **Execute on:** Your machine
     
     oci iam group list -c $TENANCY_OCID --all --query "data[?starts_with(name,'sandbox')].{Name:name,OCID:id}" --output table
