@@ -60,7 +60,7 @@ Replace `<placeholders>` with values matching your environment.
     terraform destroy -auto-approve
     
 ---
-#### SECTION: Virtual Networking ➙ Private subnets, Basion and NAT
+#### SECTION: Scaling Instances ➙ Instance Pools and Autoscale
 
 :wrench: **Task:** Provision instance pool infrastructure   
 :computer: **Execute on:** Your machine  
@@ -81,7 +81,7 @@ Replace `<placeholders>` with values matching your environment.
     ssh -J opc@$BASTION_PUBLIC_IP opc@10.1.2.2
     
 :wrench: **Task:** Increase the load  
-:cloud: **Execute on:** Compute instance (worker-vm)
+:cloud: **Execute on:** Compute instance (workers-pool instance)
  
     ps -axf -o %cpu,pid,command
     nohup stress-ng -c 0 -l 80 &
@@ -94,3 +94,6 @@ Replace `<placeholders>` with values matching your environment.
 
     cd ~/git/oci-book/chapter06/2-instance-pool-autoscale/infrastructure
     terraform destroy -auto-approve
+
+---
+#### SECTION: Scaling Instances ➙ Scaling instance vertically up
