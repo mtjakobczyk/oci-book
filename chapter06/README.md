@@ -100,7 +100,8 @@ Replace `<placeholders>` with values matching your environment.
 
 :wrench: **Task:** Provision compute instance   
 :computer: **Execute on:** Your machine  
-:dart: **Context:** Shell with TF_VAR_* environment variables set as in ~/tfvars.env.sh
+:dart: **Context:** Shell with TF_VAR_* environment variables set as in ~/tfvars.env.sh  
+:file_folder: `oci-book/chapter06/3-instance-scale-up/infrastructure`
 
     source ~/tfvars.env.sh
     cd ~/git
@@ -123,7 +124,20 @@ Replace `<placeholders>` with values matching your environment.
     
 :wrench: **Task:** Alter the instance to preserve its boot volume on instance termination   
 :computer: **Execute on:** Your machine  
+:file_folder: `oci-book/chapter06/3-instance-scale-up/infrastructure`
 
     sed -i 's/\/\*//; s/\*\///' compute.tf
     terraform plan
     terraform apply -auto-approve
+
+:wrench: **Task:** Detach boot volume   
+:computer: **Execute on:** Your machine  
+:file_folder: `oci-book/chapter06/3-instance-scale-up/infrastructure`
+
+    BOOTVOLUME_OCID=`terraform output "vm_bootvolume_ocid"`
+    echo $BOOTVOLUME_OCID
+    BOOTVOLUME_AD=`oci bv boot-volume get --boot-volume-id $BOOTVOLUME_OCID --query 'data."availability-domain"' --profile SANDBOX-ADMIN | sed 's/["]//g'`
+    echo $BOOTVOLUME_AD
+    BOOTVOLUME_ATTACHMENT_OCID=`oci compute boot-volume-attachment list --availability-domain $BOOTVOLUME_AD --boot-volume-id $BOOTVOLUME_OCID --query 'data[0].id' --profile SANDBOX-ADMIN | sed 's/["]//g'`
+    echo $BOOTVOLUME_ATTACHMENT_OCID
+    oci compute boot-volume-attachment detach --boot-volume-attachment-id $BOOTVOLUME_ATTACHMENT_OCID --wait-for-state DETACHED --force --profile SANDBOX-ADMIN
