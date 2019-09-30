@@ -97,3 +97,15 @@ Replace `<placeholders>` with values matching your environment.
 
 ---
 #### SECTION: Scaling Instances ➙ Scaling instance vertically up
+
+:wrench: **Task:** Provision compute instance   
+:computer: **Execute on:** Your machine  
+:dart: **Context:** Shell with TF_VAR_* environment variables set as in ~/tfvars.env.sh
+
+    source ~/tfvars.env.sh
+    cd ~/git
+    cd oci-book/chapter06/3-instance-scale-up/infrastructure
+    find . \( -name "*.tf" -o -name "*.yaml" \)
+    terraform init
+    terraform apply -auto-approve
+    INSTANCE_PUBLIC_IP=`terraform output vm_public_ip`
