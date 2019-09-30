@@ -39,7 +39,7 @@ Replace `<placeholders>` with values matching your environment.
     terraform apply -auto-approve
     BASTION_PUBLIC_IP=`terraform output bastion_public_ip`
     
-:wrench: **Task:** Provision bastion and worker instances   
+:wrench: **Task:** Connect to the worker over bastion   
 :computer: **Execute on:** Your machine  
 
     eval `ssh-agent -s` # [Windows Subsystem for Linux] or [GitBash on Windows] ONLY
@@ -52,11 +52,45 @@ Replace `<placeholders>` with values matching your environment.
     ping -c 3 8.8.8.8
     exit
 
-:wrench: **Task:** Provision bastion and worker instances   
+:wrench: **Task:** Destroy bastion and worker instances   
 :computer: **Execute on:** Your machine  
 :dart: **Context:** Shell with TF_VAR_* environment variables set as in ~/tfvars.env.sh
 
-    terraform apply -auto-approve
+    cd ~/git/oci-book/chapter06/1-bastion-nat/infrastructure/
+    terraform destroy -auto-approve
     
 ---
 #### SECTION: Virtual Networking ➙ Private subnets, Basion and NAT
+
+:wrench: **Task:** Provision instance pool infrastructure   
+:computer: **Execute on:** Your machine  
+:dart: **Context:** Shell with TF_VAR_* environment variables set as in ~/tfvars.env.sh
+
+    source ~/tfvars.env.sh
+    cd ~/git/oci-book/chapter06/2-instance-pool-autoscale/infrastructure
+    find . \( -name "*.tf" -o -name "*.yaml" \)
+    terraform init
+    terraform apply -auto-approve
+    BASTION_PUBLIC_IP=`terraform output bastion_public_ip`
+    
+:wrench: **Task:** Connect to one of the pooled instances over bastion   
+:computer: **Execute on:** Your machine  
+
+    eval `ssh-agent -s` # [Windows Subsystem for Linux] or [GitBash on Windows] ONLY
+    ssh-add ~/.ssh/oci_id_rsa
+    ssh -J opc@$BASTION_PUBLIC_IP opc@10.1.2.2
+    
+:wrench: **Task:** Increase the load  
+:cloud: **Execute on:** Compute instance (worker-vm)
+ 
+    ps -axf -o %cpu,pid,command
+    nohup stress-ng -c 0 -l 80 &
+    ps -axf -o %cpu,pid,command
+    exit
+    
+:wrench: **Task:** Destroy bastion and workers instances pool   
+:computer: **Execute on:** Your machine  
+:dart: **Context:** Shell with TF_VAR_* environment variables set as in ~/tfvars.env.sh
+
+    cd ~/git/oci-book/chapter06/2-instance-pool-autoscale/infrastructure
+    terraform destroy -auto-approve
