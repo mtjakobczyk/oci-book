@@ -9,4 +9,4 @@ Replace `<placeholders>` with values matching your environment.
 :wrench: **Task:** Provision Autonomous Data Warehouse instance     
 :computer: **Execute on:** Your machine
 
-  ADW_ADMIN_PASS=<put-here-new-admin-password>
+    ADW_ADMIN_PASS=<put-here-new-admin-password>
