@@ -4,9 +4,9 @@ Code snippets to use with Chapter 6.
 Replace `<placeholders>` with values matching your environment.  
 
 ---
-#### SECTION: Buckets and objects
+#### SECTION: Virtual Networking Public IPs
 
-:wrench: **Task:** Get object storage namespace name   
+:wrench: **Task:** Create a reserved public IP address   
 :computer: **Execute on:** Your machine
 
-    oci os ns get
+    oci network public-ip create --lifetime RESERVED --display-name another-ip --profile SANDBOX-ADMIN
