@@ -32,8 +32,8 @@ Replace `<placeholders>` with values matching your environment.
 :computer: **Execute on:** Your machine  
 :dart: **Context:** Shell with TF_VAR_* environment variables set as in ~/tfvars.env.sh
 
-    cd ~/git
-    cd oci-book/chapter06/1-bastion-nat/infrastructure/
+    source ~/tfvars.env.sh
+    cd ~/git/oci-book/chapter06/1-bastion-nat/infrastructure/
     find . -name "*.tf"
     terraform init
     terraform apply -auto-approve
