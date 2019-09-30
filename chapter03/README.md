@@ -243,7 +243,7 @@ Replace `<placeholders>` with values matching your environment.
 ---
 #### SECTION: Terraform ➙ Installation
 
-:wrench: **Task:** Install newest Terraform 0.12.x
+:wrench: **Task:** Install newest Terraform 0.12.x  
 :computer: **Execute on:** Your machine
 
     cd ~
