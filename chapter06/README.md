@@ -109,3 +109,21 @@ Replace `<placeholders>` with values matching your environment.
     terraform init
     terraform apply -auto-approve
     INSTANCE_PUBLIC_IP=`terraform output vm_public_ip`
+
+:wrench: **Task:** Connect to the worker over bastion   
+:computer: **Execute on:** Your machine  
+
+    ssh -i ~/.ssh/oci_id_rsa opc@$INSTANCE_PUBLIC_IP
+    
+:wrench: **Task:** Note down the boot time marker  
+:cloud: **Execute on:** Compute instance (compute instance)
+ 
+    cat datemarker
+    exit
+    
+:wrench: **Task:** Alter the instance to preserve its boot volume on instance termination   
+:computer: **Execute on:** Your machine  
+
+    sed -i 's/\/\*//; s/\*\///' compute.tf
+    terraform plan
+    terraform apply -auto-approve
