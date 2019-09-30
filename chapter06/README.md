@@ -117,7 +117,7 @@ Replace `<placeholders>` with values matching your environment.
     ssh -i ~/.ssh/oci_id_rsa opc@$INSTANCE_PUBLIC_IP
     
 :wrench: **Task:** Note down the boot time marker  
-:cloud: **Execute on:** Compute instance (compute instance)
+:cloud: **Execute on:** Compute instance (vm-1-OCPU)
  
     cat datemarker
     exit
@@ -162,3 +162,18 @@ Replace `<placeholders>` with values matching your environment.
     terraform apply -auto-approve
     NEW_INSTANCE_PUBLIC_IP=`terraform output new_vm_public_ip`
     
+:wrench: **Task:** Connect to the worker over bastion   
+:computer: **Execute on:** Your machine  
+
+    ssh -i ~/.ssh/oci_id_rsa opc@$NEW_INSTANCE_PUBLIC_IP
+    
+:wrench: **Task:** Note down the boot time marker  
+:cloud: **Execute on:** Compute instance (vm-2-OCPU)
+ 
+    cat datemarker
+    exit
+    
+:wrench: **Task:** Change the display name of the boot volume   
+:computer: **Execute on:** Your machine  
+
+    oci bv boot-volume update --boot-volume-id $BOOTVOLUME_OCID --display-name vm-bv --profile SANDBOX-ADMIN
