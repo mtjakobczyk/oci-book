@@ -37,5 +37,17 @@ Replace `<placeholders>` with values matching your environment.
     find . -name "*.tf"
     terraform init
     terraform apply -auto-approve
+    BASTION_PUBLIC_IP=`terraform output bastion_public_ip`
     
+:wrench: **Task:** Provision bastion and worker instances   
+:computer: **Execute on:** Your machine  
+
+    eval `ssh-agent -s` # [Windows Subsystem for Linux] or [GitBash on Windows] ONLY
+    ssh-add ~/.ssh/oci_id_rsa
+    ssh -J opc@$BASTION_PUBLIC_IP opc@10.0.1.130
     
+:wrench: **Task:** Test internet connectivity from an instance in private Subnet  
+:cloud: **Execute on:** Compute instance (worker-vm)
+ 
+    ping -c 3 8.8.8.8
+    exit
