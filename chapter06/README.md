@@ -142,3 +142,23 @@ Replace `<placeholders>` with values matching your environment.
     BOOTVOLUME_ATTACHMENT_OCID=`oci compute boot-volume-attachment list --availability-domain $BOOTVOLUME_AD --boot-volume-id $BOOTVOLUME_OCID --query 'data[0].id' --profile SANDBOX-ADMIN | sed 's/["]//g'`
     echo $BOOTVOLUME_ATTACHMENT_OCID
     oci compute boot-volume-attachment detach --boot-volume-attachment-id $BOOTVOLUME_ATTACHMENT_OCID --wait-for-state DETACHED --force --profile SANDBOX-ADMIN
+
+:wrench: **Task:** Alter infrastructure code to use more powerful instance with the existing boot volume attached    
+:computer: **Execute on:** Your machine  
+:file_folder: `oci-book/chapter06/3-instance-scale-up/infrastructure`
+
+    rm compute.tf
+    sed -i 's/\/\*//; s/\*\///' compute-ocpu2.tf
+    
+:wrench: **Task:** Provision more powerful instance with the existing boot volume attached    
+:computer: **Execute on:** Your machine  
+:dart: **Context:** Shell with TF_VAR_* environment variables set as in ~/tfvars.env.sh  
+:file_folder: `oci-book/chapter06/3-instance-scale-up/infrastructure`
+
+    echo $BOOTVOLUME_OCID
+    export TF_VAR_vm_2_ocpu_bootvolume_ocid=$BOOTVOLUME_OCID
+    echo $TF_VAR_vm_2_ocpu_bootvolume_ocid
+    terraform plan
+    terraform apply -auto-approve
+    
+    
