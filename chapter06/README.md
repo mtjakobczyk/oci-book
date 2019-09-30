@@ -51,3 +51,12 @@ Replace `<placeholders>` with values matching your environment.
  
     ping -c 3 8.8.8.8
     exit
+
+:wrench: **Task:** Provision bastion and worker instances   
+:computer: **Execute on:** Your machine  
+:dart: **Context:** Shell with TF_VAR_* environment variables set as in ~/tfvars.env.sh
+
+    terraform apply -auto-approve
+    
+---
+#### SECTION: Virtual Networking ➙ Private subnets, Basion and NAT
