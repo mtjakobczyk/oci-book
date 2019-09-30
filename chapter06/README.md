@@ -30,7 +30,8 @@ Replace `<placeholders>` with values matching your environment.
 
 :wrench: **Task:** Provision bastion and worker instances   
 :computer: **Execute on:** Your machine  
-:dart: **Context:** Shell with TF_VAR_* environment variables set as in ~/tfvars.env.sh
+:dart: **Context:** Shell with TF_VAR_* environment variables set as in ~/tfvars.env.sh  
+:file_folder: `oci-book/chapter06/1-bastion-nat/infrastructure`
 
     source ~/tfvars.env.sh
     cd ~/git/oci-book/chapter06/1-bastion-nat/infrastructure/
@@ -54,7 +55,8 @@ Replace `<placeholders>` with values matching your environment.
 
 :wrench: **Task:** Destroy bastion and worker instances   
 :computer: **Execute on:** Your machine  
-:dart: **Context:** Shell with TF_VAR_* environment variables set as in ~/tfvars.env.sh
+:dart: **Context:** Shell with TF_VAR_* environment variables set as in ~/tfvars.env.sh  
+:file_folder: `oci-book/chapter06/1-bastion-nat/infrastructure`
 
     cd ~/git/oci-book/chapter06/1-bastion-nat/infrastructure/
     terraform destroy -auto-approve
@@ -64,7 +66,8 @@ Replace `<placeholders>` with values matching your environment.
 
 :wrench: **Task:** Provision instance pool infrastructure   
 :computer: **Execute on:** Your machine  
-:dart: **Context:** Shell with TF_VAR_* environment variables set as in ~/tfvars.env.sh
+:dart: **Context:** Shell with TF_VAR_* environment variables set as in ~/tfvars.env.sh  
+:file_folder: `oci-book/chapter06/2-instance-pool-autoscale/infrastructure`
 
     source ~/tfvars.env.sh
     cd ~/git/oci-book/chapter06/2-instance-pool-autoscale/infrastructure
@@ -90,7 +93,8 @@ Replace `<placeholders>` with values matching your environment.
     
 :wrench: **Task:** Destroy bastion and workers instances pool   
 :computer: **Execute on:** Your machine  
-:dart: **Context:** Shell with TF_VAR_* environment variables set as in ~/tfvars.env.sh
+:dart: **Context:** Shell with TF_VAR_* environment variables set as in ~/tfvars.env.sh  
+:file_folder: `oci-book/chapter06/2-instance-pool-autoscale/infrastructure`
 
     cd ~/git/oci-book/chapter06/2-instance-pool-autoscale/infrastructure
     terraform destroy -auto-approve
@@ -177,3 +181,10 @@ Replace `<placeholders>` with values matching your environment.
 :computer: **Execute on:** Your machine  
 
     oci bv boot-volume update --boot-volume-id $BOOTVOLUME_OCID --display-name vm-bv --profile SANDBOX-ADMIN
+
+:wrench: **Task:** Destroy infrastructure    
+:computer: **Execute on:** Your machine  
+:dart: **Context:** Shell with TF_VAR_* environment variables set as in ~/tfvars.env.sh  
+:file_folder: `oci-book/chapter06/3-instance-scale-up/infrastructure`
+
+    terraform destroy -auto-approve
