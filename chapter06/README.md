@@ -160,5 +160,5 @@ Replace `<placeholders>` with values matching your environment.
     echo $TF_VAR_vm_2_ocpu_bootvolume_ocid
     terraform plan
     terraform apply -auto-approve
-    
+    NEW_INSTANCE_PUBLIC_IP=`terraform output new_vm_public_ip`
     
