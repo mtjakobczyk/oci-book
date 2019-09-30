@@ -124,6 +124,7 @@ Replace `<placeholders>` with values matching your environment.
     
 :wrench: **Task:** Alter the instance to preserve its boot volume on instance termination   
 :computer: **Execute on:** Your machine  
+:dart: **Context:** Shell with TF_VAR_* environment variables set as in ~/tfvars.env.sh  
 :file_folder: `oci-book/chapter06/3-instance-scale-up/infrastructure`
 
     sed -i 's/\/\*//; s/\*\///' compute.tf
