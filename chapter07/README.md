@@ -76,3 +76,17 @@ Replace `<placeholders>` with values matching your environment.
 :cloud: **Execute on:** SQL Developer Web (as SANDBOX_USER)
 
     SELECT * FROM all_credentials;
+
+:wrench: **Task:** Create a new Object Storage bucket     
+:computer: **Execute on:** Your machine
+
+    oci os bucket create --name roadadw-sources --profile SANDBOX-ADMIN
+    
+:wrench: **Task:** Create IAM policy for the new Object Storage bucket     
+:computer: **Execute on:** Your machine
+
+    cd ~/git/oci-book/chapter07/1-setup/
+    oci iam policy create --name sandbox-users-adw-storage-policy --statements file://sandbox-users.policies.adwstorage.json --description "ADW-Storage-related policy for regular Sandbox users" --profile SANDBOX-ADMIN
+
+---
+#### SECTION: Loading Data to ADW ➙ Star Schema
