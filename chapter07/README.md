@@ -61,7 +61,7 @@ Replace `<placeholders>` with values matching your environment.
     echo $IAM_USER_OCID
     oci iam auth-token create --user-id $IAM_USER_OCID --description token-adw --query 'data.token' --raw-output
 
-:wrench: **Task:** Create SANDBOX_USER database user     
+:wrench: **Task:** Create a new Credential for the SANDBOX_USER    
 :cloud: **Execute on:** SQL Developer Web (as SANDBOX_USER)
 
     BEGIN
@@ -72,3 +72,7 @@ Replace `<placeholders>` with values matching your environment.
       );
     END;
 
+:wrench: **Task:** List all Credentials in a given schema    
+:cloud: **Execute on:** SQL Developer Web (as SANDBOX_USER)
+
+    SELECT * FROM all_credentials;
