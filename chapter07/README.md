@@ -80,7 +80,7 @@ Replace `<placeholders>` with values matching your environment.
 :wrench: **Task:** Create a new Object Storage bucket     
 :computer: **Execute on:** Your machine
 
-    oci os bucket create --name roadadw-sources --profile SANDBOX-ADMIN
+    oci os bucket create --name roadadw-load --profile SANDBOX-ADMIN
     
 :wrench: **Task:** Create IAM policy for the new Object Storage bucket     
 :computer: **Execute on:** Your machine
