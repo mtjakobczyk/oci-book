@@ -128,3 +128,43 @@ Replace `<placeholders>` with values matching your environment.
         format => json_object('type' value 'CSV', 'skipheaders' value '1')
       );
     END;
+
+:wrench: **Task:** View dimension data in the EVENT_DIM table    
+:cloud: **Execute on:** SQL Developer Web (as SANDBOX_USER)
+
+    select * from event_dim;
+    
+:wrench: **Task:** Create ROAD_DIM table for the road dimension    
+:cloud: **Execute on:** SQL Developer Web (as SANDBOX_USER)
+    
+    create table ROAD_DIM (
+      segment_id          char(6) not null,
+      segment_name        varchar2(50) not null,
+      segment_type        char(2) not null,
+      segment_voivodeship varchar2(50) not null,
+      segment_highway     varchar2(50),
+      segment_expressway  varchar2(50),
+      road_id             varchar2(10) not null,
+      road_name           varchar2(10) not null,
+      road_lenght         number(5),
+      constraint pk_road_dim primary key (segment_id),
+      constraint chk_segment_type
+        check ( segment_type in ('A','S','GP','G'))
+    );
+
+:wrench: **Task:** Upload dimension data to the ROAD_DIM table    
+:cloud: **Execute on:** SQL Developer Web (as SANDBOX_USER)
+
+    BEGIN
+      DBMS_CLOUD.COPY_DATA(
+        table_name => 'ROAD_DIM',
+        credential_name => 'OCI_SANDBOX_USER',
+        file_uri_list => 'https://objectstorage.<put-here-region-identifier>.oraclecloud.com/n/<put-here-object-storage-namespace>/b/roadadw-load/o/road_dim.csv',
+        format => json_object('type' value 'CSV', 'skipheaders' value '1', 'blankasnull' value 'true')
+      );
+    END;
+
+:wrench: **Task:** View dimension data in the ROAD_DIM table    
+:cloud: **Execute on:** SQL Developer Web (as SANDBOX_USER)
+
+    select * from road_dim;
