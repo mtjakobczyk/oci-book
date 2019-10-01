@@ -213,3 +213,74 @@ Replace `<placeholders>` with values matching your environment.
 
     cd ~/git/oci-book/chapter07/3-facts/
     ls -1 *.csv
+
+:wrench: **Task:** List fact files     
+:computer: **Execute on:** Your machine
+:file_folder: `oci-book/chapter07/3-facts`
+
+    for fact in `ls facts.*.csv`; do echo $fact; oci os object put -bn roadadw-load --file $fact --profile SANDBOX-USER; done
+    
+:wrench: **Task:** Create ROADEVENTS_FACT table   
+:cloud: **Execute on:** SQL Developer Web (as SANDBOX_USER)
+
+    create table ROADEVENTS_FACT (
+      time_dim_id     char(6) not null,
+      road_dim_id     char(6) not null,
+      event_dim_id    char(7) not null,
+      occurrence      number(10) not null,
+      injured         number(10) not null,
+      killed          number(10) not null,
+      constraint pk_roadevents_fact
+        primary key (time_dim_id, road_dim_id, event_dim_id),
+      constraint fk_road_dim 
+        foreign key (road_dim_id) 
+          references ROAD_DIM(segment_id),
+      constraint fk_event_dim 
+        foreign key (event_dim_id) 
+          references EVENT_DIM(event_id),
+      constraint fk_time_dim 
+        foreign key (time_dim_id) 
+          references TIME_DIM(day_id)
+    );
+
+:wrench: **Task:** Create indexes on ROADEVENTS_FACT table   
+:cloud: **Execute on:** SQL Developer Web (as SANDBOX_USER)
+
+    CREATE INDEX roadevents_fact_time_ix 
+      ON roadevents_fact (time_dim_id);
+    CREATE INDEX roadevents_fact_road_ix 
+      ON roadevents_fact (road_dim_id);
+    CREATE INDEX roadevents_fact_event_ix 
+      ON roadevents_fact (event_dim_id);
+
+:wrench: **Task:** Upload data to the ROADEVENTS_FACT table   
+:cloud: **Execute on:** SQL Developer Web (as SANDBOX_USER)
+
+    BEGIN
+      DBMS_CLOUD.COPY_DATA(
+        table_name => 'ROADEVENTS_FACT',
+        credential_name => 'OCI_SANDBOX_USER',
+        file_uri_list => 'https://objectstorage.<put-here-region-identifier>.oraclecloud.com/n/<put-here-object-storage-namespace>/b/roadadw-load/o/facts.*.csv',
+        format => json_object('type' value 'CSV', 'skipheaders' value '1', 'blankasnull' value 'true')
+      );
+    END;
+
+:wrench: **Task:** Count rows and select them in ROADEVENTS_FACT table   
+:cloud: **Execute on:** SQL Developer Web (as SANDBOX_USER)
+
+    select count(*) from ROADEVENTS_FACT;
+    select * from ROADEVENTS_FACT;
+    
+---
+#### SECTION: Database Monitoring ➙ Dimensions
+
+:wrench: **Task:** Display current AWR settings   
+:cloud: **Execute on:** SQL Developer Web (as ADMIN)
+
+    select 
+      extract( hour from snap_interval) interval_hours,
+      snap_interval,
+      extract( day from retention) retention_days,
+      retention
+    from SYS.DBA_HIST_WR_CONTROL 
+    where dbid=(select con_dbid from v$database);
