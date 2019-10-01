@@ -272,7 +272,7 @@ Replace `<placeholders>` with values matching your environment.
     select * from ROADEVENTS_FACT;
     
 ---
-#### SECTION: Database Monitoring ➙ Dimensions
+#### SECTION: Database Monitoring
 
 :wrench: **Task:** Display current AWR settings   
 :cloud: **Execute on:** SQL Developer Web (as ADMIN)
@@ -284,3 +284,66 @@ Replace `<placeholders>` with values matching your environment.
       retention
     from SYS.DBA_HIST_WR_CONTROL 
     where dbid=(select con_dbid from v$database);
+
+:wrench: **Task:** Alter the retention time and the statistics collection interval     
+:cloud: **Execute on:** SQL Developer Web (as ADMIN)
+
+    BEGIN
+      DBMS_WORKLOAD_REPOSITORY.MODIFY_SNAPSHOT_SETTINGS(
+        retention => 20160,
+        interval => 60
+        );
+    END;
+
+---
+#### SECTION: Data Analytics
+
+:wrench: **Task:** Basic Star Query   
+:cloud: **Execute on:** SQL Developer Web (as SANDBOX_USER)
+
+    SELECT * FROM ROADEVENTS_FACT   F
+    JOIN TIME_DIM  T ON T.DAY_ID = F.TIME_DIM_ID
+    JOIN ROAD_DIM  R ON R.SEGMENT_ID = F.ROAD_DIM_ID
+    JOIN EVENT_DIM E ON E.EVENT_ID = F.EVENT_DIM_ID
+
+:wrench: **Task:** Grant materialized view to SANDBOX_USER    
+:cloud: **Execute on:** SQL Developer Web (as ADMIN)
+
+    GRANT CREATE MATERIALIZED VIEW TO SANDBOX_USER;
+    
+:wrench: **Task:** Verify privileges given to the SANDBOX_USER    
+:cloud: **Execute on:** SQL Developer Web (as ADMIN)
+    
+    SELECT * FROM DBA_ROLE_PRIVS where grantee='SANDBOX_USER';
+    SELECT * FROM DBA_SYS_PRIVS where grantee='SANDBOX_USER';
+
+:wrench: **Task:** Create materialized view    
+:cloud: **Execute on:** SQL Developer Web (as SANDBOX_USER)
+
+    CREATE MATERIALIZED VIEW ROADEVENTS_STAR AS
+    SELECT * FROM ROADEVENTS_FACT   F
+    JOIN TIME_DIM  T ON T.DAY_ID = F.TIME_DIM_ID
+    JOIN ROAD_DIM  R ON R.SEGMENT_ID = F.ROAD_DIM_ID
+    JOIN EVENT_DIM E ON E.EVENT_ID = F.EVENT_DIM_ID
+
+:wrench: **Task:** Aggregate query over Star schema    
+:cloud: **Execute on:** SQL Developer Web (as SANDBOX_USER)
+
+    SELECT 
+      year_name, class_name, 
+      SUM(occurrence) total_occurrence, 
+      SUM(injured) sum_injured, 
+      SUM(killed) sum_killed
+    FROM ROADEVENTS_STAR 
+    GROUP BY year_name, class_name 
+    ORDER BY year_name, class_name;
+
+:wrench: **Task:** Slice operation over Star schema    
+:cloud: **Execute on:** SQL Developer Web (as SANDBOX_USER)
+
+    SELECT 
+      SUM(occurrence) total_occurrence, 
+      SUM(injured) sum_injured, 
+      SUM(killed) sum_killed
+    FROM ROADEVENTS_STAR 
+    WHERE day_date=TO_DATE('20170812','YYYYMMDD');
