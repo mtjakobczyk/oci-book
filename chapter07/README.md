@@ -215,7 +215,7 @@ Replace `<placeholders>` with values matching your environment.
     ls -1 *.csv
 
 :wrench: **Task:** List fact files     
-:computer: **Execute on:** Your machine
+:computer: **Execute on:** Your machine  
 :file_folder: `oci-book/chapter07/3-facts`
 
     for fact in `ls facts.*.csv`; do echo $fact; oci os object put -bn roadadw-load --file $fact --profile SANDBOX-USER; done
