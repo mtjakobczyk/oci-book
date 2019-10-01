@@ -49,3 +49,25 @@ Replace `<placeholders>` with values matching your environment.
      );
      commit;
     END;
+
+---
+#### SECTION: Loading Data to ADW ➙ Database Credential
+
+:wrench: **Task:** Generate Auth Token for sandbox-user     
+:computer: **Execute on:** Your machine
+
+    IAM_USER_OCID=`oci iam user list -c $TENANCY_OCID --query "data[?name=='sandbox-user'] | [0].id" --raw-output --all`
+    echo IAM_USER_OCID
+    oci iam auth-token create --user-id $IAM_USER_OCID --description token-adw --query ‘data.token’ --raw-output
+
+:wrench: **Task:** Create SANDBOX_USER database user     
+:cloud: **Execute on:** SQL Developer Web (as SANDBOX_USER)
+
+    BEGIN
+      DBMS_CLOUD.CREATE_CREDENTIAL(
+        credential_name => 'OCI_SANDBOX_USER',
+        username => 'sandbox-user',
+        password => '<put-here-auth-token>'
+      );
+    END;
+
