@@ -21,6 +21,9 @@ Replace `<placeholders>` with values matching your environment.
        --wait-for-state AVAILABLE \
        --profile SANDBOX-ADMIN
 
+---
+#### SECTION: SQL Developer Web
+
 :wrench: **Task:** Display current time     
 :cloud: **Execute on:** SQL Developer Web (as ADMIN)
     
