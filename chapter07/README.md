@@ -90,3 +90,41 @@ Replace `<placeholders>` with values matching your environment.
 
 ---
 #### SECTION: Loading Data to ADW ➙ Star Schema
+
+:wrench: **Task:** List dimension files     
+:computer: **Execute on:** Your machine
+
+    cd ~/git/oci-book/chapter07/2-dimensions/
+    ls -1 *_dim.csv
+
+:wrench: **Task:** Upload dimension files to the bucket     
+:computer: **Execute on:** Your machine
+
+    oci os object put -bn roadadw-load --file time_dim.csv --profile SANDBOX-USER
+    oci os object put -bn roadadw-load --file road_dim.csv --profile SANDBOX-USER
+    oci os object put -bn roadadw-load --file event_dim.csv --profile SANDBOX-USER
+    
+:wrench: **Task:** Create EVENT_DIM table for the event dimension    
+:cloud: **Execute on:** SQL Developer Web (as SANDBOX_USER)
+    
+    create table EVENT_DIM (
+      event_id        char(7) not null,
+      event_name      varchar2(50) not null,
+      category_id     char(4) not null,
+      category_name   varchar2(50) not null,
+      class_id        char(1) not null,
+      class_name      varchar2(50) not null,
+      constraint pk_event_dim primary key (event_id)
+    );
+
+:wrench: **Task:** Upload dimension data to the EVENT_DIM table    
+:cloud: **Execute on:** SQL Developer Web (as SANDBOX_USER)
+
+    BEGIN
+      DBMS_CLOUD.COPY_DATA(
+        table_name => 'EVENT_DIM',
+        credential_name => 'OCI_SANDBOX_USER',
+        file_uri_list => 'https://objectstorage.<put-here-region-identifier>.oraclecloud.com/n/<put-here-object-storage-namespace>/b/roadadw-load/o/event_dim.csv',
+        format => json_object('type' value 'CSV', 'skipheaders' value '1')
+      );
+    END;
