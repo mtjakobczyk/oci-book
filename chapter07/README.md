@@ -89,7 +89,7 @@ Replace `<placeholders>` with values matching your environment.
     oci iam policy create --name sandbox-users-adw-storage-policy --statements file://sandbox-users.policies.adwstorage.json --description "ADW-Storage-related policy for regular Sandbox users" --profile SANDBOX-ADMIN
 
 ---
-#### SECTION: Loading Data to ADW ➙ Star Schema
+#### SECTION: Loading Data to ADW ➙ Star Schema ➙ Dimensions
 
 :wrench: **Task:** List dimension files     
 :computer: **Execute on:** Your machine
@@ -168,3 +168,48 @@ Replace `<placeholders>` with values matching your environment.
 :cloud: **Execute on:** SQL Developer Web (as SANDBOX_USER)
 
     select * from road_dim;
+
+:wrench: **Task:** Create TIME_DIM table for the road dimension    
+:cloud: **Execute on:** SQL Developer Web (as SANDBOX_USER)
+
+    create table TIME_DIM (
+      day_id          char(6) not null,
+      day_date        DATE not null,
+      day_name        varchar2(20) not null,
+      month_id        char(4) not null,
+      month_of_year   number(2) not null,
+      month_name      varchar2(20) not null,
+      year_id         char(2) not null,
+      year_name       char(6) not null,
+      constraint pk_time_dim primary key (day_id)
+    );
+
+:wrench: **Task:** Upload dimension data to the TIME_DIM table    
+:cloud: **Execute on:** SQL Developer Web (as SANDBOX_USER)
+
+    BEGIN
+      DBMS_CLOUD.COPY_DATA(
+        table_name => 'TIME_DIM',
+        credential_name => 'OCI_SANDBOX_USER',
+        file_uri_list => 'https://objectstorage.<put-here-region-identifier>.oraclecloud.com/n/<put-here-object-storage-namespace>/b/roadadw-load/o/time_dim.csv',
+        format => json_object(
+          'type' value 'CSV',
+          'skipheaders' value '1',
+          'blankasnull' value 'true',
+          'dateformat' value 'YYYY-MM-DD')
+      );
+    END;
+
+:wrench: **Task:** View dimension data in the TIME_DIM table    
+:cloud: **Execute on:** SQL Developer Web (as SANDBOX_USER)
+
+    select * from time_dim;
+    
+---
+#### SECTION: Loading Data to ADW ➙ Star Schema ➙ Facts
+
+:wrench: **Task:** List fact files     
+:computer: **Execute on:** Your machine
+
+    cd ~/git/oci-book/chapter07/3-facts/
+    ls -1 *.csv
