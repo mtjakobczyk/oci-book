@@ -254,7 +254,7 @@ Replace `<placeholders>` with values matching your environment.
     
 :wrench: **Task:** Create Kubernetes Secret     
 :cloud: **Execute on:** Compute instance (dev-vm)  
-:dart: **Context:** KUBECONFIG variable set to `.kube/sandbox-user-config` (SANDBOX_USER)
+:dart: **Context:** `KUBECONFIG` variable set to `.kube/sandbox-user-config` (SANDBOX_USER)
 
     OCI_TENANCY=<put-here-your-tenancy-name>
     OCIR_REGION=<put-here-your-ocir-region-code>
@@ -266,12 +266,65 @@ Replace `<placeholders>` with values matching your environment.
       --docker-password="$OCI_USER_TOKEN" -n dev-sandbox
     kubectl get secrets -n dev-sandbox
     
-:wrench: **Task:** Create Pod     
+:wrench: **Task:** Create a pod     
 :cloud: **Execute on:** Compute instance (dev-vm)  
-:dart: **Context:** KUBECONFIG variable set to `.kube/sandbox-user-config` (SANDBOX_USER)
+:dart: **Context:** `KUBECONFIG` variable set to `.kube/sandbox-user-config` (SANDBOX_USER)  
+:file_folder: `oci-book/chapter08/3-kubernetes/platform`
       
     cd oci-book/chapter08/3-kubernetes/platform
+    sed -i "s/OCIR_REGION/$OCIR_REGION/; s/OCI_TENANCY/$OCI_TENANCY/" uuid-pod.yaml
     kubectl create -f uuid-pod.yaml -n dev-sandbox
     kubectl get pods -n dev-sandbox
     
+:wrench: **Task:** Delete the pod     
+:cloud: **Execute on:** Compute instance (dev-vm)  
+:dart: **Context:** `KUBECONFIG` variable set to `.kube/sandbox-user-config` (SANDBOX_USER)
     
+    kubectl delete pod uuid-pod -n dev-sandbox
+    
+---
+#### SECTION: Container Orchestration ➙ Deployment and Services
+
+:wrench: **Task:** Create a deployment and a service     
+:cloud: **Execute on:** Compute instance (dev-vm)  
+:dart: **Context:** `KUBECONFIG` variable set to `.kube/sandbox-user-config` (SANDBOX_USER)  
+:file_folder: `oci-book/chapter08/3-kubernetes/platform`
+      
+    sed -i "s/OCIR_REGION/$OCIR_REGION/; s/OCI_TENANCY/$OCI_TENANCY/" uuid-deployment.yaml
+    kubectl create -f uuid-deployment.yaml -n dev-sandbox
+    kubectl get pods -n dev-sandbox  -o wide
+    kubectl get replicasets -n dev-sandbox
+    kubectl get services -n dev-sandbox
+    exit
+
+:wrench: **Task:** Test containerized UUID API running on OKE    
+:computer: **Execute on:** Your machine 
+    
+    LB_PUBLIC_IP=<put-here-load-balancer-public-ip>
+    for i in {1..10}; do curl $LB_PUBLIC_IP:80/identifiers; done
+
+---
+#### SECTION: Cleanup
+
+:wrench: **Task:** Connect to the dev-vm    
+:computer: **Execute on:** Your machine 
+    
+    ssh -i ~/.ssh/oci_id_rsa opc@$DEV_VM_PUBLIC_IP
+    
+:wrench: **Task:** Delete all objects in dev-sandbox namespace  
+:cloud: **Execute on:** Compute instance (dev-vm)  
+:dart: **Context:** `KUBECONFIG` variable set to `.kube/config` (SANDBOX_ADMIN)  
+
+    export KUBECONFIG=~/.kube/sandbox-user-config
+    kubectl delete all --all -n dev-sandbox
+    exit
+    
+:wrench: **Task:** Infrastructure cleanup     
+:computer: **Execute on:** Your machine  
+:dart: **Context:** Shell with `TF_VAR_*` environment variables set as in `~/tfvars.env.sh`  
+:file_folder: `oci-book/chapter08/1-devmachine`
+
+    source ~/tfvars.env.sh
+    cd ~/git
+    cd oci-book/chapter08/1-devmachine
+    terraform destroy -auto-approve
