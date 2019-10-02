@@ -83,11 +83,10 @@ Replace `<placeholders>` with values matching your environment.
 
 :wrench: **Task:** Create a policy     
 :computer: **Execute on:** Your machine   
-:file_folder: `oci-book/chapter08/2-docker`
+:file_folder: `oci-book/chapter08/2-docker/policies`
 
     cd ~/git
-    cd oci-book/chapter08/2-docker
-    cd policies
+    cd oci-book/chapter08/2-docker/policies
     ls -1
     TENANCY_OCID=`cat ~/.oci/config | grep tenancy | sed 's/tenancy=//'`
     oci iam policy create -c $TENANCY_OCID --name tenancy-ocir-policy --description "OCIR Polices"  --statements "file://tenancy.ocir.policies.json"
@@ -124,4 +123,77 @@ Replace `<placeholders>` with values matching your environment.
     
 ---
 #### SECTION: Container Orchestration ➙ Managed Cluster 
+    
+:wrench: **Task:** Create a policy     
+:computer: **Execute on:** Your machine   
+:file_folder: `oci-book/chapter08/3-kubernetes/policies`
+
+    cd ~/git
+    cd oci-book/chapter08/3-kubernetes/policies
+    TENANCY_OCID=`cat ~/.oci/config | grep tenancy | sed 's/tenancy=//'`
+    oci iam policy create -c $TENANCY_OCID --name tenancy-oke --description "OKE Policy"  --statements "file://tenancy.oke.policy.json"
+    
+:wrench: **Task:** Prepare the infrastructure and launch OKE cluster     
+:computer: **Execute on:** Your machine   
+:dart: **Context:** Shell with TF_VAR_* environment variables set as in ~/tfvars.env.sh  
+:file_folder: `oci-book/chapter08/3-kubernetes/infrastructure`
+
+    cd ~/git/oci-book/chapter08/3-kubernetes/infrastructure
+    find . | sort
+    source ~/tfvars.env.sh
+    terraform init
+    terraform apply -auto-approve
+    find . -name "*.tf" | sort
+    
+---
+#### SECTION: Container Orchestration ➙ Connecting as superuser
+
+:wrench: **Task:** Create Kubeconfig     
+:computer: **Execute on:** Your machine   
+
+    REGION=<put-here-your-region-identifier>
+    CLUSTER_OCID=`oci ce cluster list --name k8s-cluster --query "data[?name=='k8s-cluster'] | [0].id" --raw-output --profile SANDBOX-ADMIN`
+    mkdir ~/.kube
+    oci ce cluster create-kubeconfig --cluster-id $CLUSTER_OCID --file ~/.kube/config --region $REGION --profile SANDBOX-ADMIN
+    chmod 600 .kube/config
+    ls -l .kube | awk '{print $1, $9}'
+    
+:wrench: **Task:** Copy Kubeconfig and connect to the dev-vm    
+:computer: **Execute on:** Your machine 
+    
+    scp -i ~/.ssh/oci_id_rsa ~/.kube/config opc@$DEV_VM_PUBLIC_IP:/home/opc/.kube
+    ssh -i ~/.ssh/oci_id_rsa opc@$DEV_VM_PUBLIC_IP
+    
+:wrench: **Task:** Explore OKE instance  
+:cloud: **Execute on:** Compute instance (dev-vm)   
+:dart: **Context:** .kube/config present  
+
+    chmod 600 .kube/config
+    ls -l .kube | awk '{print $1, $9}'
+    kubectl get nodes -o wide
+    kubectl get namespaces
+    kubectl get pods -n kube-system
+    
+:wrench: **Task:** Check Kubernetes API permissions  
+:cloud: **Execute on:** Compute instance (dev-vm)  
+:dart: **Context:** .kube/config present
+
+    kubectl auth can-i create namespace --all-namespaces
+    kubectl auth can-i '*' '*' --namespace=default
+    kubectl auth can-i '*' '*' --all-namespaces
+    
+---
+#### SECTION: Container Orchestration ➙ Sandbox Namespace
+
+:wrench: **Task:** Create Kubernetes Namespace  
+:cloud: **Execute on:** Compute instance (dev-vm)  
+:dart: **Context:** .kube/config present  
+:file_folder: `oci-book/chapter08/3-kubernetes/platform`
+
+    cd oci-book/chapter08/3-kubernetes/platform
+    kubectl create -f dev-sandbox-namespace.yaml
+    kubectl get namespaces
+    kubectl describe namespace dev-sandbox
+    exit
+    
     
