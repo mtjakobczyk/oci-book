@@ -14,7 +14,7 @@ SBXADM_FINGERPRINT=`cat $oci_config_path | grep -A 4 "\[SANDBOX-ADMIN\]" | grep 
 echo "# Terraform variables for the SANDBOX-ADMIN" > $sandbox_admin_tfvars_path
 echo "tenancy_ocid = \"$TENANCY_OCID\"" >> $sandbox_admin_tfvars_path
 echo "region = \"$REGION_IDENTIFIER\"" >> $sandbox_admin_tfvars_path
-echo "user = \"$SBXADM_USER_OCID\"" >> $sandbox_admin_tfvars_path
+echo "user_ocid = \"$SBXADM_USER_OCID\"" >> $sandbox_admin_tfvars_path
 echo "private_key_path = \"$SBXADM_PRIVATE_KEY_PATH\"" >> $sandbox_admin_tfvars_path
 echo "private_key_password = \"$SBXADM_PRIVATE_KEY_PASS\"" >> $sandbox_admin_tfvars_path
 echo "fingerprint = \"$SBXADM_FINGERPRINT\"" >> $sandbox_admin_tfvars_path
