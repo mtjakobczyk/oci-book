@@ -148,7 +148,7 @@ Replace `<placeholders>` with values matching your environment.
 ---
 #### SECTION: Container Orchestration ➙ Connecting as superuser
 
-:wrench: **Task:** Create Kubeconfig     
+:wrench: **Task:** Create Kubeconfig for the SANDBOX_ADMIN     
 :computer: **Execute on:** Your machine   
 
     REGION=<put-here-your-region-identifier>
@@ -158,7 +158,7 @@ Replace `<placeholders>` with values matching your environment.
     chmod 600 .kube/config
     ls -l .kube | awk '{print $1, $9}'
     
-:wrench: **Task:** Copy Kubeconfig and connect to the dev-vm    
+:wrench: **Task:** Copy the Kubeconfig and connect to the dev-vm    
 :computer: **Execute on:** Your machine 
     
     scp -i ~/.ssh/oci_id_rsa ~/.kube/config opc@$DEV_VM_PUBLIC_IP:/home/opc/.kube
@@ -195,5 +195,39 @@ Replace `<placeholders>` with values matching your environment.
     kubectl get namespaces
     kubectl describe namespace dev-sandbox
     exit
+    
+---
+#### SECTION: Container Orchestration ➙ Connecting as developer
+
+:wrench: **Task:** Create a policy     
+:computer: **Execute on:** Your machine   
+:file_folder: `oci-book/chapter08/3-kubernetes/policies`
+
+    cd ~/git
+    cd oci-book/chapter08/3-kubernetes/policies
+    TENANCY_OCID=`cat ~/.oci/config | grep tenancy | sed 's/tenancy=//'`
+    oci iam policy create --name sandbox-users-containers-policy --description "Containers-related policy for regular Sandbox users"  --statements "file://sandbox-users.containers.policy.json" --profile SANDBOX-ADMIN
+    
+:wrench: **Task:** Create Kubeconfig for the SANDBOX_USER     
+:computer: **Execute on:** Your machine   
+
+    REGION=<put-here-your-region-identifier>
+    CLUSTER_OCID=`oci ce cluster list --name k8s-cluster --query "data[?name=='k8s-cluster'] | [0].id" --raw-output --profile SANDBOX-ADMIN`
+    oci ce cluster create-kubeconfig --cluster-id $CLUSTER_OCID --file ~/.kube/sandbox-user-config --region $REGION --profile SANDBOX-USER
+    chmod 600 ~/.kube/sandbox-user-config
+    ls -l ~/.kube | awk '{print $1, $9}'
+    
+:wrench: **Task:** Copy the Kubeconfig and connect to the dev-vm    
+:computer: **Execute on:** Your machine 
+    
+    scp -i ~/.ssh/oci_id_rsa ~/.kube/sandbox-user-config opc@$DEV_VM_PUBLIC_IP:/home/opc/.kube
+    ssh -i ~/.ssh/oci_id_rsa opc@$DEV_VM_PUBLIC_IP 
+    
+:wrench: **Task:** Try working with Kubernetes API as SANDBOX_USER     
+:cloud: **Execute on:** Compute instance (dev-vm)  
+:dart: **Context:** .kube/sandbox-user-config present
+
+    ls -l ~/.kube | grep config | awk '{print $1, $9}'
+    kubectl --kubeconfig ~/.kube/sandbox-user-config get pods -n dev-sandbox
     
     
