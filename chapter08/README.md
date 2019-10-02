@@ -166,7 +166,7 @@ Replace `<placeholders>` with values matching your environment.
     
 :wrench: **Task:** Explore OKE instance  
 :cloud: **Execute on:** Compute instance (dev-vm)   
-:dart: **Context:** .kube/config present  
+:dart: **Context:** `.kube/config` present  
 
     chmod 600 .kube/config
     ls -l .kube | awk '{print $1, $9}'
@@ -176,7 +176,7 @@ Replace `<placeholders>` with values matching your environment.
     
 :wrench: **Task:** Check Kubernetes API permissions  
 :cloud: **Execute on:** Compute instance (dev-vm)  
-:dart: **Context:** .kube/config present
+:dart: **Context:** `.kube/config` present
 
     kubectl auth can-i create namespace --all-namespaces
     kubectl auth can-i '*' '*' --namespace=default
@@ -187,7 +187,7 @@ Replace `<placeholders>` with values matching your environment.
 
 :wrench: **Task:** Create Kubernetes Namespace  
 :cloud: **Execute on:** Compute instance (dev-vm)  
-:dart: **Context:** .kube/config present  
+:dart: **Context:** `.kube/config` present  
 :file_folder: `oci-book/chapter08/3-kubernetes/platform`
 
     cd oci-book/chapter08/3-kubernetes/platform
@@ -223,11 +223,25 @@ Replace `<placeholders>` with values matching your environment.
     scp -i ~/.ssh/oci_id_rsa ~/.kube/sandbox-user-config opc@$DEV_VM_PUBLIC_IP:/home/opc/.kube
     ssh -i ~/.ssh/oci_id_rsa opc@$DEV_VM_PUBLIC_IP 
     
-:wrench: **Task:** Try working with Kubernetes API as SANDBOX_USER     
+:wrench: **Task:** Try listing all pods in dev-sandbox namespace as SANDBOX_USER     
 :cloud: **Execute on:** Compute instance (dev-vm)  
-:dart: **Context:** .kube/sandbox-user-config present
+:dart: **Context:** `.kube/sandbox-user-config` present (SANDBOX_USER)
 
     ls -l ~/.kube | grep config | awk '{print $1, $9}'
     kubectl --kubeconfig ~/.kube/sandbox-user-config get pods -n dev-sandbox
     
+:wrench: **Task:** Bind the predefined edit clusterrole for dev-namespace to the SANDBOX_USER     
+:cloud: **Execute on:** Compute instance (dev-vm)  
+:dart: **Context:** `.kube/config` present (SANDBOX_ADMIN)
+
+    SANDBOX_USER_OCID=<put-here-your-sandbox-user-ocid>
+    kubectl create rolebinding sandbox-users-binding --clusterrole=edit --namespace=dev-sandbox --user=$SANDBOX_USER_OCID
+
+:wrench: **Task:** Try listing all pods in dev-sandbox namespace as SANDBOX_USER     
+:cloud: **Execute on:** Compute instance (dev-vm)  
+:dart: **Context:** `.kube/sandbox-user-config` present (SANDBOX_USER)
+
+    kubectl --kubeconfig ~/.kube/sandbox-user-config get all -n dev-sandbox
     
+---
+#### SECTION: Container Orchestration ➙ Pods
