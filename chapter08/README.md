@@ -106,19 +106,19 @@ Replace `<placeholders>` with values matching your environment.
 :cloud: **Execute on:** Compute instance (dev-vm) 
 
     OCI_PROJECT_CODE=sandbox
-    OCI_TENANCY=<put-here-your-tenancy-namespace>
+    OCI_TENANCY_NAMESPACE=<put-here-your-tenancy-namespace>
     OCIR_REGION=<put-here-your-ocir-region-code>
     OCI_USER=sandbox-user
     IMAGE_NAME=uuid
     IMAGE_TAG=1.0
-    docker tag $IMAGE_NAME:$IMAGE_TAG $OCIR_REGION.ocir.io/$OCI_TENANCY/$OCI_PROJECT_CODE/$IMAGE_NAME:$IMAGE_TAG
+    docker tag $IMAGE_NAME:$IMAGE_TAG $OCIR_REGION.ocir.io/$OCI_TENANCY_NAMESPACE/$OCI_PROJECT_CODE/$IMAGE_NAME:$IMAGE_TAG
     docker images --format "table {{.Repository}}\t{{.Tag}}\t{{.ID}}"
     
 :wrench: **Task:** Push the image to OCIR  
 :cloud: **Execute on:** Compute instance (dev-vm) 
 
-    docker login -u $OCI_TENANCY/$OCI_USER $OCIR_REGION.ocir.io
-    docker push $OCIR_REGION.ocir.io/$OCI_TENANCY/$OCI_PROJECT_CODE/$IMAGE_NAME:$IMAGE_TAG
+    docker login -u $OCI_TENANCY_NAMESPACE/$OCI_USER $OCIR_REGION.ocir.io
+    docker push $OCIR_REGION.ocir.io/$OCI_TENANCY_NAMESPACE/$OCI_PROJECT_CODE/$IMAGE_NAME:$IMAGE_TAG
     exit
     
 ---
@@ -256,13 +256,13 @@ Replace `<placeholders>` with values matching your environment.
 :cloud: **Execute on:** Compute instance (dev-vm)  
 :dart: **Context:** `KUBECONFIG` variable set to `.kube/sandbox-user-config` (SANDBOX_USER)
 
-    OCI_TENANCY=<put-here-your-tenancy-namespace>
+    OCI_TENANCY_NAMESPACE=<put-here-your-tenancy-namespace>
     OCIR_REGION=<put-here-your-ocir-region-code>
     OCI_USER=sandbox-user
     OCI_USER_TOKEN=<put-here-sandbox-user-auth-token>
     kubectl create secret \
       docker-registry sandbox-user-secret --docker-server=$OCIR_REGION.ocir.io \
-      --docker-username="$OCI_TENANCY/$OCI_USER" \
+      --docker-username="$OCI_TENANCY_NAMESPACE/$OCI_USER" \
       --docker-password="$OCI_USER_TOKEN" -n dev-sandbox
     kubectl get secrets -n dev-sandbox
     
@@ -272,7 +272,7 @@ Replace `<placeholders>` with values matching your environment.
 :file_folder: `oci-book/chapter08/3-kubernetes/platform`
       
     cd oci-book/chapter08/3-kubernetes/platform
-    sed -i "s/OCIR_REGION/$OCIR_REGION/; s/OCI_TENANCY/$OCI_TENANCY/" uuid-pod.yaml
+    sed -i "s/OCIR_REGION/$OCIR_REGION/; s/OCI_TENANCY_NAMESPACE/$OCI_TENANCY_NAMESPACE/" uuid-pod.yaml
     kubectl create -f uuid-pod.yaml -n dev-sandbox
     kubectl get pods -n dev-sandbox
     
@@ -290,7 +290,7 @@ Replace `<placeholders>` with values matching your environment.
 :dart: **Context:** `KUBECONFIG` variable set to `.kube/sandbox-user-config` (SANDBOX_USER)  
 :file_folder: `oci-book/chapter08/3-kubernetes/platform`
       
-    sed -i "s/OCIR_REGION/$OCIR_REGION/; s/OCI_TENANCY/$OCI_TENANCY/" uuid-deployment.yaml
+    sed -i "s/OCIR_REGION/$OCIR_REGION/; s/OCI_TENANCY_NAMESPACE/$OCI_TENANCY_NAMESPACE/" uuid-deployment.yaml
     kubectl create -f uuid-deployment.yaml -n dev-sandbox
     kubectl get pods -n dev-sandbox  -o wide
     kubectl get replicasets -n dev-sandbox
