@@ -149,14 +149,13 @@ Replace `<placeholders>` with values matching your environment.
     
 :wrench: **Task:** Prepare the infrastructure and launch OKE cluster     
 :computer: **Execute on:** Your machine   
-:dart: **Context:** Shell with TF_VAR_* environment variables set as in ~/tfvars.env.sh  
+:dart: **Context:** `~/sandbox-admin.tfvars` present  
 :file_folder: `oci-book/chapter08/3-kubernetes/infrastructure`
 
     cd ~/git/oci-book/chapter08/3-kubernetes/infrastructure
     find . | sort
-    source ~/tfvars.env.sh
     terraform init
-    terraform apply -auto-approve
+    terraform apply -var-file="~/sandbox-admin.tfvars" -auto-approve
     find . -name "*.tf" | sort
     
 ---
