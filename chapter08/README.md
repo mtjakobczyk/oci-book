@@ -137,7 +137,21 @@ Replace `<placeholders>` with values matching your environment.
     cd oci-book/chapter08/3-kubernetes/policies
     TENANCY_OCID=`cat ~/.oci/config | grep tenancy | sed 's/tenancy=//'`
     oci iam policy create -c $TENANCY_OCID --name tenancy-oke --description "OKE Policy"  --statements "file://tenancy.oke.policy.json"
-    
+ 
+:wrench: **Task:** Create Terraform variable file for the sandbox-admin user     
+:computer: **Execute on:** Your machine 
+
+    SBXADM_USER_OCID=`cat .oci/config | grep -A 4 "\[SANDBOX-ADMIN\]" | grep user | sed 's/user=//'`
+    SBXADM_PRIVATE_KEY_PATH=`cat .oci/config | grep -A 4 "\[SANDBOX-ADMIN\]" | grep key_file | sed 's/key_file=//'`
+    SBXADM_PRIVATE_KEY_PASS=`cat .oci/config | grep -A 4 "\[SANDBOX-ADMIN\]" | grep pass_phrase | sed 's/pass_phrase=//'`
+    SBXADM_FINGERPRINT=`cat .oci/config | grep -A 4 "\[SANDBOX-ADMIN\]" | grep fingerprint | sed 's/fingerprint=//'`
+    echo "# Terraform variables for the SANDBOX-ADMIN" > ~/sandbox-admin.tfvars
+    echo "user = $SBXADM_USER_OCID" >> ~/sandbox-admin.tfvars
+    echo "private_key_path = $SBXADM_PRIVATE_KEY_PATH" >> ~/sandbox-admin.tfvars
+    echo "private_key_password = $SBXADM_PRIVATE_KEY_PASS" >> ~/sandbox-admin.tfvars
+    echo "fingerprint = $SBXADM_FINGERPRINT" >> ~/sandbox-admin.tfvars
+
+ 
 :wrench: **Task:** Prepare the infrastructure and launch OKE cluster     
 :computer: **Execute on:** Your machine   
 :dart: **Context:** Shell with TF_VAR_* environment variables set as in ~/tfvars.env.sh  
