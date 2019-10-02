@@ -241,7 +241,37 @@ Replace `<placeholders>` with values matching your environment.
 :cloud: **Execute on:** Compute instance (dev-vm)  
 :dart: **Context:** `.kube/sandbox-user-config` present (SANDBOX_USER)
 
-    kubectl --kubeconfig ~/.kube/sandbox-user-config get all -n dev-sandbox
+    kubectl --kubeconfig ~/.kube/sandbox-user-config get pods -n dev-sandbox
     
 ---
 #### SECTION: Container Orchestration ➙ Pods
+
+:wrench: **Task:** Define KUBECONFIG variable     
+:cloud: **Execute on:** Compute instance (dev-vm)  
+:dart: **Context:** `.kube/sandbox-user-config` present (SANDBOX_USER)
+
+    export KUBECONFIG=~/.kube/sandbox-user-config
+    
+:wrench: **Task:** Create Kubernetes Secret     
+:cloud: **Execute on:** Compute instance (dev-vm)  
+:dart: **Context:** KUBECONFIG variable set to `.kube/sandbox-user-config` (SANDBOX_USER)
+
+    OCI_TENANCY=<put-here-your-tenancy-name>
+    OCIR_REGION=<put-here-your-ocir-region-code>
+    OCI_USER=sandbox-user
+    OCI_USER_TOKEN=<put-here-sandbox-user-auth-token>
+    kubectl create secret \
+      docker-registry sandbox-user-secret --docker-server=$OCIR_REGION.ocir.io \
+      --docker-username="$OCI_TENANCY/$OCI_USER" \
+      --docker-password="$OCI_USER_TOKEN" -n dev-sandbox
+    kubectl get secrets -n dev-sandbox
+    
+:wrench: **Task:** Create Pod     
+:cloud: **Execute on:** Compute instance (dev-vm)  
+:dart: **Context:** KUBECONFIG variable set to `.kube/sandbox-user-config` (SANDBOX_USER)
+      
+    cd oci-book/chapter08/3-kubernetes/platform
+    kubectl create -f uuid-pod.yaml -n dev-sandbox
+    kubectl get pods -n dev-sandbox
+    
+    
