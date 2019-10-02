@@ -54,6 +54,7 @@ Replace `<placeholders>` with values matching your environment.
     
 :wrench: **Task:** Build the uuid container image  
 :cloud: **Execute on:** Compute instance (dev-vm) 
+:file_folder: `oci-book/chapter08/2-docker/uuid-service`
     
     docker build -t uuid:1.0 .
     docker images --format "table {{.Repository}}\t{{.Tag}}\t{{.ID}}\t{{.Size}}"
@@ -76,3 +77,51 @@ Replace `<placeholders>` with values matching your environment.
     curl 127.0.0.1:5012/identifiers
     curl 127.0.0.1:5013/identifiers
     exit
+
+---
+#### SECTION: Containers ➙ Container Registry
+
+:wrench: **Task:** Create a policy     
+:computer: **Execute on:** Your machine   
+:file_folder: `oci-book/chapter08/2-docker`
+
+    cd ~/git
+    cd oci-book/chapter08/2-docker
+    cd policies
+    ls -1
+    TENANCY_OCID=`cat ~/.oci/config | grep tenancy | sed 's/tenancy=//'`
+    oci iam policy create -c $TENANCY_OCID --name tenancy-ocir-policy --description "OCIR Polices"  --statements "file://tenancy.ocir.policies.json"
+
+:wrench: **Task:** Generate an Auth Token     
+:computer: **Execute on:** Your machine  
+
+    IAM_USER_OCID=`oci iam user list -c $TENANCY_OCID --query "data[?name=='sandbox-user'] | [0].id" --raw-output`
+    oci iam auth-token create --user-id $IAM_USER_OCID --description token-ocir --query 'data.token' --raw-output
+    
+:wrench: **Task:** Connect to the compute instance   
+:computer: **Execute on:** Your machine  
+
+    ssh -i ~/.ssh/oci_id_rsa opc@$DEV_VM_PUBLIC_IP
+    
+:wrench: **Task:** Tag the image  
+:cloud: **Execute on:** Compute instance (dev-vm) 
+
+    OCI_PROJECT_CODE=sandbox
+    OCI_TENANCY=<put-here-your-tenancy-name>
+    OCIR_REGION=<put-here-your-ocir-region-code>
+    OCI_USER=sandbox-user
+    IMAGE_NAME=uuid
+    IMAGE_TAG=1.0
+    docker tag $IMAGE_NAME:$IMAGE_TAG $OCIR_REGION.ocir.io/$OCI_TENANCY/$OCI_PROJECT_CODE/$IMAGE_NAME:$IMAGE_TAG
+    docker images --format "table {{.Repository}}\t{{.Tag}}\t{{.ID}}"
+    
+:wrench: **Task:** Push the image to OCIR  
+:cloud: **Execute on:** Compute instance (dev-vm) 
+
+    docker login -u $OCI_TENANCY/$OCI_USER $OCIR_REGION.ocir.io
+    docker push $OCIR_REGION.ocir.io/$OCI_TENANCY/$OCI_PROJECT_CODE/$IMAGE_NAME:$IMAGE_TAG
+    exit
+    
+---
+#### SECTION: Container Orchestration ➙ Managed Cluster 
+    
