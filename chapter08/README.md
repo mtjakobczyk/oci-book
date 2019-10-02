@@ -332,7 +332,16 @@ Replace `<placeholders>` with values matching your environment.
     kubectl delete all --all -n dev-sandbox
     exit
     
-:wrench: **Task:** Infrastructure cleanup     
+:wrench: **Task:** Cluster cleanup     
+:computer: **Execute on:** Your machine  
+:dart: **Context:** `~/sandbox-admin.tfvars` present   
+:file_folder: `oci-book/chapter08/3-kubernetes/infrastructure`
+
+    cd ~/git
+    cd oci-book/chapter08/3-kubernetes/infrastructure
+    terraform destroy -var-file="~/sandbox-admin.tfvars" -auto-approve
+        
+:wrench: **Task:** dev-vm cleanup     
 :computer: **Execute on:** Your machine  
 :dart: **Context:** Shell with `TF_VAR_*` environment variables set as in `~/tfvars.env.sh`  
 :file_folder: `oci-book/chapter08/1-devmachine`
