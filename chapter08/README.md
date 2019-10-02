@@ -167,7 +167,7 @@ Replace `<placeholders>` with values matching your environment.
     REGION=<put-here-your-region-identifier>
     CLUSTER_OCID=`oci ce cluster list --name k8s-cluster --query "data[?name=='k8s-cluster'] | [0].id" --lifecycle-state ACTIVE --raw-output --profile SANDBOX-ADMIN`
     mkdir ~/.kube
-    oci ce cluster create-kubeconfig --cluster-id $CLUSTER_OCID --file ~/.kube/config --region $REGION --token-version 2.0.0 --profile SANDBOX-ADMIN
+    oci ce cluster create-kubeconfig --cluster-id $CLUSTER_OCID --file ~/.kube/config --region $REGION --token-version 1.0.0 --profile SANDBOX-ADMIN
     chmod 600 .kube/config
     ls -l .kube | awk '{print $1, $9}'
     
