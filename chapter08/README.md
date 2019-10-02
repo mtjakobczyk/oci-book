@@ -97,6 +97,11 @@ Replace `<placeholders>` with values matching your environment.
     IAM_USER_OCID=`oci iam user list -c $TENANCY_OCID --query "data[?name=='sandbox-user'] | [0].id" --raw-output --all`
     oci iam auth-token create --user-id $IAM_USER_OCID --description token-ocir --query 'data.token' --raw-output
     
+:wrench: **Task:** Identify your tenancy namespace   
+:computer: **Execute on:** Your machine 
+
+    oci os ns get --query data --raw-output
+
 :wrench: **Task:** Connect to the compute instance   
 :computer: **Execute on:** Your machine  
 
