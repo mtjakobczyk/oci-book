@@ -17,7 +17,7 @@ spec:
       - name: sandbox-user-secret
       containers:
       - name: uuid-container
-        image: OCIR_REGION.ocir.io/OCI_TENANCY/sandbox/uuid:1.0
+        image: OCIR_REGION.ocir.io/OCI_TENANCY_NAMESPACE/sandbox/uuid:1.0
         ports:
         - containerPort: 5000
           protocol: TCP
