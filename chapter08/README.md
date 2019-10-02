@@ -155,7 +155,7 @@ Replace `<placeholders>` with values matching your environment.
     cd ~/git/oci-book/chapter08/3-kubernetes/infrastructure
     find . | sort
     terraform init
-    terraform apply -var-file="~/sandbox-admin.tfvars" -auto-approve
+    terraform apply -var-file="$HOME/sandbox-admin.tfvars" -auto-approve
     find . -name "*.tf" | sort
     
 ---
@@ -339,7 +339,7 @@ Replace `<placeholders>` with values matching your environment.
 
     cd ~/git
     cd oci-book/chapter08/3-kubernetes/infrastructure
-    terraform destroy -var-file="~/sandbox-admin.tfvars" -auto-approve
+    terraform destroy -var-file="$HOME/sandbox-admin.tfvars" -auto-approve
         
 :wrench: **Task:** dev-vm cleanup     
 :computer: **Execute on:** Your machine  
