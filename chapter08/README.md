@@ -106,7 +106,7 @@ Replace `<placeholders>` with values matching your environment.
 :cloud: **Execute on:** Compute instance (dev-vm) 
 
     OCI_PROJECT_CODE=sandbox
-    OCI_TENANCY=<put-here-your-tenancy-name>
+    OCI_TENANCY=<put-here-your-tenancy-namespace>
     OCIR_REGION=<put-here-your-ocir-region-code>
     OCI_USER=sandbox-user
     IMAGE_NAME=uuid
@@ -256,7 +256,7 @@ Replace `<placeholders>` with values matching your environment.
 :cloud: **Execute on:** Compute instance (dev-vm)  
 :dart: **Context:** `KUBECONFIG` variable set to `.kube/sandbox-user-config` (SANDBOX_USER)
 
-    OCI_TENANCY=<put-here-your-tenancy-name>
+    OCI_TENANCY=<put-here-your-tenancy-namespace>
     OCIR_REGION=<put-here-your-ocir-region-code>
     OCI_USER=sandbox-user
     OCI_USER_TOKEN=<put-here-sandbox-user-auth-token>
