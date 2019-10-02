@@ -11,10 +11,10 @@ Replace `<placeholders>` with values matching your environment.
 :dart: **Context:** Shell with TF_VAR_* environment variables set as in ~/tfvars.env.sh  
 :file_folder: `oci-book/chapter08/1-devmachine`
 
-    source ~/tfvars.env.sh
     cd ~/git
     cd oci-book/chapter08/1-devmachine
     find . \( -name "*.tf" -o -name "*.yaml" \) | sort
+    source ~/tfvars.env.sh
     terraform init
     terraform apply
     DEV_VM_PUBLIC_IP=`terraform output dev_machine_public_ip`
@@ -94,7 +94,7 @@ Replace `<placeholders>` with values matching your environment.
 :wrench: **Task:** Generate an Auth Token     
 :computer: **Execute on:** Your machine  
 
-    IAM_USER_OCID=`oci iam user list -c $TENANCY_OCID --query "data[?name=='sandbox-user'] | [0].id" --raw-output`
+    IAM_USER_OCID=`oci iam user list -c $TENANCY_OCID --query "data[?name=='sandbox-user'] | [0].id" --raw-output --all`
     oci iam auth-token create --user-id $IAM_USER_OCID --description token-ocir --query 'data.token' --raw-output
     
 :wrench: **Task:** Connect to the compute instance   
