@@ -403,3 +403,21 @@ Replace `<placeholders>` with values matching your environment.
           'Lesser Poland' as lesser_poland
         )
     )
+
+---
+#### SECTION: Cleanup
+
+:wrench: **Task:** Terminate ADW and delete object storage bucket     
+:computer: **Execute on:** Your machine
+
+    ADW_OCID=`oci db autonomous-database list --query "data[?\"display-name\"=='road-adw'] | [0].id" --raw-output`
+    echo $ADW_OCID
+    ocid1.autonomousdatabase.oc1.eu-frankfurt-1.ab......763psq
+    oci db autonomous-database delete --autonomous-database-id "$ADW_OCID" --wait-for
+    -state TERMINATED
+    Are you sure you want to delete this resource? [y/N]: y
+    Action completed. Waiting until the resource has entered state: TERMINATED
+    oci os object bulk-delete -bn roadadw-load
+    oci os bucket delete -bn roadadw-load
+    
+    
