@@ -53,7 +53,7 @@ Replace `<placeholders>` with values matching your environment.
     ls -1
     
 :wrench: **Task:** Build the uuid container image  
-:cloud: **Execute on:** Compute instance (dev-vm) 
+:cloud: **Execute on:** Compute instance (dev-vm)  
 :file_folder: `oci-book/chapter08/2-docker/uuid-service`
     
     docker build -t uuid:1.0 .
