@@ -148,13 +148,13 @@ Replace `<placeholders>` with values matching your environment.
     oci iam policy create -c $TENANCY_OCID --name functions-policy --description "FaaS Policy" --statements "file://tenancy.functions.policy.json"
     oci iam policy create --name sandbox-users-functions-policy --description "Functions-related policy for regular Sandbox users" --statements "file://sandbox-users.functions.policy.json" --profile SANDBOX-ADMIN
 
+---
+#### SECTION: Serverless ➙ Oracle Functions ➙ Client Setup
+
 :wrench: **Task:** Identify your tenancy namespace     
 :computer: **Execute on:** Your machine   
     
     oci os ns get --query 'data' --raw-output
-
----
-#### SECTION: Serverless ➙ Oracle Functions ➙ Development Client
 
 :wrench: **Task:** Reconnect to the Dev Machine     
 :computer: **Execute on:** Your machine   
@@ -162,24 +162,95 @@ Replace `<placeholders>` with values matching your environment.
     ssh -i ~/.ssh/oci_id_rsa ubuntu@$DEV_MACHINE_IP
 
 :wrench: **Task:** Create Fn context     
-:cloud: **Execute on:** Your machine  
+:cloud: **Execute on:** Cloud instance (dev-vm)  
 
     fn create context sandbox-user-fra-oci --provider oracle
 
 :wrench: **Task:** Edit Fn context     
-:cloud: **Execute on:** Your machine  
+:cloud: **Execute on:** Cloud instance (dev-vm)  
 :pencil: Edit the `~/.fn/contexts/sandbox-user-fra-oci.yaml` as described in the book
 
     vi ~/.fn/contexts/sandbox-user-fra-oci.yaml
 
 :wrench: **Task:** Create .oci/config     
-:cloud: **Execute on:** Your machine 
+:cloud: **Execute on:** Cloud instance (dev-vm) 
 
     mkdir ~/.oci
 
-
 :wrench: **Task:** Edit .oci/config  
-:cloud: **Execute on:** Your machine  
+:cloud: **Execute on:** Cloud instance (dev-vm)  
 :pencil: Edit the `~/.oci/config` as described in the book
 
     vi ~/.oci/config
+
+:wrench: **Task:** Upload SANDBOX-USER key, config and connect to the Dev Machine     
+:computer: **Execute on:** Your machine
+
+    scp -i ~/.ssh/oci_id_rsa ~/.apikeys/api.sandbox-user.pem ubuntu@$DEV_MACHINE_IP:/home/ubuntu
+    ssh -i ~/.ssh/oci_id_rsa ubuntu@$DEV_MACHINE_IP
+
+:wrench: **Task:** Place API Key and config in proper folders   
+:cloud: **Execute on:** Cloud instance (dev-vm) 
+
+    mkdir ~/.apikeys
+    mv ~/api.sandbox-user.pem ~/.apikeys/api.sandbox-user.pem
+    chmod go-rwx ~/.apikeys/api.sandbox-user.pem
+
+:wrench: **Task:** Set Oracle Functions context as current and test connectivity   
+:cloud: **Execute on:** Cloud instance (dev-vm) 
+
+    fn use context sandbox-user-fra-oci
+    fn list apps
+
+---
+#### SECTION: Serverless ➙ Oracle Functions ➙ Deploying UUID function
+
+:wrench: **Task:** Read the subnet OCID   
+:computer: **Execute on:** Cloud instance (dev-vm)  
+:file_folder: `oci-book/chapter09/1-infrastructure`
+
+    cd ~/git/oci-book/chapter09/1-infrastructure
+    terraform output functions_subnet_ocid
+
+:wrench: **Task:** Create application in Oracle Functions   
+:cloud: **Execute on:** Cloud instance (dev-vm) 
+
+    FN_SUBNET_ID=<put-here-subnet-ocid>
+    fn create app uuidcloudapp --annotation oracle.com/oci/subnetIds="[\"$FN_SUBNET_ID\"]"
+
+:wrench: **Task:** Login to OCIR   
+:cloud: **Execute on:** Cloud instance (dev-vm) 
+
+    OCI_TENANCY_NAMESPACE=<put-here-your-tenancy-namespace>
+    OCIR_REGION=<put-here-your-ocir-region-code>
+    OCI_USER=sandbox-user
+    docker login -u $OCI_TENANCY_NAMESPACE/$OCI_USER $OCIR_REGION.ocir.io
+    
+:wrench: **Task:** Deploy function manifest and push image to OCIR   
+:cloud: **Execute on:** Cloud instance (dev-vm)
+:file_folder: `~/uuidfn/`
+
+    cd ~/uuidfn
+    fn -v deploy --app uuidcloudapp --no-bump
+
+:wrench: **Task:** Inspect Oracle Function   
+:cloud: **Execute on:** Cloud instance (dev-vm)
+
+    fn list apps
+    fn inspect app uuidcloudapp
+    
+:wrench: **Task:** Testing Oracle Function   
+:cloud: **Execute on:** Cloud instance (dev-vm)
+
+    fn invoke uuidcloudapp uuidfn
+    echo -n '{ "client_name": "some_app"  }' | fn invoke uuidcloudapp uuidfn --content-type application/json
+    fn invoke uuidcloudapp uuidfn
+    fn invoke uuidcloudapp uuidfn
+   
+:wrench: **Task:** Listing Oracle Function endpoint   
+:cloud: **Execute on:** Cloud instance (dev-vm)
+
+    fn inspect function uuidcloudapp uuidfn | jq -r '.annotations."fnproject.io/fn/invokeEndpoint"'
+    
+---
+#### SECTION: Events ➙ Functions and Object Storage ➙ Preparing Infrastructure
