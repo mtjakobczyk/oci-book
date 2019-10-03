@@ -298,9 +298,43 @@ Replace `<placeholders>` with values matching your environment.
 ---
 #### SECTION: Events ➙ Functions and Object Storage ➙ Deploying function
 
+:wrench: **Task:** Initialize application in Oracle Functions   
+:cloud: **Execute on:** Cloud instance (dev-vm)
 
+    cd ~
+    fn init --runtime python reportingfn
+    cp ~/functions/reportingfn.py ~/reportingfn/func.py
+    echo -ne "\noci" >> ~/reportingfn/requirements.txt
 
+:wrench: **Task:** Login to OCIR   
+:cloud: **Execute on:** Cloud instance (dev-vm) 
 
+    OCI_TENANCY_NAMESPACE=<put-here-your-tenancy-namespace>
+    OCIR_REGION=<put-here-your-ocir-region-code>
+    OCI_USER=sandbox-user
+    docker login -u $OCI_TENANCY_NAMESPACE/$OCI_USER $OCIR_REGION.ocir.io
+    
+:wrench: **Task:** Create application in Oracle Functions   
+:cloud: **Execute on:** Cloud instance (dev-vm)
+
+    FN_SUBNET_ID=<put-here-subnet-ocid>
+    fn create app reportingapp --annotation oracle.com/oci/subnetIds="[\"$FN_SUBNET_ID\"]"
+
+:wrench: **Task:** Deploy application to Oracle Functions   
+:cloud: **Execute on:** Cloud instance (dev-vm)  
+:file_folder: `~/reportingfn/`
+    
+    cd ~/reportingfn/
+    fn -v deploy --app reportingapp
+
+:wrench: **Task:** Tag function with the defined tag key   
+:cloud: **Execute on:** Cloud instance (dev-vm)
+
+    FN_APP_OCID=`oci fn application list --query "data[?\"display-name\" == 'reportingapp'] | [0].id" --raw-output`
+    echo $FN_APP_OCID
+    FN_FUN_OCID=`oci fn function list --application-id $FN_APP_OCID --query "data[?\"display-name\" == 'reportingfn'] | [0].id" --raw-output`
+    echo $FN_FUN_OCID
+    oci fn function update --function-id $FN_FUN_OCID --defined-tags '{ "test-projects": {"reports": ""} }'
 
 ---
 #### SECTION: Events ➙ Events as function triggers
