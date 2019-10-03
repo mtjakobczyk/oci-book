@@ -42,7 +42,7 @@ Replace `<placeholders>` with values matching your environment.
     docker info
     
 ---
-#### SECTION: Serverless ➙ Fn Project
+#### SECTION: Serverless ➙ Fn Project ➙ Installation and Configuration
 
 :wrench: **Task:** Install and start Fn Project     
 :cloud: **Execute on:** Cloud instance (dev-vm)
@@ -65,3 +65,40 @@ Replace `<placeholders>` with values matching your environment.
     fn use context default
     fn update context registry localdev
     fn list contexts
+
+---
+#### SECTION: Serverless ➙ Fn Project ➙ Your first function
+
+:wrench: **Task:** Initialize Python-based Fn project (Blank function)     
+:cloud: **Execute on:** Cloud instance (dev-vm)
+
+    fn init --runtime python blankfn
+    tree ~/blankfn/
+    cp ~/functions/blankfn.py ~/blankfn/func.py
+
+:wrench: **Task:** Create Fn application (Blank function)     
+:cloud: **Execute on:** Cloud instance (dev-vm)
+
+    fn create app blankapp
+    fn list apps
+
+:wrench: **Task:** Build Fn function (Blank function)     
+:cloud: **Execute on:** Cloud instance (dev-vm)
+
+    cd ~/blankfn
+    fn --verbose deploy --app blankapp --local
+
+:wrench: **Task:** Inspect Fn function (Blank function)     
+:cloud: **Execute on:** Cloud instance (dev-vm)
+
+    fn list functions blankapp
+    docker images | grep blank
+    docker ps --format '{{.Names}} [{{.Image}}] {{.Status}}'
+
+:wrench: **Task:** Test Fn function locally (Blank function)     
+:cloud: **Execute on:** Cloud instance (dev-vm)
+
+    fn invoke blankapp blankfn
+    docker ps --format '{{.Names}} [{{.Image}}] {{.Status}}'
+    fn invoke blankapp blankfn &
+    fn invoke blankapp blankfn &
