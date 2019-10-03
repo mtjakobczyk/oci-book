@@ -41,5 +41,27 @@ Replace `<placeholders>` with values matching your environment.
     docker images
     docker info
     
+---
+#### SECTION: Serverless ➙ Fn Project
+
+:wrench: **Task:** Install and start Fn Project     
+:cloud: **Execute on:** Cloud instance (dev-vm)
+
+    curl -LSs https://raw.githubusercontent.com/fnproject/cli/master/install | sh
+    fn version
+    fn start -d
+
+:wrench: **Task:** Inspect local installation     
+:cloud: **Execute on:** Cloud instance (dev-vm)
+
+    docker images
+    docker ps
+    docker logs fnserver
     
-    
+:wrench: **Task:** Configure Fn Project for local development     
+:cloud: **Execute on:** Cloud instance (dev-vm)
+
+    fn list contexts
+    fn use context default
+    fn update context registry localdev
+    fn list contexts
