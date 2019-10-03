@@ -328,7 +328,7 @@ Replace `<placeholders>` with values matching your environment.
     fn -v deploy --app reportingapp
 
 :wrench: **Task:** Tag function with the defined tag key   
-:cloud: **Execute on:** Cloud instance (dev-vm)
+:computer: **Execute on:** Your machine
 
     FN_APP_OCID=`oci fn application list --query "data[?\"display-name\" == 'reportingapp'] | [0].id" --raw-output`
     echo $FN_APP_OCID
@@ -339,5 +339,39 @@ Replace `<placeholders>` with values matching your environment.
 ---
 #### SECTION: Events ➙ Events as function triggers
 
+:wrench: **Task:** Trigger function using event mock   
+:cloud: **Execute on:** Cloud instance (dev-vm) 
+
+    cat ~/event.mock.json | fn invoke reportingapp reportingfn --content-type application/json
+
 ---
 #### SECTION: Events ➙ Oracle Events
+
+:wrench: **Task:** Let Oracle Events trigger Oracle Functions   
+:computer: **Execute on:** Your machine  
+:file_folder: `oci-book/chapter09/4-events/policies`
+
+    cd ~/git/oci-book/chapter09/4-events/policies
+    oci iam policy create --name cloudevents-policy --statements file://cloudevents.policies.json --description "Functions-related policy for CloudEvents" --profile SANDBOX-ADMIN
+
+:wrench: **Task:** Create Oracle Events rule   
+:computer: **Execute on:** Your machine  
+:file_folder: `oci-book/chapter09/4-events/policies` 
+
+    cd ~/git/oci-book/chapter09/4-events/events
+    echo $FN_FUN_OCID
+    cat oracleevents.actions.template.json | sed -e "s/PUT_HERE_FUNCTION_ID/$FN_FUN_OCID/g" > oracleevents.actions.json
+    SERIALIZED_CONDITIONS=`cat oracleevents.conditions.json | sed 's/"/\\"/g' | sed 's/[[:space:]]//g' | tr -d '\n'`
+    oci events rule create --display-name new-reports --is-enabled true --condition $SERIALIZED_CONDITIONS --actions file://oracleevents.actions.json
+    
+:wrench: **Task:** Put a two more test files to the bucket   
+:computer: **Execute on:** Your machine  
+:file_folder: `oci-book/chapter09/4-events/reports`
+
+    cd ~/git/oci-book/chapter09/4-events/reports
+    oci os object put -bn reports --file customer_attendance.20190923.raw.csv --profile SANDBOX-USER
+    oci os object put -bn reports --file customer_attendance.20190924.raw.csv --profile SANDBOX-USER
+    
+---
+#### SECTION: Cleanup
+
