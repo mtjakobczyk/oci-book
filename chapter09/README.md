@@ -206,7 +206,7 @@ Replace `<placeholders>` with values matching your environment.
 #### SECTION: Serverless ➙ Oracle Functions ➙ Deploying UUID function
 
 :wrench: **Task:** Read the subnet OCID   
-:computer: **Execute on:** Cloud instance (dev-vm)  
+:computer: **Execute on:** Your machine  
 :file_folder: `oci-book/chapter09/1-infrastructure`
 
     cd ~/git/oci-book/chapter09/1-infrastructure
@@ -227,7 +227,7 @@ Replace `<placeholders>` with values matching your environment.
     docker login -u $OCI_TENANCY_NAMESPACE/$OCI_USER $OCIR_REGION.ocir.io
     
 :wrench: **Task:** Deploy function manifest and push image to OCIR   
-:cloud: **Execute on:** Cloud instance (dev-vm)
+:cloud: **Execute on:** Cloud instance (dev-vm)  
 :file_folder: `~/uuidfn/`
 
     cd ~/uuidfn
@@ -254,3 +254,56 @@ Replace `<placeholders>` with values matching your environment.
     
 ---
 #### SECTION: Events ➙ Functions and Object Storage ➙ Preparing Infrastructure
+
+:wrench: **Task:** Create Object Storage bucket for reports   
+:computer: **Execute on:** Your machine  
+
+    oci os bucket create --name reports --profile SANDBOX-ADMIN
+
+:wrench: **Task:** IAM Policy statement for object storage   
+:computer: **Execute on:** Your machine  
+:file_folder: `oci-book/chapter09/4-events/policies`
+
+    cd ~/git/oci-book/chapter09/4-events/policies
+    oci iam policy create --name sandbox-users-storage-reports-policy --statements file://sandbox-users.policies.storage-reports.json --description "Storage-related (reports) policy for regular Sandbox users" --profile SANDBOX-ADMIN
+
+:wrench: **Task:** Put a test file to the bucket   
+:computer: **Execute on:** Your machine  
+:file_folder: `oci-book/chapter09/4-events/reports`
+
+    cd ~/git/oci-book/chapter09/4-events/reports
+    oci os object put -bn reports --file customer_attendance.20190922.raw.csv --profile SANDBOX-USER
+
+:wrench: **Task:** Create tag key inside the existing tag namespace   
+:computer: **Execute on:** Your machine 
+
+    TAG_NAMESPACE_OCID=`oci iam tag-namespace list --query "data[?name=='test-projects'] | [0].id" --raw-output`
+    echo $TAG_NAMESPACE_OCID
+    oci iam tag create --tag-namespace-id $TAG_NAMESPACE_OCID --name reports --description "Reports project" --profile SANDBOX-ADMIN
+
+:wrench: **Task:** Dynamic Group for tagged functions   
+:computer: **Execute on:** Your machine 
+
+    echo $TENANCY_OCID
+    MATCHING_RULE="ALL {resource.type = 'fnfunc', tag.test-projects.reports.value}"
+    oci iam dynamic-group create --name reporting-functions --description "Functions related to the reporting project" --matching-rule "$MATCHING_RULE" -c $TENANCY_OCID
+
+:wrench: **Task:** Dynamic Group for tagged functions   
+:computer: **Execute on:** Your machine  
+:file_folder: `oci-book/chapter09/4-events/policies`
+
+    cd ~/git/oci-book/chapter09/4-events/policies
+    oci iam policy create --name functions-storage-reports-policy --statements file://functions.policies.storage-reports.json --description "Storage-related (reports) policy for tagged functions" --profile SANDBOX-ADMIN
+
+---
+#### SECTION: Events ➙ Functions and Object Storage ➙ Deploying function
+
+
+
+
+
+---
+#### SECTION: Events ➙ Events as function triggers
+
+---
+#### SECTION: Events ➙ Oracle Events
