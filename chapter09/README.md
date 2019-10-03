@@ -121,7 +121,7 @@ Replace `<placeholders>` with values matching your environment.
     fn list apps
 
 :wrench: **Task:** Build Fn function (UUID Generator)     
-:cloud: **Execute on:** Cloud instance (dev-vm)
+:cloud: **Execute on:** Cloud instance (dev-vm)  
 :file_folder: `~/uuidfn`
 
     cd ~/uuidfn/
