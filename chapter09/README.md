@@ -148,6 +148,11 @@ Replace `<placeholders>` with values matching your environment.
     oci iam policy create -c $TENANCY_OCID --name functions-policy --description "FaaS Policy" --statements "file://tenancy.functions.policy.json"
     oci iam policy create --name sandbox-users-functions-policy --description "Functions-related policy for regular Sandbox users" --statements "file://sandbox-users.functions.policy.json" --profile SANDBOX-ADMIN
 
+:wrench: **Task:** Identify your tenancy namespace     
+:computer: **Execute on:** Your machine   
+    
+    oci os ns get --query 'data' --raw-output
+
 ---
 #### SECTION: Serverless ➙ Oracle Functions ➙ Development Client
 
@@ -156,9 +161,23 @@ Replace `<placeholders>` with values matching your environment.
     
     ssh -i ~/.ssh/oci_id_rsa ubuntu@$DEV_MACHINE_IP
 
-:wrench: **Task:** Create context, OCI config     
-:computer: **Execute on:** Your machine  
-:file_folder: `oci-book/chapter09/3-functions/policies`
+:wrench: **Task:** Create Fn context     
+:cloud: **Execute on:** Your machine  
 
     fn create context sandbox-user-fra-oci --provider oracle
     vi ~/.fn/contexts/sandbox-user-fra-oci.yaml
+
+:wrench: **Task:** Edit Fn context     
+:cloud: **Execute on:** Your machine  
+:pencil: Edit the `~/.fn/contexts/sandbox-user-fra-oci.yaml` as described in the book
+
+:wrench: **Task:** Create .oci/config     
+:cloud: **Execute on:** Your machine 
+
+    mkdir ~/.oci
+    vi ~/.oci/config
+
+:wrench: **Task:** Edit .oci/config  
+:cloud: **Execute on:** Your machine  
+:pencil: Edit the `~/.oci/config` as described in the book
+
