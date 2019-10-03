@@ -83,7 +83,8 @@ Replace `<placeholders>` with values matching your environment.
     fn list apps
 
 :wrench: **Task:** Build Fn function (Blank function)     
-:cloud: **Execute on:** Cloud instance (dev-vm)
+:cloud: **Execute on:** Cloud instance (dev-vm)  
+:file_folder: `~/blankfn`
 
     cd ~/blankfn
     fn --verbose deploy --app blankapp --local
@@ -121,6 +122,7 @@ Replace `<placeholders>` with values matching your environment.
 
 :wrench: **Task:** Build Fn function (UUID Generator)     
 :cloud: **Execute on:** Cloud instance (dev-vm)
+:file_folder: `~/uuidfn`
 
     cd ~/uuidfn/
     fn --verbose deploy --app uuidapp --local
@@ -133,3 +135,25 @@ Replace `<placeholders>` with values matching your environment.
     fn inspect function uuidapp uuidfn
     FN_INVOKE_ENDPOINT=`fn inspect function uuidapp uuidfn | jq -r '.annotations."fnproject.io/fn/invokeEndpoint"'`
     curl -X "POST" -H "Content-Type: application/json" $FN_INVOKE_ENDPOINT
+
+---
+#### SECTION: Serverless ➙ Oracle Functions ➙ OCI Networking and Policies
+
+:wrench: **Task:** Create FaaS and function developer policies     
+:computer: **Execute on:** Your machine  
+:file_folder: `oci-book/chapter09/3-functions/policies`
+
+    cd ~/git/oci-book/chapter09/3-functions/policies
+    TENANCY_OCID=`cat ~/.oci/config | grep tenancy | sed 's/tenancy=//'`
+    oci iam policy create -c $TENANCY_OCID --name functions-policy --description "FaaS Policy" --statements "file://tenancy.functions.policy.json"
+    oci iam policy create --name sandbox-users-functions-policy --description "Functions-related policy for regular Sandbox users" --statements "file://sandbox-users.functions.policy.json" --profile SANDBOX-ADMIN
+
+---
+#### SECTION: Serverless ➙ Oracle Functions ➙ Development Client
+
+:wrench: **Task:** Create context, OCI config     
+:computer: **Execute on:** Your machine  
+:file_folder: `oci-book/chapter09/3-functions/policies`
+
+    fn create context sandbox-user-fra-oci --provider oracle
+    vi ~/.fn/contexts/sandbox-user-fra-oci.yaml
