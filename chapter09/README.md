@@ -354,6 +354,8 @@ Replace `<placeholders>` with values matching your environment.
     cd ~/git/oci-book/chapter09/4-events/policies
     oci iam policy create --name cloudevents-policy --statements file://cloudevents.policies.json --description "Functions-related policy for CloudEvents" --profile SANDBOX-ADMIN
 
+:warning: Make sure you enable emitting events on the `reports` bucket as described in the book
+
 :wrench: **Task:** Create Oracle Events rule   
 :computer: **Execute on:** Your machine  
 :file_folder: `oci-book/chapter09/4-events/policies` 
