@@ -383,7 +383,7 @@ Replace `<placeholders>` with values matching your environment.
     oci os object bulk-delete -bn reports
     oci os bucket delete -bn reports
     
-:wrench: **Task:** Delete functions and event rule
+:wrench: **Task:** Delete functions from Oracle Functions  
 :computer: **Execute on:** Your machine  
 
     FN_APP_OCID=`oci fn application list --query "data[?\"display-name\" == 'reportingapp'] | [0].id" --raw-output`
@@ -394,6 +394,13 @@ Replace `<placeholders>` with values matching your environment.
     FN_FUN_OCID=`oci fn function list --application-id $FN_APP_OCID --query "data[?\"display-name\" == 'uuidfn'] | [0].id" --raw-output`
     oci fn function delete --function-id $FN_FUN_OCID
     oci fn application delete --application-id $FN_APP_OCID
+
+:wrench: **Task:** Delete Oracle Events rule  
+:computer: **Execute on:** Your machine  
+
+    EVENTRULE_OCID=`oci events rule list --query "data[?\"display-name\" == 'new-reports'] | [0].id" --raw-output`
+    oci events rule delete --rule-id $EVENTRULE_OCID
+    Are you sure you want to delete this resource? [y/N]: y
 
 :wrench: **Task:** dev-vm cleanup     
 :computer: **Execute on:** Your machine  
