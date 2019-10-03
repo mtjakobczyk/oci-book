@@ -102,3 +102,34 @@ Replace `<placeholders>` with values matching your environment.
     docker ps --format '{{.Names}} [{{.Image}}] {{.Status}}'
     fn invoke blankapp blankfn &
     fn invoke blankapp blankfn &
+
+---
+#### SECTION: Serverless ➙ Fn Project ➙ UUID function
+
+:wrench: **Task:** Initialize Fn project  (UUID Generator)     
+:cloud: **Execute on:** Cloud instance (dev-vm)
+
+    cd ~
+    fn init --runtime python uuidfn
+    cp ~/functions/uuidfn.py ~/uuidfn/func.py
+
+:wrench: **Task:** Create Fn application (UUID Generator)     
+:cloud: **Execute on:** Cloud instance (dev-vm)
+
+    fn create app uuidapp
+    fn list apps
+
+:wrench: **Task:** Build Fn function (UUID Generator)     
+:cloud: **Execute on:** Cloud instance (dev-vm)
+
+    cd ~/uuidfn/
+    fn --verbose deploy --app uuidapp --local
+
+:wrench: **Task:** Test Fn function locally (UUID Generator)     
+:cloud: **Execute on:** Cloud instance (dev-vm)
+
+    fn invoke uuidapp uuidfn
+    echo -n '{ "client_name": "some_app"  }' | fn invoke uuidapp uuidfn --content-type application/json
+    fn inspect function uuidapp uuidfn
+    FN_INVOKE_ENDPOINT=`fn inspect function uuidapp uuidfn | jq -r '.annotations."fnproject.io/fn/invokeEndpoint"'`
+    curl -X "POST" -H "Content-Type: application/json" $FN_INVOKE_ENDPOINT
