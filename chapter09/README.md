@@ -377,3 +377,30 @@ Replace `<placeholders>` with values matching your environment.
 ---
 #### SECTION: Cleanup
 
+:wrench: **Task:** Delete the reports bucket and its contents     
+:computer: **Execute on:** Your machine  
+
+    oci os object bulk-delete -bn reports
+    oci os bucket delete -bn reports
+    
+:wrench: **Task:** Delete functions and event rule
+:computer: **Execute on:** Your machine  
+
+    FN_APP_OCID=`oci fn application list --query "data[?\"display-name\" == 'reportingapp'] | [0].id" --raw-output`
+    FN_FUN_OCID=`oci fn function list --application-id $FN_APP_OCID --query "data[?\"display-name\" == 'reportingfn'] | [0].id" --raw-output`
+    oci fn function delete --function-id $FN_FUN_OCID
+    oci fn application delete --application-id $FN_APP_OCID
+    FN_APP_OCID=`oci fn application list --query "data[?\"display-name\" == 'uuidcloudapp'] | [0].id" --raw-output`
+    FN_FUN_OCID=`oci fn function list --application-id $FN_APP_OCID --query "data[?\"display-name\" == 'uuidfn'] | [0].id" --raw-output`
+    oci fn function delete --function-id $FN_FUN_OCID
+    oci fn application delete --application-id $FN_APP_OCID
+
+:wrench: **Task:** dev-vm cleanup     
+:computer: **Execute on:** Your machine  
+:dart: **Context:** Shell with `TF_VAR_*` environment variables set as in `~/tfvars.env.sh`  
+:file_folder: `oci-book/chapter09/1-infrastructure`
+
+    source ~/tfvars.env.sh
+    cd ~/git
+    cd oci-book/chapter09/1-infrastructure
+    terraform destroy -auto-approve
