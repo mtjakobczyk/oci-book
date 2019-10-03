@@ -165,19 +165,21 @@ Replace `<placeholders>` with values matching your environment.
 :cloud: **Execute on:** Your machine  
 
     fn create context sandbox-user-fra-oci --provider oracle
-    vi ~/.fn/contexts/sandbox-user-fra-oci.yaml
 
 :wrench: **Task:** Edit Fn context     
 :cloud: **Execute on:** Your machine  
 :pencil: Edit the `~/.fn/contexts/sandbox-user-fra-oci.yaml` as described in the book
 
+    vi ~/.fn/contexts/sandbox-user-fra-oci.yaml
+
 :wrench: **Task:** Create .oci/config     
 :cloud: **Execute on:** Your machine 
 
     mkdir ~/.oci
-    vi ~/.oci/config
+
 
 :wrench: **Task:** Edit .oci/config  
 :cloud: **Execute on:** Your machine  
 :pencil: Edit the `~/.oci/config` as described in the book
 
+    vi ~/.oci/config
