@@ -151,6 +151,11 @@ Replace `<placeholders>` with values matching your environment.
 ---
 #### SECTION: Serverless ➙ Oracle Functions ➙ Development Client
 
+:wrench: **Task:** Reconnect to the Dev Machine     
+:computer: **Execute on:** Your machine   
+    
+    ssh -i ~/.ssh/oci_id_rsa ubuntu@$DEV_MACHINE_IP
+
 :wrench: **Task:** Create context, OCI config     
 :computer: **Execute on:** Your machine  
 :file_folder: `oci-book/chapter09/3-functions/policies`
