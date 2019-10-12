@@ -24,15 +24,20 @@ Replace `<placeholders>` with values matching your environment.
 
     ssh -i ~/.ssh/oci_id_rsa opc@$DEV_VM_PUBLIC_IP
     
-:wrench: **Task:** Wait for cloud-init and exit  
+:wrench: **Task:** Wait for cloud-init to complete  
 :cloud: **Execute on:** Compute instance (dev-vm)
  
     sudo cat /var/log/cloud-init.log | grep "DEV machine is running"
-    exit
     
+:wrench: **Task:** Install OCI CLI
+:cloud: **Execute on:** Compute instance (dev-vm)
+
+    bash -c "$(curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh)"
+
 :wrench: **Task:** Reconnect to the compute instance   
 :computer: **Execute on:** Your machine  
 
+    exit
     ssh -i ~/.ssh/oci_id_rsa opc@$DEV_VM_PUBLIC_IP
     
 :wrench: **Task:** Verify Docker runtime and objects  
