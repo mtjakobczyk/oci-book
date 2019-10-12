@@ -19,6 +19,11 @@ packages:
  - containerd.io
  - kubectl
  - python3
+write_files:
+-   content: |
+      LANG=en_US.utf-8
+      LC_ALL=en_US.utf-8
+    path: /etc/environment
 runcmd:
  - [ systemctl, enable, docker ]
  - [ systemctl, start, docker ]
