@@ -24,6 +24,9 @@ runcmd:
  - [ usermod, -aG, docker, opc ]
  - [ mkdir, "/home/opc/.kube" ]
  - [ chown, "opc:opc", "/home/opc/.kube" ]
+ - [ mkdir, "/home/opc/.oci" ]
+ - [ chown, "opc:opc", "/home/opc/.oci" ]
+ - [ bash, -c, "$(curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh)" ]
  - [ firewall-offline-cmd, "--add-port=5010-5019/tcp" ]
  - [ systemctl, restart, firewalld ]
 final_message: "DEV machine is running, after $UPTIME seconds"
