@@ -33,6 +33,7 @@ Replace `<placeholders>` with values matching your environment.
 :cloud: **Execute on:** Compute instance (dev-vm)
 
     bash -c "$(curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh)"
+    oci --version
 
 :wrench: **Task:** Reconnect to the compute instance   
 :computer: **Execute on:** Your machine  
