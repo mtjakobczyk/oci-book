@@ -18,6 +18,7 @@ packages:
  - docker-ce-cli
  - containerd.io
  - kubectl
+ - python3
 runcmd:
  - [ systemctl, enable, docker ]
  - [ systemctl, start, docker ]
