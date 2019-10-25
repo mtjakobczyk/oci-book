@@ -29,13 +29,16 @@ Replace `<placeholders>` with values matching your environment.
  
     sudo cat /var/log/cloud-init.log | grep "DEV machine is running"
     
-:wrench: **Task:** Install OCI CLI  
+:wrench: **Task:** Install OCI CLI and prepare directories  
 :cloud: **Execute on:** Compute instance (dev-vm)
 
     bash -c "$(curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh)"
     oci --version
+    mkdir ~/.oci
+    mkdir ~/.apikeys
+    exit
 
-:wrench: **Task:** Reconnect to the compute instance   
+:wrench: **Task:** Upload Reconnect to the compute instance   
 :computer: **Execute on:** Your machine  
 
     exit
