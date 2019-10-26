@@ -1,5 +1,6 @@
 ### Practical Oracle Cloud Infrastructure
-© Michal Jakobczyk  
+https://www.apress.com/gp/book/9781484255056  
+© Michał Tomasz Jakóbczyk   
 Code snippets to use with Chapter 7.  
 Replace `<placeholders>` with values matching your environment.  
 
