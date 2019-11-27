@@ -140,7 +140,7 @@ Replace `<placeholders>` with values matching your environment.
 :computer: **Execute on:** Your machine
     
     bash -c "$(curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh)"
-    source ~/.bashrc
+    source ~/.bashrc # On MacOS you may need to source .bash_profile instead
     oci --version
     
 :wrench: **Task:** Verify OCI CLI installation  
