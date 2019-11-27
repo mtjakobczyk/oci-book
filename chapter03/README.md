@@ -224,7 +224,7 @@ Replace `<placeholders>` with values matching your environment.
 
     IMAGE_OCID=`oci compute image list --shape "VM.Standard2.1" --operating-system "CentOS" --operating-system-version 7 --sort-by TIMECREATED --query data[0].id | tr -d '"'`
     echo $IMAGE_OCID
-    VM_OCID=`oci compute instance launch --display-name cli-vm --availability-domain "$AD1" --subnet-id "$SUBNET_OCID" --private-ip 192.168.3.2 --image-id "$IMAGE_OCID" --shape VM.Standard2.1 --ssh-authorized-keys-file ~/.ssh/oci_id_rsa.pub --wait-for-state RUNNING --query data.id | tr -d '"'`
+    VM_OCID=`oci compute instance launch --display-name cli-vm --availability-domain "$AD1" --subnet-id "$SUBNET_OCID" --private-ip 192.168.3.2 --image-id "$IMAGE_OCID" --shape VM.Standard2.1 --ssh-authorized-keys-file ~/oci_id_rsa.pub --wait-for-state RUNNING --query data.id | tr -d '"'`
     echo $VM_OCID
 
 :wrench: **Task:** Use OCI CLI to list the public IP of a compute instance  
