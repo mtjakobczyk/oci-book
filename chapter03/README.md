@@ -55,7 +55,7 @@ Replace `<placeholders>` with values matching your environment.
     deactivate
 
 ---
-#### SECTION: SDK ➙ Installation
+#### SECTION: SDK ➙ Configuration
 
 :wrench: **Task:** Prepare OCI SDK/CLI configuration file  
 :computer: **Execute on:** Your machine  
