@@ -271,7 +271,7 @@ Replace `<placeholders>` with values matching your environment.
 :wrench: **Task:**  Load new TF-specific environment variables for each session  
 :computer: **Execute on:** Your machine
 
-    echo "source ~/tfvars.env.sh" | tee -a ~/.profile
+    echo "source ~/tfvars.env.sh" | tee -a ~/.bashrc
     source ~/tfvars.env.sh
     
 :wrench: **Task:**  Initialize Terraform project (1-provider-only)  
