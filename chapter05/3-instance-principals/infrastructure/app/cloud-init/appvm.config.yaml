@@ -21,7 +21,6 @@ runcmd:
  -  [ yum, -y, install, python3-pip ]
  -  [ python3, -m, pip, install, --upgrade, pip ]
  -  [ python3, -m, pip, install, oci ]
- -  [ chown, -R, "opc:opc", "/home/opc/app" ]
  -  [ wget, "https://raw.githubusercontent.com/mtjakobczyk/oci-book/master/chapter05/3-instance-principals/applications/reportissuer.py" ]
  -  [ mv, reportissuer.py, "/home/opc/" ]
  -  [ chown, "opc:opc", "/home/opc/reportissuer.py" ]
