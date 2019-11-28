@@ -187,9 +187,9 @@ Replace `<placeholders>` with values matching your environment.
     cd
     python3 -m venv oci-multipart
     source oci-multipart/bin/activate
-    pip install --upgrade pip
-    pip install oci
-    pip freeze | grep oci
+    python3 -m pip install --upgrade pip
+    python3 -m pip install oci
+    python3 -m pip freeze | grep oci
     
 :wrench: **Task:** Test multi-part file upload using SDK  
 :computer: **Execute on:** Your machine  
