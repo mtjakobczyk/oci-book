@@ -17,10 +17,10 @@ write_files:
     path: /etc/systemd/system/reportissuer.service
 runcmd:
  -  [ yum, -y, install, "https://centos7.iuscommunity.org/ius-release.rpm" ]
- -  [ yum, -y, install, python36u ]
- -  [ yum, -y, install, python36u-pip ]
- -  [ pip3.6, install, --upgrade, pip ]
- -  [ pip3.6, install, oci ]
+ -  [ yum, -y, install, python3 ]
+ -  [ yum, -y, install, python3-pip ]
+ -  [ python3, -m, pip, install, --upgrade, pip ]
+ -  [ python3, -m, pip, install, oci ]
  -  [ chown, -R, "opc:opc", "/home/opc/app" ]
  -  [ wget, "https://gist.githubusercontent.com/mtjakobczyk/cd1c9352344204e506f332342402e10b/raw/81501af1ebb955299f67efa29886ba4df2f2ac52/reportissuer.py" ]
  -  [ mv, reportissuer.py, "/home/opc/" ]
