@@ -15,7 +15,7 @@ Replace `<placeholders>` with values matching your environment.
 ---
 #### SECTION: Working with objects ➙ Basics
 
-:wrench: **Task:** Get object storage namespace name   
+:wrench: **Task:** Create object storage bucket   
 :computer: **Execute on:** Your machine
 
     oci os bucket create --name blueprints --profile SANDBOX-ADMIN
