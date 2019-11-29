@@ -47,11 +47,11 @@ Replace `<placeholders>` with values matching your environment.
 :computer: **Execute on:** Your machine  
 :dart: **Context:** Shell with the activated venv
 
-    pip install --upgrade pip
-    pip --version
-    pip freeze
-    pip install oci
-    pip freeze
+    python3 -m pip install --upgrade pip
+    python3 -m pip --version
+    python3 -m pip freeze
+    python3 -m pip install oci
+    python3 -m pip freeze
     deactivate
 
 ---
@@ -154,7 +154,7 @@ Replace `<placeholders>` with values matching your environment.
 :computer: **Execute on:** Your machine   
 :dart: **Context:** Python interpreter run within the activated OCI CLI venv
     
-    pip freeze | grep oci
+    python3 -m pip freeze | grep oci
     deactivate
     
 ---
