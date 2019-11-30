@@ -133,6 +133,7 @@ Replace `<placeholders>` with values matching your environment.
 :file_folder: `oci-book/chapter06/3-instance-scale-up/infrastructure`
 
     sed -i 's/\/\*//; s/\*\///' compute.tf
+    # On MacOS: sed -i '.bak' -e 's/\/\*//; s/\*\///' compute.tf
     terraform plan
     terraform apply -auto-approve
 
