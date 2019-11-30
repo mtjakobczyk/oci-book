@@ -12,10 +12,10 @@ variable "compartment_ocid" {}
 
 # root module variables
 variable "vcn_cidr" {
-  type = "string"
+  type = string
   default = "10.1.0.0/16"
 }
 variable "vcn_subnet_cidr" {
-  type = "string"
+  type = string
   default = "10.1.1.0/24"
 }
