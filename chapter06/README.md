@@ -155,6 +155,7 @@ Replace `<placeholders>` with values matching your environment.
 
     rm compute.tf
     sed -i 's/\/\*//; s/\*\///' compute-ocpu2.tf
+    # On MacOS: sed -i '.bak' -e 's/\/\*//; s/\*\///' compute-ocpu2.tf
     
 :wrench: **Task:** Provision more powerful instance with the existing boot volume attached    
 :computer: **Execute on:** Your machine  
