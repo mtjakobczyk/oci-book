@@ -22,6 +22,20 @@ Replace `<placeholders>` with values matching your environment.
        --wait-for-state AVAILABLE \
        --profile SANDBOX-ADMIN
 
+:wrench: **Task:** Provision Autonomous Data Warehouse instance (Free Tier)    
+:computer: **Execute on:** Your machine
+
+    ADW_ADMIN_PASS=<put-here-new-admin-password>
+    oci db autonomous-database create \
+       --db-name ROADDW \
+       --display-name road-adw \
+       --db-workload DW \
+       --license-model LICENSE_INCLUDED \
+       --is-free-tier true \
+       --admin-password $ADW_ADMIN_PASS \
+       --wait-for-state AVAILABLE \
+       --profile SANDBOX-ADMIN
+
 ---
 #### SECTION: SQL Developer Web
 
