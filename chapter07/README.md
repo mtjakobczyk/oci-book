@@ -32,7 +32,7 @@ Replace `<placeholders>` with values matching your environment.
        --db-workload DW \
        --license-model LICENSE_INCLUDED \
        --cpu-core-count 1 \
-       --data-storage-size-in-tbs 0.2 \
+       --data-storage-size-in-tbs 1 \
        --is-free-tier true \
        --admin-password $ADW_ADMIN_PASS \
        --wait-for-state AVAILABLE \
