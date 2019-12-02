@@ -125,6 +125,7 @@ Replace `<placeholders>` with values matching your environment.
 
     docker login -u $OCI_TENANCY_NAMESPACE/$OCI_USER $OCIR_REGION.ocir.io
     docker push $OCIR_REGION.ocir.io/$OCI_TENANCY_NAMESPACE/$OCI_PROJECT_CODE/$IMAGE_NAME:$IMAGE_TAG
+    docker logout $OCIR_REGION.ocir.io
     exit
     
 ---
