@@ -30,15 +30,6 @@ Replace `<placeholders>` with values matching your environment.
  
     sudo cat /var/log/cloud-init.log | grep "DEV machine is running"
     
-:wrench: **Task:** Install OCI CLI and prepare directories  
-:cloud: **Execute on:** Compute instance (dev-vm)
-
-    bash -c "$(curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh)"
-    oci --version
-    mkdir ~/.oci
-    mkdir ~/.apikeys
-    exit
-
 :wrench: **Task:** Upload Reconnect to the compute instance   
 :computer: **Execute on:** Your machine  
 
@@ -168,6 +159,18 @@ Replace `<placeholders>` with values matching your environment.
     terraform apply -var-file="$HOME/sandbox-admin.tfvars" -auto-approve
     find . -name "*.tf" | sort
     
+---
+#### SECTION: Preparing connectivity
+
+:wrench: **Task:** Install OCI CLI and prepare directories  
+:cloud: **Execute on:** Compute instance (dev-vm)
+
+    bash -c "$(curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh)"
+    oci --version
+    mkdir ~/.oci
+    mkdir ~/.apikeys
+    exit
+
 ---
 #### SECTION: Container Orchestration ➙ Connecting as superuser
 
