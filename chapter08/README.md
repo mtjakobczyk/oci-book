@@ -220,7 +220,7 @@ Replace `<placeholders>` with values matching your environment.
 
     chmod 600 .kube/config
     chmod 600 .oci/config
-    kubectl get nodes -o wide
+    kubectl get nodes
     kubectl get namespaces
     kubectl get pods -n kube-system
     
