@@ -187,11 +187,28 @@ Replace `<placeholders>` with values matching your environment.
     mkdir ~/.oci
     mkdir ~/.apikeys
     exit
+    
+:wrench: **Task:** Prepare and upload CLI configuration for the sandbox-admin to the dev-vm      
+:computer: **Execute on:** Your machine  
 
-:wrench: **Task:** Copy the Kubeconfig and connect to the dev-vm    
+    cat ~/.oci/config | grep -A 4 "\[SANDBOX-ADMIN\]" > ~/.oci/devvm.config
+    cat ~/.oci/config | grep tenancy >> ~/.oci/devvm.config
+    cat ~/.oci/config | grep region >> ~/.oci/devvm.config
+    scp -i ~/.ssh/oci_id_rsa ~/.oci/devvm.config opc@$DEV_VM_PUBLIC_IP:/home/opc/.oci/config
+
+:wrench: **Task:** Upload the API Key for the sandbox-user to the dev-vm    
+:computer: **Execute on:** Your machine 
+    
+    scp -i ~/.ssh/oci_id_rsa ~/.apikeys/api.sandbox-admin.pem opc@$DEV_VM_PUBLIC_IP:/home/opc/.apikeys/api.sandbox-admin.pem
+
+:wrench: **Task:** Upload the Kubeconfig to the dev-vm    
 :computer: **Execute on:** Your machine 
     
     scp -i ~/.ssh/oci_id_rsa ~/.kube/sandbox-admin.config opc@$DEV_VM_PUBLIC_IP:/home/opc/.kube/config
+    
+:wrench: **Task:** Connect to the dev-vm    
+:computer: **Execute on:** Your machine  
+    
     ssh -i ~/.ssh/oci_id_rsa opc@$DEV_VM_PUBLIC_IP
     
 :wrench: **Task:** Explore OKE instance  
