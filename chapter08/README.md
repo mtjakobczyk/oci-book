@@ -174,6 +174,9 @@ Replace `<placeholders>` with values matching your environment.
     chmod 600 .kube/sandbox-admin.config
     ls -l .kube | awk '{print $1, $9}'
     
+
+:warning: Edit the .kube/sandbox-admin.config file to add SANDBOX-ADMIN profile as described in book  
+
 :wrench: **Task:** Connect to the dev-vm    
 :computer: **Execute on:** Your machine  
     
