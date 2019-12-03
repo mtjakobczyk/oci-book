@@ -165,7 +165,6 @@ Replace `<placeholders>` with values matching your environment.
 
 :wrench: **Task:** Create Kubeconfig for the SANDBOX_ADMIN     
 :computer: **Execute on:** Your machine   
-
     
     CLUSTER_OCID=`oci ce cluster list --name k8s-cluster --query "data[?name=='k8s-cluster'] | [0].id" --lifecycle-state ACTIVE --raw-output --profile SANDBOX-ADMIN`
     echo $CLUSTER_OCID
@@ -175,10 +174,24 @@ Replace `<placeholders>` with values matching your environment.
     chmod 600 .kube/sandbox-admin.config
     ls -l .kube | awk '{print $1, $9}'
     
+:wrench: **Task:** Connect to the dev-vm    
+:computer: **Execute on:** Your machine  
+    
+    ssh -i ~/.ssh/oci_id_rsa opc@$DEV_VM_PUBLIC_IP
+
+:wrench: **Task:** Install OCI CLI and prepare directories  
+:cloud: **Execute on:** Compute instance (dev-vm)  
+
+    bash -c "$(curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh)"
+    oci --version
+    mkdir ~/.oci
+    mkdir ~/.apikeys
+    exit
+
 :wrench: **Task:** Copy the Kubeconfig and connect to the dev-vm    
 :computer: **Execute on:** Your machine 
     
-    scp -i ~/.ssh/oci_id_rsa ~/.kube/config opc@$DEV_VM_PUBLIC_IP:/home/opc/.kube
+    scp -i ~/.ssh/oci_id_rsa ~/.kube/sandbox-admin.config opc@$DEV_VM_PUBLIC_IP:/home/opc/.kube/config
     ssh -i ~/.ssh/oci_id_rsa opc@$DEV_VM_PUBLIC_IP
     
 :wrench: **Task:** Explore OKE instance  
