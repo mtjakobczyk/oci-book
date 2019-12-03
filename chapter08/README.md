@@ -161,25 +161,15 @@ Replace `<placeholders>` with values matching your environment.
     find . -name "*.tf" | sort
     
 ---
-#### SECTION: Preparing connectivity
-
-:wrench: **Task:** Install OCI CLI and prepare directories  
-:cloud: **Execute on:** Compute instance (dev-vm)
-
-    bash -c "$(curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh)"
-    oci --version
-    mkdir ~/.oci
-    mkdir ~/.apikeys
-    exit
-
----
 #### SECTION: Container Orchestration ➙ Connecting as superuser
 
 :wrench: **Task:** Create Kubeconfig for the SANDBOX_ADMIN     
 :computer: **Execute on:** Your machine   
 
-    REGION=<put-here-your-region-identifier>
+    
     CLUSTER_OCID=`oci ce cluster list --name k8s-cluster --query "data[?name=='k8s-cluster'] | [0].id" --lifecycle-state ACTIVE --raw-output --profile SANDBOX-ADMIN`
+    echo $CLUSTER_OCID
+    REGION=<put-here-your-region-identifier>
     mkdir ~/.kube
     oci ce cluster create-kubeconfig --cluster-id $CLUSTER_OCID --file ~/.kube/config --region $REGION --token-version 1.0.0 --profile SANDBOX-ADMIN
     chmod 600 .kube/config
