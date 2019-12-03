@@ -9,7 +9,7 @@ variable "ads" {
 }
 
 variable "oke_cluster" {
-  type = "map"
+  type = map
   default = {
     cidr = "10.0.2.0/24"
     version = "v1.12.7"
