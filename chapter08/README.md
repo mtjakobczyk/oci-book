@@ -171,8 +171,8 @@ Replace `<placeholders>` with values matching your environment.
     echo $CLUSTER_OCID
     REGION=<put-here-your-region-identifier>
     mkdir ~/.kube
-    oci ce cluster create-kubeconfig --cluster-id $CLUSTER_OCID --file ~/.kube/config --region $REGION --token-version 1.0.0 --profile SANDBOX-ADMIN
-    chmod 600 .kube/config
+    oci ce cluster create-kubeconfig --cluster-id $CLUSTER_OCID --file ~/.kube/sandbox-admin.config --region $REGION --profile SANDBOX-ADMIN
+    chmod 600 .kube/sandbox-admin.config
     ls -l .kube | awk '{print $1, $9}'
     
 :wrench: **Task:** Copy the Kubeconfig and connect to the dev-vm    
