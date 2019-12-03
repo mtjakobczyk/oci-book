@@ -216,7 +216,7 @@ Replace `<placeholders>` with values matching your environment.
 :dart: **Context:** `.kube/config` present  
 
     chmod 600 .kube/config
-    ls -l .kube | awk '{print $1, $9}'
+    chmod 600 .oci/config
     kubectl get nodes -o wide
     kubectl get namespaces
     kubectl get pods -n kube-system
