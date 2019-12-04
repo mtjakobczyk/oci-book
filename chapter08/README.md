@@ -329,7 +329,7 @@ Replace `<placeholders>` with values matching your environment.
     OCI_TENANCY_NAMESPACE=<put-here-your-tenancy-namespace>
     OCIR_REGION=<put-here-your-ocir-region-code>
     OCI_USER=sandbox-user
-    OCI_USER_TOKEN=<put-here-sandbox-user-auth-token>
+    OCI_USER_TOKEN="<put-here-sandbox-user-auth-token>"
     kubectl create secret \
       docker-registry sandbox-user-secret --docker-server=$OCIR_REGION.ocir.io \
       --docker-username="$OCI_TENANCY_NAMESPACE/$OCI_USER" \
