@@ -383,9 +383,9 @@ Replace `<placeholders>` with values matching your environment.
     
 :wrench: **Task:** Delete all objects in dev-sandbox namespace  
 :cloud: **Execute on:** Compute instance (dev-vm)  
-:dart: **Context:** `KUBECONFIG` variable set to `.kube/config` (SANDBOX_ADMIN)  
+:dart: **Context:** `KUBECONFIG` variable set to `.kube/sandbox-user.config` (SANDBOX_USER)  
 
-    export KUBECONFIG=~/.kube/sandbox-user-config
+    export KUBECONFIG=~/.kube/sandbox-user.config
     kubectl delete all --all -n dev-sandbox
     exit
     
