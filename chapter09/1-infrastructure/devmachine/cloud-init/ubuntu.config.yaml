@@ -8,8 +8,8 @@ runcmd:
  - [ "apt-get", "install", "docker-ce", "docker-ce-cli", "containerd.io", "-y" ]
  - [ "usermod", "-aG", "docker", "ubuntu" ]
  - [ "mkdir", "/home/ubuntu/functions" ]
- - [ "wget", "-O", "/home/ubuntu/functions/blankfn.py", "https://gist.githubusercontent.com/mtjakobczyk/9fb338b6e666bacdcc040461dc850488/raw/2865d1b42b54d9da2be0547597271ce8c7eb8339/blankfn.py" ]
- - [ "wget", "-O", "/home/ubuntu/functions/uuidfn.py", "https://gist.githubusercontent.com/mtjakobczyk/019be73ae891d8ab96e27b20521744a2/raw/7c920e26a0fb49e38ad7d3819fa686a42c2c2c1f/uuidfn.py" ]
- - [ "wget", "-O", "/home/ubuntu/functions/reportingfn.py", "https://gist.githubusercontent.com/mtjakobczyk/ca0f004172b275ead06eafc07c640827/raw/88984bf0c6356bdeea80d4b880babaa9352bb7b1/reportingfn.py" ]
- - [ "wget", "-O", "/home/ubuntu/event.mock.json", "https://gist.githubusercontent.com/mtjakobczyk/0db61e4100b69cdebef0727e371d587d/raw/5b9f7ecf3f575be0d2d3a8895ffbbf7beeb27ef5/event.mock.json" ]
+ - [ "wget", "-O", "/home/ubuntu/functions/blankfn.py", "https://raw.githubusercontent.com/mtjakobczyk/oci-book/master/chapter09/2-fn/blankfn.py" ]
+ - [ "wget", "-O", "/home/ubuntu/functions/uuidfn.py", "https://raw.githubusercontent.com/mtjakobczyk/oci-book/master/chapter09/2-fn/uuidfn.py" ]
+ - [ "wget", "-O", "/home/ubuntu/functions/reportingfn.py", "https://raw.githubusercontent.com/mtjakobczyk/oci-book/master/chapter09/2-fn/reportingfn.py" ]
+ - [ "wget", "-O", "/home/ubuntu/event.mock.json", "https://raw.githubusercontent.com/mtjakobczyk/oci-book/master/chapter09/4-events/events/event.mock.json" ]
 final_message: "DEV machine is running, after $UPTIME seconds"
