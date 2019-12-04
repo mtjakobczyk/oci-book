@@ -263,14 +263,34 @@ Replace `<placeholders>` with values matching your environment.
 
     REGION=<put-here-your-region-identifier>
     CLUSTER_OCID=`oci ce cluster list --name k8s-cluster --query "data[?name=='k8s-cluster'] | [0].id" --lifecycle-state ACTIVE --raw-output --profile SANDBOX-ADMIN`
-    oci ce cluster create-kubeconfig --cluster-id $CLUSTER_OCID --file ~/.kube/sandbox-user-config --region $REGION --token-version 1.0.0 --profile SANDBOX-USER
-    chmod 600 ~/.kube/sandbox-user-config
+    oci ce cluster create-kubeconfig --cluster-id $CLUSTER_OCID --file ~/.kube/sandbox-user.config --region $REGION --profile SANDBOX-USER
+    chmod 600 ~/.kube/sandbox-user.config
     ls -l ~/.kube | awk '{print $1, $9}'
     
+:warning: Edit the .kube/sandbox-user.config file to add SANDBOX-USER profile as described in book  
+
+:wrench: **Task:** Extend CLI configuration adding sandbox-user entries and upload it to the dev-vm      
+:computer: **Execute on:** Your machine  
+
+    cat ~/.oci/config | grep -A 4 "\[SANDBOX-USER\]" >> ~/.oci/devvm.config
+    cat ~/.oci/config | grep tenancy >> ~/.oci/devvm.config
+    cat ~/.oci/config | grep region >> ~/.oci/devvm.config
+    scp -i ~/.ssh/oci_id_rsa ~/.oci/devvm.config opc@$DEV_VM_PUBLIC_IP:/home/opc/.oci/config
+
+:wrench: **Task:** Upload the API Key for the sandbox-user to the dev-vm    
+:computer: **Execute on:** Your machine 
+    
+    scp -i ~/.ssh/oci_id_rsa ~/.apikeys/api.sandbox-user.pem opc@$DEV_VM_PUBLIC_IP:/home/opc/.apikeys/api.sandbox-user.pem
+
+:wrench: **Task:** Upload the Kubeconfig to the dev-vm    
+:computer: **Execute on:** Your machine 
+    
+    scp -i ~/.ssh/oci_id_rsa ~/.kube/sandbox-user.config opc@$DEV_VM_PUBLIC_IP:/home/opc/.kube/sandbox-user.config
+
 :wrench: **Task:** Copy the Kubeconfig and connect to the dev-vm    
 :computer: **Execute on:** Your machine 
     
-    scp -i ~/.ssh/oci_id_rsa ~/.kube/sandbox-user-config opc@$DEV_VM_PUBLIC_IP:/home/opc/.kube
+    scp -i ~/.ssh/oci_id_rsa ~/.kube/sandbox-user.config opc@$DEV_VM_PUBLIC_IP:/home/opc/.kube
     ssh -i ~/.ssh/oci_id_rsa opc@$DEV_VM_PUBLIC_IP 
     
 :wrench: **Task:** Try listing all pods in dev-sandbox namespace as SANDBOX_USER     
