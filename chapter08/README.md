@@ -294,7 +294,7 @@ Replace `<placeholders>` with values matching your environment.
     
 :wrench: **Task:** Try listing all pods in dev-sandbox namespace as SANDBOX_USER     
 :cloud: **Execute on:** Compute instance (dev-vm)  
-:dart: **Context:** `.kube/sandbox-user-config` present (SANDBOX_USER)
+:dart: **Context:** `.kube/sandbox-user.config` present (SANDBOX_USER)
 
     chmod 600 ~/.kube/sandbox-user.config
     ls -l ~/.kube | grep config | awk '{print $1, $9}'
@@ -318,9 +318,9 @@ Replace `<placeholders>` with values matching your environment.
 
 :wrench: **Task:** Define KUBECONFIG variable     
 :cloud: **Execute on:** Compute instance (dev-vm)  
-:dart: **Context:** `.kube/sandbox-user-config` present (SANDBOX_USER)
+:dart: **Context:** `.kube/sandbox-user.config` present (SANDBOX_USER)
 
-    export KUBECONFIG=~/.kube/sandbox-user-config
+    export KUBECONFIG=~/.kube/sandbox-user.config
     
 :wrench: **Task:** Create Kubernetes Secret     
 :cloud: **Execute on:** Compute instance (dev-vm)  
