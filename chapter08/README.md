@@ -269,6 +269,11 @@ Replace `<placeholders>` with values matching your environment.
     
 :warning: Edit the .kube/sandbox-user.config file to add SANDBOX-USER profile as described in book  
 
+:wrench: **Task:** Upload the Kubeconfig to the dev-vm    
+:computer: **Execute on:** Your machine 
+    
+    scp -i ~/.ssh/oci_id_rsa ~/.kube/sandbox-user.config opc@$DEV_VM_PUBLIC_IP:/home/opc/.kube/sandbox-user.config
+
 :wrench: **Task:** Extend CLI configuration adding sandbox-user entries and upload it to the dev-vm      
 :computer: **Execute on:** Your machine  
 
@@ -281,11 +286,6 @@ Replace `<placeholders>` with values matching your environment.
 :computer: **Execute on:** Your machine 
     
     scp -i ~/.ssh/oci_id_rsa ~/.apikeys/api.sandbox-user.pem opc@$DEV_VM_PUBLIC_IP:/home/opc/.apikeys/api.sandbox-user.pem
-
-:wrench: **Task:** Upload the Kubeconfig to the dev-vm    
-:computer: **Execute on:** Your machine 
-    
-    scp -i ~/.ssh/oci_id_rsa ~/.kube/sandbox-user.config opc@$DEV_VM_PUBLIC_IP:/home/opc/.kube/sandbox-user.config
 
 :wrench: **Task:** Copy the Kubeconfig and connect to the dev-vm    
 :computer: **Execute on:** Your machine 
