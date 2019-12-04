@@ -287,18 +287,18 @@ Replace `<placeholders>` with values matching your environment.
     
     scp -i ~/.ssh/oci_id_rsa ~/.apikeys/api.sandbox-user.pem opc@$DEV_VM_PUBLIC_IP:/home/opc/.apikeys/api.sandbox-user.pem
 
-:wrench: **Task:** Copy the Kubeconfig and connect to the dev-vm    
+:wrench: **Task:** Connect to the dev-vm    
 :computer: **Execute on:** Your machine 
     
-    scp -i ~/.ssh/oci_id_rsa ~/.kube/sandbox-user.config opc@$DEV_VM_PUBLIC_IP:/home/opc/.kube
-    ssh -i ~/.ssh/oci_id_rsa opc@$DEV_VM_PUBLIC_IP 
+    ssh -i ~/.ssh/oci_id_rsa opc@$DEV_VM_PUBLIC_IP
     
 :wrench: **Task:** Try listing all pods in dev-sandbox namespace as SANDBOX_USER     
 :cloud: **Execute on:** Compute instance (dev-vm)  
 :dart: **Context:** `.kube/sandbox-user-config` present (SANDBOX_USER)
 
+    chmod 600 ~/.kube/sandbox-user.config
     ls -l ~/.kube | grep config | awk '{print $1, $9}'
-    kubectl --kubeconfig ~/.kube/sandbox-user-config get pods -n dev-sandbox
+    kubectl --kubeconfig ~/.kube/sandbox-user.config get pods -n dev-sandbox
     
 :wrench: **Task:** Bind the predefined edit clusterrole for dev-namespace to the SANDBOX_USER     
 :cloud: **Execute on:** Compute instance (dev-vm)  
@@ -311,7 +311,7 @@ Replace `<placeholders>` with values matching your environment.
 :cloud: **Execute on:** Compute instance (dev-vm)  
 :dart: **Context:** `.kube/sandbox-user-config` present (SANDBOX_USER)
 
-    kubectl --kubeconfig ~/.kube/sandbox-user-config get pods -n dev-sandbox
+    kubectl --kubeconfig ~/.kube/sandbox-user.config get pods -n dev-sandbox
     
 ---
 #### SECTION: Container Orchestration ➙ Pods
