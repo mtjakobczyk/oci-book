@@ -401,7 +401,6 @@ Replace `<placeholders>` with values matching your environment.
 
     EVENTRULE_OCID=`oci events rule list --query "data[?\"display-name\" == 'new-reports'] | [0].id" --raw-output`
     oci events rule delete --rule-id $EVENTRULE_OCID
-    Are you sure you want to delete this resource? [y/N]: y
 
 :wrench: **Task:** dev-vm cleanup     
 :computer: **Execute on:** Your machine  
