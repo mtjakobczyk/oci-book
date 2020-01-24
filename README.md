@@ -6,3 +6,6 @@ This repository accompanies **Practical Oracle Cloud Infrastructure** by Michał
 https://www.apress.com/gp/book/9781484255056
 
 Download the files as a zip using the green button, or clone the repository to your machine using Git.
+
+Last time code tested on macOS: *December 2019*  
+Last time code tested on Windows Substem for Linux: *January 2020*
