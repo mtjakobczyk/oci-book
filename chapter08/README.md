@@ -171,8 +171,8 @@ Replace `<placeholders>` with values matching your environment.
     REGION=<put-here-your-region-identifier>
     mkdir ~/.kube
     oci ce cluster create-kubeconfig --cluster-id $CLUSTER_OCID --file ~/.kube/sandbox-admin.config --region $REGION --profile SANDBOX-ADMIN
-    chmod 600 .kube/sandbox-admin.config
-    ls -l .kube | awk '{print $1, $9}'
+    chmod 600 ~/.kube/sandbox-admin.config
+    ls -l ~/.kube | awk '{print $1, $9}'
     
 
 :warning: Edit the .kube/sandbox-admin.config file to add SANDBOX-ADMIN profile as described in book  
