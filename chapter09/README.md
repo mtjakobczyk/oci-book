@@ -286,7 +286,7 @@ Replace `<placeholders>` with values matching your environment.
 :computer: **Execute on:** Your machine 
 
     echo $TENANCY_OCID
-    MATCHING_RULE="ALL {resource.type = 'fnfunc', tag.test-projects.reports.value}"
+    MATCHING_RULE="ALL { resource.type = 'fnfunc', tag.test-projects.reports.value = 'r1' }"
     oci iam dynamic-group create --name reporting-functions --description "Functions related to the reporting project" --matching-rule "$MATCHING_RULE" -c $TENANCY_OCID
 
 :wrench: **Task:** Dynamic Group for tagged functions   
@@ -335,7 +335,7 @@ Replace `<placeholders>` with values matching your environment.
     echo $FN_APP_OCID
     FN_FUN_OCID=`oci fn function list --application-id $FN_APP_OCID --query "data[?\"display-name\" == 'reportingfn'] | [0].id" --raw-output`
     echo $FN_FUN_OCID
-    oci fn function update --function-id $FN_FUN_OCID --defined-tags '{ "test-projects": {"reports": ""} }'
+    oci fn function update --function-id $FN_FUN_OCID --defined-tags '{ "test-projects": {"reports": "r1"} }'
 
 ---
 #### SECTION: Events ➙ Events as function triggers
