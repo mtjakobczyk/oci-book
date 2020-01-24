@@ -18,7 +18,7 @@ Replace `<placeholders>` with values matching your environment.
        --license-model LICENSE_INCLUDED \
        --cpu-core-count 1 \
        --data-storage-size-in-tbs 1 \
-       --admin-password $ADW_ADMIN_PASS \
+       --admin-password "$ADW_ADMIN_PASS" \
        --wait-for-state AVAILABLE \
        --profile SANDBOX-ADMIN
 
@@ -34,7 +34,7 @@ Replace `<placeholders>` with values matching your environment.
        --cpu-core-count 1 \
        --data-storage-size-in-tbs 1 \
        --is-free-tier true \
-       --admin-password $ADW_ADMIN_PASS \
+       --admin-password "$ADW_ADMIN_PASS" \
        --wait-for-state AVAILABLE \
        --profile SANDBOX-ADMIN
 
